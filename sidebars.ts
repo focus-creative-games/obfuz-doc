@@ -32,7 +32,7 @@ const sidebars: SidebarsConfig = {
         slug: '/getting-started',
       },
       items: [
-        'beginner/installation',
+        'beginner/quick-start',
       ],
     },
     {
@@ -43,6 +43,7 @@ const sidebars: SidebarsConfig = {
         slug: '/manual',
       },
       items: [
+        'manual/installation',
         'manual/configuration',
       ],
     },
