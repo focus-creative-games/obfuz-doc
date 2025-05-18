@@ -49,6 +49,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'manual/installation',
         'manual/configuration',
+        'manual/menu',
         'manual/assembly',
         'manual/obfuscation-pass',
         'manual/secret',
@@ -58,6 +59,7 @@ const sidebars: SidebarsConfig = {
         'manual/field-encryption',
         'manual/call-obfuscation',
         'manual/incremental-obfuscation-and-hotupdate',
+        'manual/deobfuscate-stacktrace',
       ],
     },
     {
