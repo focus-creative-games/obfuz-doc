@@ -24,6 +24,10 @@
 
 ## 设置
 
+:::tip
+几乎所有程序集都可以被混淆，包括`System`、`System.Core`、`UnityEngine.*`，甚至`Obfuz.Runtime`都可以被混淆！
+:::
+
 :::warning
 
 如果某个程序集不需要被混淆，但它引用了被混淆的程序集，一定要将它加入`Non Obfuscated But Referenceing Obfuscated Assemblies`列表！
@@ -36,6 +40,8 @@
 或者放到Unity项目的外部，Obfuz有可能没法知道实际上有哪些第4类程序集。为简化规则起见，Obfuz要求配置手动配置第4类程序集列表。
 
 将第3类程序集加入到`Assembly To Obfuscate`列表，将第4类程序集加入`Non Obfuscated But Referenceing Obfuscated Assemblies`列表。
+
+**请不要将第1类和第2类程序集加到混淆或者非混淆的列表**，没有意义！如果将第1类程序集加入混淆或非混淆的列表，反而会引发错误！
 
 ## dll形式的程序集及位置在Unity项目外的程序集
 
