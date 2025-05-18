@@ -36,6 +36,7 @@ const sidebars: SidebarsConfig = {
         'beginner/multi-assemblies-to-obfuscate',
         'beginner/configuration',
         'beginner/work-with-hybridclr',
+        'beginner/dynamic-secret-key',
       ],
     },
     {
@@ -48,6 +49,26 @@ const sidebars: SidebarsConfig = {
       items: [
         'manual/installation',
         'manual/configuration',
+        'manual/assembly',
+        'manual/obfuscation-pass',
+        'manual/secret',
+        'manual/encryptionvm',
+        'manual/symbol-obfuscation',
+        'manual/const-encryption',
+        'manual/field-encryption',
+        'manual/call-obfuscation',
+        'manual/incremental-obfuscation-and-hotupdate',
+      ],
+    },
+    {
+      type: 'category',
+      label: '帮助',
+      link: {
+        type: 'generated-index',
+        slug: '/help',
+      },
+      items: [
+        'help/faq',
       ],
     },
   ],
