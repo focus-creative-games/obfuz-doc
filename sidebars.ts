@@ -33,6 +33,9 @@ const sidebars: SidebarsConfig = {
       },
       items: [
         'beginner/quick-start',
+        'beginner/multi-assemblies-to-obfuscate',
+        'beginner/configuration',
+        'beginner/work-with-hybridclr',
       ],
     },
     {

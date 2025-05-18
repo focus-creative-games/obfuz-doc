@@ -4,7 +4,7 @@
 Obfuz支持Unity 2019+版本，同时也支持团结引擎1.0.0+，能在所有Unity和团结引擎支持的平台下正确工作。
 :::
 
-本文档将指引从零开始创建一个Obfuz示例项目。完整示例项目参见[Obfuz](https://github.com/focus-creative-games/obfuz/tree/main/Obfuz).
+本文档将指引从零开始创建一个Obfuz示例项目。完整示例项目参见[QuickStart](https://github.com/focus-creative-games/obfuz/tree/main/Samples/QuickStart).
 
 ## 创建项目
 
@@ -12,8 +12,12 @@ Obfuz支持Unity 2019+版本，同时也支持团结引擎1.0.0+，能在所有U
 
 ## 安装
 
-打开Unity Package Manager窗口，点击`Add package from URL...`，填入地址`https://github.com/focus-creative-games/obfuz.git?path=Obfuz/Packages/com.code-philosophy.obfuz`
-即可完成安装。
+Obfuz的Unity Package Manager URL安装地址：
+
+- gitee `https://gitee.com/focus-creative-games/obfuz.git?path=Obfuz/Packages/com.code-philosophy.obfuz`
+- github `https://github.com/focus-creative-games/obfuz.git?path=Obfuz/Packages/com.code-philosophy.obfuz`
+
+打开Unity Package Manager窗口，点击`Add package from URL...`，填入以上地址之一即可完成安装。
 
 ## 配置
 
@@ -28,33 +32,7 @@ Obfuz支持Unity 2019+版本，同时也支持团结引擎1.0.0+，能在所有U
 
 ## 添加代码
 
-- 创建`Assets/Scripts`脚本目录。
-- 在`Assets/Scripts`目录创建 `Algorithm.cs`代码文件，文件内容如下：
-
-```csharp
-
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Algorithm
-{
-    public int Add(int a, int b)
-    {
-        return a + b;
-    }
-
-    public int ComputeHashCode(int a)
-    {
-        int hash = 17;
-        hash = hash * 23 + a.GetHashCode();
-        return hash;
-    }
-}
-
-```
-
-- 在`Assets/Scripts`目录下创建`Bootstrap.cs`代码文件，文件内容如下：
+- 在`Assets`目录下创建`Bootstrap.cs`代码文件，文件内容如下：
 
 ```csharp
 using Obfuz;
@@ -66,27 +44,29 @@ using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
 {
-    // [ObfuzIgnore]指示Obfuz不要混淆这个函数。
-    // 需要初始化Obfuz加密虚拟机后被混淆的代码才能正常运行。
-    // 尽可能地早地初始化这个加密虚拟机。
+    // [ObfuzIgnore]指示Obfuz不要混淆这个函数
+    // 初始化EncryptionService后被混淆的代码才能正常运行，
+    // 因此尽可能地早地初始化它。
     [ObfuzIgnore]
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
-    private static void SetUpStaticSecret()
+    private static void SetUpStaticSecretKey()
     {
         Debug.Log("SetUpStaticSecret begin");
         EncryptionService<DefaultStaticEncryptionScope>.Encryptor = new GeneratedEncryptionVirtualMachine(Resources.Load<TextAsset>("Obfuz/defaultStaticSecretKey").bytes);
         Debug.Log("SetUpStaticSecret end");
     }
 
+    int Add(int a, int b)
+    {
+        return a + b + 1;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        var c = new Algorithm();
-        int a = c.Add(100, 200);
+        Debug.Log("Hello, Obfuz");
+        int a = Add(10, 20);
         Debug.Log($"a = {a}");
-
-        int b = c.ComputeHashCode(a);
-        Debug.Log($"b = {b}");
     }
 }
 
@@ -108,8 +88,8 @@ public class Bootstrap : MonoBehaviour
 
 ## 查看混淆后的Assembly-CSharp程序集
 
-使用[ILSpy](https://github.com/icsharpcode/ILSpy)打开`Library/Obfuz/{buildTarget}/ObfuscatedAssemblies/Assembly-CSharp.dll`。
-发现确实被混淆了。
+使用[ILSpy](https://github.com/icsharpcode/ILSpy)打开`Library/Obfuz/{buildTarget}/ObfuscatedAssemblies/Assembly-CSharp.dll`,
+发现程序集确实被混淆了。
 
 混淆后的Boostrap类代码变成如下:
 
@@ -117,30 +97,37 @@ public class Bootstrap : MonoBehaviour
 
 using System;
 using $a;
-using $A;
+using Obfuz;
 using UnityEngine;
 
-// Token: 0x02000003 RID: 3
+// Token: 0x02000002 RID: 2
 public class Bootstrap : MonoBehaviour
 {
-  // Token: 0x06000004 RID: 4 RVA: 0x0000313D File Offset: 0x0000133D
+  // Token: 0x06000001 RID: 1 RVA: 0x000030F0 File Offset: 0x000012F0
   [RuntimeInitializeOnLoadMethod(2)]
   private static void SetUpStaticSecret()
   {
     Debug.Log("SetUpStaticSecret begin");
-    global::$A.$C<$c>.$L = new global::$a.$A(Resources.Load<TextAsset>("Obfuz/defaultStaticSecret").bytes);
+    EncryptionService<DefaultStaticEncryptionScope>.Encryptor = new $A(Resources.Load<TextAsset>("Obfuz/defaultStaticSecretKey").bytes);
     Debug.Log("SetUpStaticSecret end");
   }
 
-  // Token: 0x06000005 RID: 5 RVA: 0x000032E0 File Offset: 0x000014E0
+  // Token: 0x06000002 RID: 2 RVA: 0x0000311F File Offset: 0x0000131F
+  private int $a(int 1, int 1)
+  {
+    return 1 + 1 + 1;
+  }
+
+  // Token: 0x06000003 RID: 3 RVA: 0x00003208 File Offset: 0x00001408
   private void Start()
   {
-    global::$a $a = new global::$a();
-    int num = global::$e.$A($a, global::$e.$a(global::$d.$A, 8, 117, -2060908889, global::$A.$C<$c>.$d(-1139589574, 85, -452785586)), global::$e.$a(global::$d.$A, 12, 138, -1222258517, global::$A.$C<$c>.$d(-1139589574, 85, -452785586)), global::$A.$C<$c>.$d(-595938299, 185, 132898840));
-    global::$e.$b(string.Format(global::$D.$a, num), global::$A.$C<$c>.$d(1718597184, 154, 2114032877));
-    int num2 = global::$e.$B($a, num, global::$A.$C<$c>.$d(368894728, 171, -1414000938));
-    global::$e.$b(string.Format(global::$D.$A, num2), global::$A.$C<$c>.$d(1718597184, 154, 2114032877));
+    int num = $e.$A(this, $e.$a($d.$A, 0, 27, -201418147, EncryptionService<DefaultStaticEncryptionScope>.Decrypt(-1139589574, 85, -452785586)), $e.$a($d.$A, 4, 153, -875938825, EncryptionService<DefaultStaticEncryptionScope>.Decrypt(-1139589574, 85, -452785586)), EncryptionService<DefaultStaticEncryptionScope>.Decrypt(1757957431, 242, 760404455));
+    $e.$b(string.Format($D.$a, num), EncryptionService<DefaultStaticEncryptionScope>.Decrypt(1718597184, 154, 2114032877));
   }
 }
 
 ```
+
+可以看到尽管没有对BootStrap标记为不混淆，也没有对Awake和Start函数标记为不混淆，Obfuz会自动识别这些特殊的Unity类型和函数，不会混淆它们的名称，但仍然会对函数体进行混淆。
+
+这是Obfuz的强大和便利之处，它与Unity工作流深度集成，尽可能地简化混淆的配置工作。
