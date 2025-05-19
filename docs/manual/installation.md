@@ -16,7 +16,7 @@ Obfuz的Unity Package Manager URL安装地址：
 - 支持所有Unity和团结引擎支持的平台
 - 支持Mono和IL2CPP backend。但对Mono backend测试较少，如有遇到问题，请及时报告给我们。
 
-事实上，更早的Unity版本也是支持的，只是可能需要解决与Unity 构建工作流的兼容问题。有需要的开发者可修改`com.code-philosophy.obfuz\Editor\Unity\ObfuscationProcess.cs`的代码以兼容更早的版本。
+事实上，更早的Unity版本也是支持的，只是可能需要解决与Unity 构建工作流的兼容问题。有需要的开发者可修改`com.code-philosophy.obfuzEditor/Unity/ObfuscationProcess.cs`的代码以兼容更早的版本。
 
 ## 解决与HybridCLR兼容问题
 

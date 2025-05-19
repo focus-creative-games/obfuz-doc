@@ -74,14 +74,14 @@ public class Bootstrap : MonoBehaviour
 
 ## 挂载脚本
 
-在场景中创建一个GameObject，然后将`BootStrap`脚本加到这个GameObject上。
+在场景中创建一个GameObject，然后将`Bootstrap`脚本加到这个GameObject上。
 
 在Unity Editor中试运行，确保没有错误。
 
 ## 构建&运行
 
 在`Build Settings`中运行`Build And Run`构建并且运行。Obfuz会在构建过程插入对Assembly-CSharp的混淆操作，
-原始文件备份到`Library/Obfuz/{buildTarget}/OriginalAssemblies、Assembly-CSharp.dll`，
+原始文件备份到`Library/Obfuz/{buildTarget}/OriginalAssemblies/Assembly-CSharp.dll`，
 混淆后的文件备份到`Library/Obfuz/{buildTarget}/ObfuscatedAssemblies/Assembly-CSharp.dll`。
 
 查看Player.log，验证运行日志与Editor下运行结果一致。
@@ -95,36 +95,33 @@ public class Bootstrap : MonoBehaviour
 
 ```csharp
 
-using System;
 using $a;
 using Obfuz;
 using UnityEngine;
 
-// Token: 0x02000002 RID: 2
 public class Bootstrap : MonoBehaviour
 {
-  // Token: 0x06000001 RID: 1 RVA: 0x000030F0 File Offset: 0x000012F0
-  [RuntimeInitializeOnLoadMethod(2)]
-  private static void SetUpStaticSecret()
-  {
-    Debug.Log("SetUpStaticSecret begin");
-    EncryptionService<DefaultStaticEncryptionScope>.Encryptor = new $A(Resources.Load<TextAsset>("Obfuz/defaultStaticSecretKey").bytes);
-    Debug.Log("SetUpStaticSecret end");
-  }
+ [RuntimeInitializeOnLoadMethod(/*Could not decode attribute arguments.*/)]
+ private static void SetUpStaticSecretKey()
+ {
+  Debug.Log((object)"SetUpStaticSecret begin");
+  EncryptionService<DefaultStaticEncryptionScope>.Encryptor = (IEncryptor)(object)new $A(Resources.Load<TextAsset>("Obfuz/defaultStaticSecretKey").bytes);
+  Debug.Log((object)"SetUpStaticSecret end");
+ }
 
-  // Token: 0x06000002 RID: 2 RVA: 0x0000311F File Offset: 0x0000131F
-  private int $a(int 1, int 1)
-  {
-    return 1 + 1 + 1;
-  }
+ private int $a(int 1, int 1)
+ {
+  return 1 + 1 + 1;
+ }
 
-  // Token: 0x06000003 RID: 3 RVA: 0x00003208 File Offset: 0x00001408
-  private void Start()
-  {
-    int num = $e.$A(this, $e.$a($d.$A, 0, 27, -201418147, EncryptionService<DefaultStaticEncryptionScope>.Decrypt(-1139589574, 85, -452785586)), $e.$a($d.$A, 4, 153, -875938825, EncryptionService<DefaultStaticEncryptionScope>.Decrypt(-1139589574, 85, -452785586)), EncryptionService<DefaultStaticEncryptionScope>.Decrypt(1757957431, 242, 760404455));
-    $e.$b(string.Format($D.$a, num), EncryptionService<DefaultStaticEncryptionScope>.Decrypt(1718597184, 154, 2114032877));
-  }
+ private void Start()
+ {
+  $e.$a((object)$D.$a, EncryptionService<DefaultStaticEncryptionScope>.Decrypt(1718597184, 154, 2114032877));
+  int num = $e.$b((object)this, $e.$A((object)$d.$A, 0, 27, -201418147, EncryptionService<DefaultStaticEncryptionScope>.Decrypt(-1139589574, 85, -452785586)), $e.$A((object)$d.$A, 4, 153, -875938825, EncryptionService<DefaultStaticEncryptionScope>.Decrypt(-1139589574, 85, -452785586)), EncryptionService<DefaultStaticEncryptionScope>.Decrypt(1757957431, 242, 760404455));
+  $e.$a((object)string.Format($D.$A, num), EncryptionService<DefaultStaticEncryptionScope>.Decrypt(1718597184, 154, 2114032877));
+ }
 }
+
 
 ```
 
