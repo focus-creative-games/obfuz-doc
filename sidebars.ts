@@ -52,7 +52,6 @@ const sidebars: SidebarsConfig = {
         'manual/menu',
         'manual/assembly',
         'manual/encryption',
-        'manual/encryptionvm',
         'manual/obfuscation-pass',
         'manual/symbol-obfuscation',
         'manual/const-encryption',
