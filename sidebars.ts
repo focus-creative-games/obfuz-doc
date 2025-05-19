@@ -58,6 +58,7 @@ const sidebars: SidebarsConfig = {
         'manual/field-encryption',
         'manual/call-obfuscation',
         'manual/incremental-obfuscation-and-hotupdate',
+        'manual/serialization-reflection',
         'manual/deobfuscate-stacktrace',
       ],
     },

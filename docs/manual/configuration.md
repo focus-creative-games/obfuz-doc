@@ -48,7 +48,7 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 
 ### Encryption VM Settings
 
-加密虚拟机（Encryption Virtual Machine）相关设置。 补充文档见[EncryptionVM](./encryptionvm)。
+加密虚拟机（Encryption Virtual Machine）相关设置。 补充文档见[加密](./encryption)。
 
 |选项|描述|
 |-|-|
