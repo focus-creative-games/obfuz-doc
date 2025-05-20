@@ -61,14 +61,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <obfuz>
-
-    <whitelist type="int">-100,100</whitelist> 不加密 [-100, 100]范围内的常量
-    <whitelist type="string-length-range">,3</whitelist> 不加密长度小于等于3的字符串
-    
     <assembly name="Assembly-CSharp">
-        <type name="ConstEncrypt.Test1" disableEncrypt="1"/> 对Test1类所有函数禁用常量加密
-        <type name="ConstEncrypt.Test2">
-            <method name="Sum3" disableEncrypt="1"/> 不加密Sum3函数中的常量
+        <type name="FieldEncrypt.Test1">
+            <field name="a" encrypt="1"/>
         </type>
     </assembly>
 </obfuz>
@@ -82,16 +77,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <obfuz>
-
-    <whitelist type="int">-100,100</whitelist> 不加密 [-100, 100]范围内的常量
-    <whitelist type="string-length-range">,3</whitelist> 不加密长度小于等于3的字符串
-    
-    <assembly name="Assembly-CSharp">
-        <type name="ConstEncrypt.Test1" disableEncrypt="1"/> 对Test1类所有函数禁用常量加密
-        <type name="ConstEncrypt.Test2">
-            <method name="Sum3" disableEncrypt="1"/> 不加密Sum3函数中的常量
-        </type>
-    </assembly>
+  <whitelist>
+    <assembly name="mscorlib" obfuscate="0"/>
+    <assembly name="UnityEngine.*" obfuscate="0"/>
+  </whitelist>
+  
+  <assembly name="Assembly-CSharp">
+      <type name="*CallObfus.Test1" disableObfuscation="1"/>
+      <type name="*CallObfus.Test2">
+          <method name="Run1" disableObfuscation="1"/>
+      </type>
+  </assembly>
 </obfuz>
 ```
 
