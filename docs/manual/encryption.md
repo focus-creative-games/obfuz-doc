@@ -128,7 +128,6 @@ EncrytpionOpCodeCount必须为2的幂（如64、128、256、1024），默认值�
 建议每次发布新主包时修改`CodeGenerationSecretKey`，生成全新的EncryptionVM，以增大破解难度。如果使用了代码热更新技术且`GeneratedEncryptionVirutalMachine`在AOT程序集中，
 那么在发布热更新代码时不要修改`CodeGenerationSecretKey`，否则会导致被混淆的热更新程序集执行解密代码出错！
 
-
 ## EncryptionService
 
 Obfuz通过EncryptionSerivce类提供统一的加密和解密服务。它的实现很简单，有一个`IEncryptor _encryptor`变量，通过转发调用`_encryptor`中的接口函数实现具体的加解密服务。
