@@ -30,7 +30,7 @@
 
 :::warning
 
-如果某个程序集不需要被混淆，但它引用了被混淆的程序集，一定要将它加入`Non Obfuscated But Referenceing Obfuscated Assemblies`列表！
+如果某个程序集不需要被混淆，但它引用了被混淆的程序集，一定要将它加入`NonObfuscatedButReferenceingObfuscatedAssemblies`列表！
 
 :::
 
@@ -39,7 +39,7 @@
 很显然，必须配置有哪些第3类程序集。理论上，第4类程序集（即引用了这些被混淆程序集的程序集）能够被自动识别。但是由于这些程序集有可能以plugin形式存在
 或者放到Unity项目的外部，Obfuz有可能没法知道实际上有哪些第4类程序集。为简化规则起见，Obfuz要求配置手动配置第4类程序集列表。
 
-将第3类程序集加入到`Assembly To Obfuscate`列表，将第4类程序集加入`Non Obfuscated But Referenceing Obfuscated Assemblies`列表。
+将第3类程序集加入到`AssemblyToObfuscate`列表，将第4类程序集加入`NonObfuscatedButReferenceingObfuscatedAssemblies`列表。
 
 **请不要将第1类和第2类程序集加到混淆或者非混淆的列表**，没有意义！如果将第1类程序集加入混淆或非混淆的列表，反而会引发错误！
 
