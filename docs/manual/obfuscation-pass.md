@@ -4,15 +4,17 @@ Obfuz支持多种混淆算法，混淆时会按照某个顺序依次执行每个
 
 ## 执行方式
 
-:::tip
-FieldEncryption有特殊性，因为只要字段标记为加密，所有访问了该字段的代码都需要被混淆。由于被加密的字段一般只是极少数，因此设计上它的优先级高于Obfuscation Pass规则。
-:::
-
-Obfuz的混淆（或加密）流程的执行方式为先判定对目标是否启用此Pass，再实施该Pass的混淆和加密操作。因此对于除了FieldEncryption之外的Pass：
+Obfuz的混淆（或加密）流程的执行方式为先判定对目标是否启用此Pass，再实施该Pass的混淆和加密操作。因此：
 
 - 如果对某目标禁用了某个Obfuscation Pass，即使在该Pass的规则文件中对该目标启用的混淆，混淆也不会生效。
 - 如果对某目标启用了某个Obfuscation Pass，如果在该Pass的规则文件中对该目标禁用了混淆，混淆也不会生效。
 - 只有同时对目标启用了某个Obfuscation Pass，同时在该Pass的规则文件中启用了混淆，混淆才会生效。
+
+:::warning
+
+唯一例外是`[EncryptField]`特性标记的字段，会无视Obfuscation Pass的规则及`[ObfuzIgnore]`，详细文档见[字段加密](./field-encryption)。
+
+:::
 
 ## 支持的Pass
 
