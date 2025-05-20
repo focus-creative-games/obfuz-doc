@@ -11,6 +11,8 @@
 - int、uint
 - long、ulong
 - IntPtr、UIntPtr
+- float
+- double
 - string
 
 将来会进一步支持加密**数组类型**常量。
