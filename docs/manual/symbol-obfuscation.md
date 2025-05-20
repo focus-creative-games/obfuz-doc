@@ -111,12 +111,25 @@ obName、obNamespace、obGetter、obSetter、obAdd、obRemove、obFire之类的�
 
 ## modifier 类型
 
-type、method、field、event、property都可以定义modifier属性，指示此项规则只哪些可见类型的目标生效。modifier可以为以下值：
+type、method、field、event、property都可以定义modifier属性，指示此项规则只哪些可见类型的目标生效。modifier如果为空，对所有可见类型的都生效。如果非空，可以是以下值的**组合**，以`|`分割：
 
-- 空。 对所有可见类型的都生效
-- public。 对public、protected、private的元数据都生效。
-- protected。 对protected、private的元数据生效。
-- private。 对private的元数据生效。
+- public。 对public 元数据都生效。
+- protected。 对protected 元数据生效。
+- private。 对private 元数据生效。
+
+例如想仅对public和protected生效，可以可以配置为`public|protected`。
+
+## ClassType 类型
+
+type规则可以定义classType属性，指示当前规则对哪种类型生效。 classType如果为空，对所有类型都生效。如果非空，可以是以下值的**组合**，以`|`分割：
+
+- class。 对普通类型生效，不包含struct、enum、interface、delegate。
+- struct。 对普通值类型生效，不包括enum。
+- interface。对接口类型生效。
+- enum。 对枚举类型生效。
+- delegate。对delegate类型生效。
+
+例如你想对所有非值类型生效，则可以配置为`class|interface|delegate`。
 
 ### assembly 配置规则
 
@@ -131,6 +144,7 @@ type、method、field、event、property都可以定义modifier属性，指示�
 |-|-|-|
 |name|是|name为通配符表达式。如果为空则表示匹配所有类型|
 |modifier|是|指示匹配哪些可见类型的目标|
+|classType|是|指示匹配哪种类型|
 |obName|是|如果没有设置则继承assembly的obName值。表示是否混淆本类型以及嵌套子类型及所有成员|
 |obNamespace|是|如果没有设置则继承assembly的obName值。表示是否混淆命名空间|
 

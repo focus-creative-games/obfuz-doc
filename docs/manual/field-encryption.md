@@ -35,6 +35,31 @@ MonoBehaviour、ScriptableObject及NewtonsoftJson之类的序列化库深度依�
 
 `FieldEncryptSettings.EncryptionLevel`字段可以设置全局默认加密级别。
 
+## EncryptFieldAttribute
+
+EncryptFieldAttribute提供代码中便捷地标记某个字段为加密字段的办法。
+
+它的优先级高于Obfuscation Pass规则和`[ObfuzIgnore]`。只要对某个字段添加了`[EncryptField]`特性，即使字段及所在类型有`[ObfuzIgnore]`特性，仍然会被加密。
+
+示例代码：
+
+```csharp
+
+[ObfuzIgnore]
+class A
+{
+  [EncryptField]
+  public int x1; // 变量x1仍然会被加密，无视类型上的[ObfuzIgnore]
+  
+  [ObfuzIgnore]
+  [EncryptField]
+  public int x2; // 变量x2仍然会被加密，无视字段上的[ObfuzIgnore]
+
+  public int y; // 变量y不会加密，也不会被释加任何混淆或加密Pass
+}
+
+```
+
 ## 规则文件
 
 由于字段加密会影响字段的读写性能，因此默认情况下**不会加密任何字段**。
@@ -85,28 +110,3 @@ assembly的子元素只能为type。
 |-|-|-|-|
 |name|否||类型名的通配字符串，如果为空表示匹配所有类型|
 |encrypt|是|0|是否加密此字段|
-
-## EncryptFieldAttribute
-
-EncryptFieldAttribute提供代码中便捷地标记某个字段为加密字段的办法。
-
-它的优先级高于Obfuscation Pass规则和`[ObfuzIgnore]`。只要对某个字段添加了`[EncryptField]`特性，即使字段及所有类型有`[ObfuzIgnore]`特性，仍然会被加密。
-
-示例代码：
-
-```csharp
-
-[ObfuzIgnore]
-class A
-{
-  [EncryptField]
-  public int x1; // 变量x1仍然会被加密，无视类型上的[ObfuzIgnore]
-  
-  [ObfuzIgnore]
-  [EncryptField]
-  public int x2; // 变量x2仍然会被加密，无视字段上的[ObfuzIgnore]
-
-  public int y; // 变量y不会加密，也不会被释加任何混淆或加密Pass
-}
-
-```
