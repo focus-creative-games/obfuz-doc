@@ -78,9 +78,9 @@ public static class BuildCommand
 HybridCLR默认的`HybridCLR/Generate/All`命令基于未混淆的程序集生成link.xml。如果有一部分AOT程序集被混淆了，基于未混淆代码生成link.xml中保留的类型和函数都是混淆前的名字，
 这导致link.xml无法真正保留那些混淆后的AOT类型和函数。构建后运行热更新代码有可能出现类型和函数被裁剪的情况。
 
-解决办法是使用Obfuz4HybridCLR专门提供的`Obfuz/ObfuzExtension/GenerateAll`命令。
+解决办法是使用Obfuz4HybridCLR专门提供的`HybridCLR/ObfuzExtension/GenerateAll`命令。
 
-- 运行`Obfuz/ObfuzExtension/GenerateAll`
+- 运行`HybridCLR/ObfuzExtension/GenerateAll`
 
 ## 生成混淆后的热更新程序集并且放到StreamingAssets目录下
 
