@@ -4,7 +4,13 @@
 
 ## 安装
 
-按照Obfuz和HybridCLR的安装文档操作即可。
+安装以下插件：
+
+- com.code-philosophy.hybridclr `https://github.com/focus-creative-games/hybridclr_unity.git`
+- com.code-philosophy.obfuz `https://github.com/focus-creative-games/obfuz.git?path=com.code-philosophy.obfuz`
+- com.code-philosophy.obfuz4hybridclr `https://github.com/focus-creative-games/obfuz.git?path=com.code-philosophy.obfuz4hybridclr`
+
+obufz4hybridclr是一个Obfuz扩展包，用于支持HybridCLR热更新工作流。
 
 :::warning
 
@@ -25,94 +31,38 @@ Obfuz和HybridCLR插件都包含了dnlib插件。对于Unity 2021及更早版本
 - 将HotUpdate加入`HybridCLRSettings`的热更新程序集列表
 - 将HotUpdate和Assembly-CSharp加入`ObfuzSettings.AssembliesToObfuscate`列表
 
-## 解决HybridCLR的一些问题
-
-HybridCLR的`HybridCLR/Generate/All`及`HybridCLR/Generate/LinkXml`都是基于未混淆的代码生成的link.xml，这导致混淆后生成的link.xml关于混淆程序集相关的预留完全
-没有生效，因为对应的名字在混淆后的程序集中并不存在。
-
-解决办法为为混淆后的程序集额外生成一个link.xml，代码如下：
+## 添加混淆热更新代码的构建代码
 
 ```csharp
 
-    [MenuItem("Obfuz/GenerateLinkXmlForHybridCLR")]
-    public static void GenerateLinkXml()
-    {
-        CompileDllCommand.CompileDllActiveBuildTarget();
-        BuildTarget target = EditorUserBuildSettings.activeBuildTarget;
-        var obfuzSettings = ObfuzSettings.Instance;
+using HybridCLR.Editor;
+using Obfuz4HybridCLR;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEditor;
+using UnityEngine;
 
-        var assemblySearchDirs = new List<string>
-        {
-            SettingsUtil.GetHotUpdateDllsOutputDirByTarget(target),
-        };
-        ObfuscatorBuilder builder = ObfuscatorBuilder.FromObfuzSettings(obfuzSettings, target, true);
-        builder.InsertTopPriorityAssemblySearchPaths(assemblySearchDirs);
-
-        Obfuscator obfuz = builder.Build();
-        obfuz.Run();
-
-
-        List<string> hotfixAssemblies = SettingsUtil.HotUpdateAssemblyNamesExcludePreserved;
-
-        var analyzer = new Analyzer(new PathAssemblyResolver(builder.ObfuscatedAssemblyOutputPath));
-        var refTypes = analyzer.CollectRefs(hotfixAssemblies);
-
-        // HyridCLR中 LinkXmlWritter不是public的，在其他程序集无法访问，只能通过反射操作
-        var linkXmlWriter = typeof(SettingsUtil).Assembly.GetType("HybridCLR.Editor.Link.LinkXmlWriter");
-        var writeMethod = linkXmlWriter.GetMethod("Write", BindingFlags.Public | BindingFlags.Instance);
-        var instance = Activator.CreateInstance(linkXmlWriter);
-        string linkXmlOutputPath = $"{Application.dataPath}/Obfuz/link.xml";
-        writeMethod.Invoke(instance, new object[] { linkXmlOutputPath, refTypes });
-        Debug.Log($"[GenerateLinkXmlForObfuscatedAssembly] output:{linkXmlOutputPath}");
-        AssetDatabase.Refresh();
-    }
-
-```
-
-## 添加混淆热更新的相关代码
-
-```csharp
-    [MenuItem("Obfuz/CompileAndObfuscateAndCopyToStreamingAssets")]
+public static class BuildCommand
+{
+    [MenuItem("Build/CompileAndObfuscateAndCopyToStreamingAssets")]
     public static void CompileAndObfuscateAndCopyToStreamingAssets()
     {
         BuildTarget target = EditorUserBuildSettings.activeBuildTarget;
-        string outputPath = ObfuzSettings.Instance.GetObfuscatedAssemblyOutputPath(target);
-        CompileAndObfuscate(target, outputPath);
+        ObfuscateUtil.CompileAndObfuscateHotUpdateAssemblies(target);
 
         Directory.CreateDirectory(Application.streamingAssetsPath);
 
+        string hotUpdateDllPath = $"{SettingsUtil.GetHotUpdateDllsOutputDirByTarget(target)}";
         foreach (string assName in SettingsUtil.HotUpdateAssemblyNamesIncludePreserved)
         {
-            string srcFile = $"{outputPath}/{assName}.dll";
+            string srcFile = $"{hotUpdateDllPath}/{assName}.dll";
             string dstFile = $"{Application.streamingAssetsPath}/{assName}.dll.bytes";
             File.Copy(srcFile, dstFile, true);
             Debug.Log($"[CompileAndObfuscate] Copy {srcFile} to {dstFile}");
         }
     }
-
-
-    public static void CompileAndObfuscate(BuildTarget target, string outputPath)
-    {
-        CompileDllCommand.CompileDll(EditorUserBuildSettings.activeBuildTarget, EditorUserBuildSettings.development);
-        var assemblySearchPaths = new List<string>
-      {
-        SettingsUtil.GetHotUpdateDllsOutputDirByTarget(target),
-      };
-        CustomObfuscate(target, assemblySearchPaths, outputPath);
-    }
-
-    public static void CustomObfuscate(BuildTarget target, List<string> assemblySearchPaths, string outputPath)
-    {
-        var obfuzSettings = ObfuzSettings.Instance;
-
-        var assemblySearchDirs = assemblySearchPaths;
-        ObfuscatorBuilder builder = ObfuscatorBuilder.FromObfuzSettings(obfuzSettings, target, true);
-        builder.InsertTopPriorityAssemblySearchPaths(assemblySearchDirs);
-        builder.ObfuscatedAssemblyOutputPath = outputPath;
-
-        Obfuscator obfuz = builder.Build();
-        obfuz.Run();
-    }
+}
 
 ```
 
@@ -123,12 +73,16 @@ HybridCLR的`HybridCLR/Generate/All`及`HybridCLR/Generate/LinkXml`都是基于�
 
 ## 生成HybridCLR相关的代码
 
-- 运行`Obfuz/GenerateLinkXmlForHybridCLR`
-- 运行`HybridCLR/Generate/All`
+HybridCLR默认的`HybridCLR/Generate/All`命令基于未混淆的程序集生成link.xml。如果有一部分AOT程序集被混淆了，基于未混淆代码生成link.xml中保留的类型和函数都是混淆前的名字，
+这导致link.xml无法真正保留那些混淆后的AOT类型和函数。构建后运行热更新代码有可能出现类型和函数被裁剪的情况。
+
+解决办法是使用Obfuz4HybridCLR专门提供的`Obfuz/ObfuzExtension/GenerateAll`命令。
+
+- 运行`Obfuz/ObfuzExtension/GenerateAll`
 
 ## 生成混淆后的热更新程序集并且放到StreamingAssets目录下
 
-- 运行`Obfuz/CompileAndObfuscateAndCopyToStreamingAssets`
+- 运行`Build/CompileAndObfuscateAndCopyToStreamingAssets`
 
 ## 打包&运行
 
