@@ -22,9 +22,10 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 
 |选项|描述|
 |-|-|
-|Assembly To Obfuscate| 需要被混淆的程序集名列表。程序集名不包含`.dll`，示例：`Main`、`Assembly-CSharp`|
+|Assembly To Obfuscate| 需要被混淆的程序集名列表。程序集名不包含`.dll`，示例：`Main`、`Assembly-CSharp`。如果想混淆`Obfuz.Runtime`，请开启下面的`Obfuscate Obfuz Runtime`选项，不要添加到此列表！|
 |Non Obfuscated But Referenceing Obfuscated Assemblies|不需要被混淆，但引用了被混淆的程序集的程序集名列表|
-|Additional Assembly Search Paths|以编译好的dll形式存在的程序集的相对搜索路径，不包含程序集名本身，相对目录的当前目录为项目目录。示例：`Assets/Plugins`|
+|Additional Assembly Search Paths|以dll形式存在的程序集的相对搜索路径，目前Obfuz会自动搜索工程内的与当前buildTarget兼容的托管dll（含Assets及Packages及Libarary/PackageCache），因此一般**不需要**配置此项。除非托管dll在Unity工程外，或者说存在多个同名dll需要解决搜索优先级。|
+|Obfuscate Obfuz Runtime|是否混淆Obfuz.Runtime程序集。默认为true，强烈建议开启此选项。|
 
 ### Obfuscation Pass Settings
 
