@@ -2,6 +2,11 @@
 
 有时会需要在构造流程之外执行混淆。例如使用HybridCLR热更新后，希望发布热更新代码前对热更新代码执行混淆。
 
+:::warning
+如果你正在使用HybridCLR，强烈使用`com.cod-philosphy.obfuz4hybridclr` package，因为它已经提供所有HybridCLR热更新需要的代码，使用更方便简单。
+详细文档见[与HybridCLR协同工作](./work-with-hybridclr)。
+:::
+
 ## 生成需要被混淆的dll
 
 源码形式的程序集需要先编译为dll才能被Obfuz混淆。对于Unity工程内的源码，可以使用以下代码实现编译dll：
@@ -30,6 +35,12 @@ public class ObfusacteTool
 
 ## 代码实现
 
+:::tip
+
+单独执行混淆不会触发`Obfuz.Unity.ObfuscationBeginEventArgs`和`Obfuz.Unity.ObfuscationEndEventArgs`，这两个事件只在构建流程中才会被触发。
+
+:::
+
 混淆前请先编译好dll。
 
 ```csharp
@@ -52,21 +63,6 @@ using UnityEngine;
 
 public static class ObfuscateUtil
 {
-    public static bool AreSameDirectory(string path1, string path2)
-    {
-        try
-        {
-            var dir1 = new DirectoryInfo(path1);
-            var dir2 = new DirectoryInfo(path2);
-
-            // 比较完整路径（考虑符号链接）
-            return dir1.FullName.TrimEnd('\\') == dir2.FullName.TrimEnd('\\');
-        }
-        catch
-        {
-            return false;
-        }
-    }
 
     public static void Obfuscate(BuildTarget target, List<string> assemblySearchPaths, string outputPath)
     {
@@ -77,17 +73,6 @@ public static class ObfuscateUtil
         builder.InsertTopPriorityAssemblySearchPaths(assemblySearchDirs);
 
         string obfuscatedAssemblyOutputPath = obfuzSettings.GetObfuscatedAssemblyOutputPath(target);
-        if (AreSameDirectory(outputPath, obfuscatedAssemblyOutputPath))
-        {
-            throw new Exception($"outputPath:{outputPath} can't be same to ObfuscatedAssemblyOutputPath:{obfuscatedAssemblyOutputPath}");
-        }
-        foreach (var assemblySearchDir in builder.AssemblySearchPaths)
-        {
-            if (AreSameDirectory(assemblySearchDir, obfuscatedAssemblyOutputPath))
-            {
-                throw new Exception($"assemblySearchDir:{assemblySearchDir} can't be same to ObfuscatedAssemblyOutputPath:{obfuscatedAssemblyOutputPath}");
-            }
-        }
 
         Obfuscator obfuz = builder.Build();
         obfuz.Run();
@@ -105,5 +90,3 @@ public static class ObfuscateUtil
 
 
 ```
-
-Obfuscator执行过程不会触发`Obfuz.Unity.ObfuscationBeginEventArgs`和`Obfuz.Unity.ObfuscationEndEventArgs`，因为没什么必要。
