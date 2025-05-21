@@ -37,7 +37,7 @@ MonoBehaviour、ScriptableObject及NewtonsoftJson之类的序列化库深度依�
 
 ## EncryptFieldAttribute
 
-EncryptFieldAttribute提供代码中便捷地标记某个字段为加密字段的办法。
+EncryptFieldAttribute提供代码中便捷地标记某个字段为加密字段的办法，详细文档见[Obfuz CustomAttributes](./customattributes)。
 
 它的优先级高于Obfuscation Pass规则和`[ObfuzIgnore]`。只要对某个字段添加了`[EncryptField]`特性，即使字段及所在类型有`[ObfuzIgnore]`特性，仍然会被加密。
 

@@ -25,7 +25,7 @@ Obfuz没有处理场景对象上的`UnityEvent`字段，因此如果在`Inspecto
 
 1. [Obfuscation Pass](./obfuscation-pass)中配置对某些元数据禁用`Symbol Obfus` Pass。
 2. [符号混淆](./symbol-obfuscation)的规则文件中配置对某些元数据禁用符号混淆。
-3. 在代码中给需要禁用符号混淆的元数据上添加`[ObfuzIgnore]`特性， 文档[ObfuzIgnoreAttribute](./obfuzignore)。
+3. 在代码中给需要禁用符号混淆的元数据上添加`[ObfuzIgnore]`特性， 文档[Obfuz CustomAttributes](./customattributes)。
 
 ### 手动维护原始名称与反射对象的映射关系
 
