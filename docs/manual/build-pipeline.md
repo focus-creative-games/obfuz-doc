@@ -41,12 +41,12 @@ public class TestObfuscationEvent
 
     private static void OnObfuscationBegin(ObfuscationBeginEventArgs args)
     {
-        Debug.Log($"OnObfuscationBegin: {args.scriptAssembliesPath} -> {args.obfuscatedScriptAssembliesPath}");
+        Debug.Log($"OnObfuscationBegin");
     }
 
     private static void OnObfuscationEnd(ObfuscationEndEventArgs args)
     {
-        Debug.Log($"OnObfuscationEnd: {args.originalScriptAssembliesPath} -> {args.obfuscatedScriptAssembliesPath}");
+        Debug.Log($"OnObfuscationEnd");
     }
 }
 
