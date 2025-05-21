@@ -31,7 +31,7 @@ ObfuzIgnoreAttribute的代码实现如下：
 |参数|描述|
 |-|-|
 |scope|混淆作用范围。类型为ObfuzScope，默认值为Obfuzscope.All，即会禁用类型名、字段、函数、property、event及子类型的所有混淆|
-|InheritByNestedTypes|是否被嵌套成员类继承。默认为true。此参数只对类型有效。|
+|InheritByNestedTypes|嵌套子类型是否继承当前ObfuzIgnoreAttribute，如果为true，所有嵌套子类型（包括嵌套子类型的嵌套子类型）也会等同定义了当前的ObfuzIgnoreAttribute。默认为true。此参数只对类型有效。|
 
 枚举类ObfuzScope的实现如下：
 
