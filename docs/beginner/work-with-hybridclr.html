@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">Obfuz+HybridCLR | Obfuz</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.obfuz.com/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://www.obfuz.com/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://www.obfuz.com/docs/beginner/work-with-hybridclr"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Obfuz+HybridCLR | Obfuz"><meta data-rh="true" name="description" content="本工程演示如何将Obfuz与HybridCLR一起使用，完整示例项目参见WorkWithHybridCLR。"><meta data-rh="true" property="og:description" content="本工程演示如何将Obfuz与HybridCLR一起使用，完整示例项目参见WorkWithHybridCLR。"><link data-rh="true" rel="icon" href="/img/favicon.png"><link data-rh="true" rel="canonical" href="https://www.obfuz.com/docs/beginner/work-with-hybridclr"><link data-rh="true" rel="alternate" href="https://www.obfuz.com/docs/beginner/work-with-hybridclr" hreflang="en"><link data-rh="true" rel="alternate" href="https://www.obfuz.com/docs/beginner/work-with-hybridclr" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.ff9dae79.css">
-<script src="/assets/js/runtime~main.7cd5554a.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.6b715903.js" defer="defer"></script>
 <script src="/assets/js/main.b23f4aa6.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -42,9 +42,9 @@
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="生成hybridclr相关的代码">生成HybridCLR相关的代码<a href="#生成hybridclr相关的代码" class="hash-link" aria-label="Direct link to 生成HybridCLR相关的代码" title="Direct link to 生成HybridCLR相关的代码">​</a></h2>
 <p>HybridCLR默认的<code>HybridCLR/Generate/All</code>命令基于未混淆的程序集生成link.xml。如果有一部分AOT程序集被混淆了，基于未混淆代码生成link.xml中保留的类型和函数都是混淆前的名字，
 这导致link.xml无法真正保留那些混淆后的AOT类型和函数。构建后运行热更新代码有可能出现类型和函数被裁剪的情况。</p>
-<p>解决办法是使用Obfuz4HybridCLR专门提供的<code>Obfuz/ObfuzExtension/GenerateAll</code>命令。</p>
+<p>解决办法是使用Obfuz4HybridCLR专门提供的<code>HybridCLR/ObfuzExtension/GenerateAll</code>命令。</p>
 <ul>
-<li>运行<code>Obfuz/ObfuzExtension/GenerateAll</code></li>
+<li>运行<code>HybridCLR/ObfuzExtension/GenerateAll</code></li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="生成混淆后的热更新程序集并且放到streamingassets目录下">生成混淆后的热更新程序集并且放到StreamingAssets目录下<a href="#生成混淆后的热更新程序集并且放到streamingassets目录下" class="hash-link" aria-label="Direct link to 生成混淆后的热更新程序集并且放到StreamingAssets目录下" title="Direct link to 生成混淆后的热更新程序集并且放到StreamingAssets目录下">​</a></h2>
 <ul>
