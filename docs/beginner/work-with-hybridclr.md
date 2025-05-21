@@ -1,6 +1,8 @@
-# 与HybridCLR协同工作
+# Obfuz+HybridCLR
 
 本工程演示如何将Obfuz与HybridCLR一起使用，完整示例项目参见[WorkWithHybridCLR](https://github.com/focus-creative-games/obfuz/tree/main/Samples/WorkWithHybridCLR)。
+
+详细文档见[与HybridCLR协同工作](../manual/work-with-hybridclr)。
 
 ## 安装
 

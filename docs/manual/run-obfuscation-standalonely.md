@@ -28,53 +28,81 @@ public class ObfusacteTool
 }
 ```
 
-使用HybridCLR插件的开发者，可以运行菜单`HybridCLR/CompileDll/ActiveBuildTarget`编译，或者直接调用 `HybridCLR.Editor.CompileDlllCommand.CompileDll`函数完成代码编译。
-
 ## 代码实现
 
 混淆前请先编译好dll。
 
 ```csharp
 
-public class ObfusacteTool
+using HybridCLR.Editor;
+using Obfuz.Settings;
+using Obfuz;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using UnityEditor;
+using HybridCLR.Editor.Commands;
+using HybridCLR.Editor.Installer;
+using System.IO;
+using HybridCLR.Editor.ABI;
+using UnityEngine;
+
+
+public static class ObfuscateUtil
 {
+    public static bool AreSameDirectory(string path1, string path2)
+    {
+        try
+        {
+            var dir1 = new DirectoryInfo(path1);
+            var dir2 = new DirectoryInfo(path2);
 
-  public static void CustomObfuscate(BuildTarget target，List<string> assemblySearchPaths, string outputPath)
-  {
-    var obfuzSettings = ObfuzSettings.Instance;
+            // 比较完整路径（考虑符号链接）
+            return dir1.FullName.TrimEnd('\\') == dir2.FullName.TrimEnd('\\');
+        }
+        catch
+        {
+            return false;
+        }
+    }
 
-    var assemblySearchDirs = assemblySearchPaths;
-    ObfuscatorBuilder builder = ObfuscatorBuilder.FromObfuzSettings(obfuzSettings, target, true);
-    builder.InsertTopPriorityAssemblySearchPaths(assemblySearchDirs);
-    builder.ObfuscatedAssemblyOutputPath = outputPath;
+    public static void Obfuscate(BuildTarget target, List<string> assemblySearchPaths, string outputPath)
+    {
+        var obfuzSettings = ObfuzSettings.Instance;
 
-    Obfuscator obfuz = builder.Build();
-    obfuz.Run();
-  }
+        var assemblySearchDirs = assemblySearchPaths;
+        ObfuscatorBuilder builder = ObfuscatorBuilder.FromObfuzSettings(obfuzSettings, target, true);
+        builder.InsertTopPriorityAssemblySearchPaths(assemblySearchDirs);
+
+        string obfuscatedAssemblyOutputPath = obfuzSettings.GetObfuscatedAssemblyOutputPath(target);
+        if (AreSameDirectory(outputPath, obfuscatedAssemblyOutputPath))
+        {
+            throw new Exception($"outputPath:{outputPath} can't be same to ObfuscatedAssemblyOutputPath:{obfuscatedAssemblyOutputPath}");
+        }
+        foreach (var assemblySearchDir in builder.AssemblySearchPaths)
+        {
+            if (AreSameDirectory(assemblySearchDir, obfuscatedAssemblyOutputPath))
+            {
+                throw new Exception($"assemblySearchDir:{assemblySearchDir} can't be same to ObfuscatedAssemblyOutputPath:{obfuscatedAssemblyOutputPath}");
+            }
+        }
+
+        Obfuscator obfuz = builder.Build();
+        obfuz.Run();
+
+        Directory.CreateDirectory(outputPath);
+        foreach (string srcFile in Directory.GetFiles(obfuscatedAssemblyOutputPath, "*.dll"))
+        {
+            string fileName = Path.GetFileName(srcFile);
+            string destFile = $"{outputPath}/{fileName}";
+            File.Copy(srcFile, destFile, true);
+            Debug.Log($"Copy {srcFile} to {destFile}");
+        }
+    }
 }
 
-```
-
-对于使用了HybridCLR插件的开发者， assemblySearchPaths可以是热更新程序集的默认输出目录，示例代码如下：
-
-```csharp
-public class ObfusacteTool
-{
-  public static void CompileAndObfuscate(BuildTarget target，string outputPath)
-  {
-      CompileDllCommand.CompileDll(EditorUserBuildSettings.activeBuildTarget, EditorUserBuildSettings.development);
-      var assemblySearchPaths = new List<string>
-      {
-        SettingsUtil.GetHotUpdateDllsOutputDirByTarget(target),
-      };
-      CustomObfuscate(target, assemblySearchPaths, outputPath);
-  }
-
-  public static void CustomObfuscate(BuildTarget target，List<string> assemblySearchPaths, string outputPath)
-  {
-      // ...
-  }
-}
 
 ```
 

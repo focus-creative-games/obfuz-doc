@@ -61,6 +61,7 @@ const sidebars: SidebarsConfig = {
         'manual/build-pipeline',
         'manual/run-obfuscation-standalonely',
         'manual/incremental-obfuscation-and-hotupdate',
+        'manual/work-with-hybridclr',
         'manual/serialization-reflection',
         'manual/deobfuscate-stacktrace',
       ],
