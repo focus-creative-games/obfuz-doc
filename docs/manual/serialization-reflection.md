@@ -15,13 +15,41 @@ Obfuz与Unity工作流深度集成，目前会对Unity有一些特殊处理：
 Obfuz没有处理场景对象上的`UnityEvent`字段，因此如果在`Inspector`中设置了`UnityEvent`类型字段的回调函数，需要禁用这些函数的符号混淆，
 否则运行时将出现找不到回调函数的错误。
 
-## 对某些元数据禁用符号混淆
+## 解决混淆后反射找不到类型的问题
+
+主要有两个办法。
+
+### 对需要反射查找的元数据禁用符号混淆
 
 有几种方式：
 
 1. [Obfuscation Pass](./obfuscation-pass)中配置对某些元数据禁用`Symbol Obfus` Pass。
 2. [符号混淆](./symbol-obfuscation)的规则文件中配置对某些元数据禁用符号混淆。
 3. 在代码中给需要禁用符号混淆的元数据上添加`[ObfuzIgnore]`特性， 文档[ObfuzIgnoreAttribute](./obfuzignore)。
+
+### 手动维护原始名称与反射对象的映射关系
+
+使用类似下面的代码：
+
+```csharp
+
+class NotReflectionFind
+{
+  private static readonly Dictionary<string, Type> _types = new Dictionary<string, Type>{
+    {"A", typeof(A)},
+    {"B", typeof(B)},
+    // ...
+
+  };
+
+  public static Type FindType(string name)
+  {
+    return _types.TryGetValue(name, out var type) ? type : null;
+  }
+}
+
+
+```
 
 ## 解决与Newtonsoft.Json之类序列化库的兼容问题
 

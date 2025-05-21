@@ -14,8 +14,8 @@ Obfuz支持Unity 2019+版本，同时也支持团结引擎1.0.0+，能在所有U
 
 Obfuz的Unity Package Manager URL安装地址：
 
-- gitee `https://gitee.com/focus-creative-games/obfuz.git?path=Obfuz/Packages/com.code-philosophy.obfuz`
-- github `https://github.com/focus-creative-games/obfuz.git?path=Obfuz/Packages/com.code-philosophy.obfuz`
+- gitee `https://gitee.com/focus-creative-games/obfuz.git?path=com.code-philosophy.obfuz`
+- github `https://github.com/focus-creative-games/obfuz.git?path=com.code-philosophy.obfuz`
 
 打开Unity Package Manager窗口，点击`Add package from URL...`，填入以上地址之一即可完成安装。
 
