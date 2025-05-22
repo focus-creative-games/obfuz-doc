@@ -35,8 +35,8 @@ const sidebars: SidebarsConfig = {
         'beginner/quick-start',
         'beginner/multi-assemblies-to-obfuscate',
         'beginner/configuration',
+        'beginner/dynamic-secret-key',
         'beginner/work-with-hybridclr',
-        //'beginner/dynamic-secret-key',
       ],
     },
     {
