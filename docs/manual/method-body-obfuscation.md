@@ -16,3 +16,9 @@ Obfuz已经尽力考虑Unity引擎下常见的需要禁用函数体混淆名称�
 - 名字含`$Obfuz$`前缀的函数是Obfuz生成的，它们的函数体不会被混淆
 - `Obfuz.EncryptionVM.GeneratedEncryptionVirtualMachine`类的所有函数体都不会被混淆
 - 标记了`[RuntimeInitializeOnLoadMethod]`，并且加载时机等于或者早于`RuntimeInitializeLoadType.AfterAssembliesLoaded`的函数体不会被混淆
+
+:::tip
+
+只是禁用了函数体混淆，函数名仍然可能被混淆。`[RuntimeInitializeOnLoadMethod]`是个例外，因为符号混淆中会对这类函数特殊处理，不混淆它的函数名及类名。
+
+:::

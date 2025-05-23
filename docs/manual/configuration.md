@@ -44,7 +44,8 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 |-|-|
 |Default Static Secret Key| 默认的静态密钥。由于初始化时机的限制，AOT程序集一般只能使用静态密钥。如果有AOT程序集被混淆，发布App后请不要修改这个值。|
 |Default Dynamic Secret Key| 默认的动态密钥。 允许在启动后完成一些事件（如代码热更新）后才加载的密钥。一般只能用于热更新程序集这种动态更新的程序集。 每次热更新前都可以修改这个值。|
-|Secret Key Output Path|密钥文档的默认输出目录。|
+|StaticSecretKeyOutputPath|默认静态密钥文档的默认输出目录。|
+|DynamicSecretKeyOutputPath|默认动态密钥文档的默认输出目录。|
 |Random Seed|随机数种子。该种子会影响所有的混淆和加密操作，建议定期更换。每次发布App或者热更新前都可以修改这个值。|
 
 ### Encryption VM Settings

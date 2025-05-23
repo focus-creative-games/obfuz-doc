@@ -44,10 +44,8 @@ using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
 {
-    // [ObfuzIgnore]指示Obfuz不要混淆这个函数
     // 初始化EncryptionService后被混淆的代码才能正常运行，
     // 因此尽可能地早地初始化它。
-    [ObfuzIgnore]
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
     private static void SetUpStaticSecretKey()
     {
@@ -125,6 +123,6 @@ public class Bootstrap : MonoBehaviour
 
 ```
 
-可以看到尽管没有对BootStrap标记为不混淆，也没有对Awake和Start函数标记为不混淆，Obfuz会自动识别这些特殊的Unity类型和函数，不会混淆它们的名称，但仍然会对函数体进行混淆。
+可以看到尽管没有对BootStrap标记为不混淆，没有对有`[RuntimeInitializeOnLoadMethod]`的SetUpStaticSecretKey函数禁用混淆，也没有对Awake和Start函数标记为不混淆，Obfuz会自动识别这些特殊的Unity类型和函数，不会混淆它们的名称，但仍然会对函数体进行混淆。
 
 这是Obfuz的强大和便利之处，它与Unity工作流深度集成，尽可能地简化混淆的配置工作。
