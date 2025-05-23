@@ -48,16 +48,21 @@ Debug模式混淆名不受混淆名前缀配置的影响。以`Name`为例，即
 
 `SymbolObfusSettings.Debug`字段配置了是否开启Debug模式，默认关闭。
 
+## 默认禁用符号混淆的目标
+
+Obfuz已经尽力考虑Unity引擎下常见的需要禁用混淆名称的场合，以下目标不会被混淆，也不会受规则文件的影响:
+
+- 继承自MonoBehaviour或ScriptableObject或标记了`[Serializable]`（我们统称这三类为可序列化类）的脚本类的名称
+- 可序列化类脚本类中Awake、Start之类的事件函数
+- 可序列化类中public类型可序列化字段或者`[SerializedField]`特性标记的字段
+- delegate的成员字段及函数
+- enum的私有字段
+- 标记了`[RuntimeInitializeOnLoadMethod]`的函数及它的父类名（否则Unity无法根据类型和函数名找到此函数）
+- 标记了Unity.Behaviour模块的`[BlackboardEnum]`特性的枚举类的类名极其枚举项名称
+- 其他情况
+
 ## 规则文件
 
-Obfuz已经尽力考虑Unity引擎下常见的需要禁用混淆名称的场合，如:
-
-- 不混淆继承自MonoBehaviour或ScriptableObject或标记了`[Serializable]`的脚本类的名称
-- 不混淆继承自MonoBehaviour或ScriptableObject或标记了`[Serializable]`的脚本类中Awake、Start之类的事件函数
-- 不混淆继承自MonoBehaviour或ScriptableObject或标记了`[Serializable]`的脚本类中public类型可序列化字段或者`[SerializedField]`特性标记的字段
-- 不混淆delegate的成员字段及函数
-- 不混淆enum的私有字段
-- 其他情况
 
 实践中仍然可能需要更精准地控制混淆范围和效果，Obfuz通过规则文件来实现精细的符号混淆控制，允许配置多个规则文件。
 

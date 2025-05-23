@@ -52,6 +52,7 @@ const sidebars: SidebarsConfig = {
         'manual/menu',
         'manual/assembly',
         'manual/encryption',
+        'manual/code-obfuscation',
         'manual/obfuscation-pass',
         'manual/customattributes',
         'manual/symbol-obfuscation',
