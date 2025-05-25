@@ -6,11 +6,25 @@
 
 旧版本如果定义了几个相同名字的带参Property（如`operator []`）时会产生这个问题。请更新到最新版本，同时**删除旧的`symbol-mapping.xml`文件**（默认在`Assets/Obfuz/symbol-mapping.xml`）。
 
-### il2cpp 构建过程中打印错误日志，某些类型、字段、函数、property、event打不到。这些找不到的元数据的名称是原始的未混淆的名称
+### il2cpp 构建过程中打印错误日志，某些类型、字段、函数、property、event找不到。这些找不到的元数据的名称是原始的未混淆的名称
 
 应该是出错的程序集引用了被混淆程序集，但你没有把它加入到`ObfuzSettings.AssemblySettings.NonObfuscatedButReferenceingObfuscatedAssemblies`列表。
 如果不加到此列表，被混淆的元数据修改时不会同步修改这些引用了它的程序集中的引用符号，导致出错。详细文档见[程序集](../manual/assembly)和[符号混淆](../manual/symbol-obfuscation)。
 
+### 构建过程中混淆成功了，但il2cpp生成代码过程中出现错误
+
+有几个原因：
+
+1. Obfuz生成的混淆dll有bug
+2. il2cpp对dll中元数据的名称有要求而obfuz未满足其隐式要求而出错。
+3. Obfuz解决了此问题，但旧版本obfuz生成的symbol-mapping.xml文件仍然迫使它使用了一个非法或与il2cpp不兼容的混淆
+
+解决办法：
+
+1. 删除symbol-mapping.xml
+2. 更新Obfuz到最新版本
+
+还无法解决，请构造出复现工程，向我们报告。
 
 ## 运行过程中发生异常
 

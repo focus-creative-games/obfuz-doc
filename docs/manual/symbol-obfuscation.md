@@ -72,43 +72,43 @@ Obfuz已经尽力考虑Unity引擎下常见的需要禁用混淆名称的场合�
 <?xml version="1.0" encoding="UTF-8"?>
 
 <obfuz>
-    <assembly name="Obfus1">
-      <type name="*.NotObfuscate" obName="0"/>
+    <assembly name="Obfuscated">
+      <type name="*.NotObfuscate" obName="0" applyToMembers="1"/>
+      <type name="*.Foo" classType="class|enum" obName="0"/>
       <type name="*.NotObfuscateField">
         <field name="a" obName="0"/>
-        <field name="b*" modifier="public" obName="0"/>
+        <field name="b*" modifier="public|private" obName="0"/>
       </type>
-      <type name="*.NotObfuscateMethod">
-        <method name="a" obName="0"/>
+      <type name="*.NotObfuscateMethod" obName="0">
+        <method name="Foo1" obName="0"/>
         <method name="b*" obName="1"/>
         <method name="c*" modifier="public" obName="0"/>
       </type>
-      <type name="*.NotObfuscateProperty">
-        <property name="a" obName="0" obGetter="0" obSetter="0"/>
+      <type name="*.NotObfuscateProperty" obName="0">
+        <property name="X0" obName="0" applyToMethods="1"/>
         <property name="b*" obName="0"/>
         <property name="c*" modifier="private" obName="1"/>
       </type>
-      <type name="*.NotObfuscateEvent">
-        <event name="a*" obName="0" obAdd="0" obAdd="0" obRemove="0" obFire="0"/>
+      <type name="*.NotObfuscateEvent" obName="0">
+        <event name="A1" obName="0" applyToMethods="1" />
         <event name="b*" modifier="protected" obName="1"/>
         <event name="c*" obName="0"/>
       </type>
     </assembly>
 
-    <assembly name="Obfus2">
-      <type name="*.NotObfuscateField">
-        <field name="a" obName="0"/>
-        <field name="b*" modifier="public" obName="0"/>
-      </type>
+    <assembly name="Tests">
+
     </assembly>
 </obfuz>
 ```
 
 顶层tag必须是obfuz，次级tag必须是assembly。
 
+所有目标(assembly、type、field、method、property、event)都**允许定义多条与它匹配的规则**，以最后一个obName不为空的规则的值为准。
+
 ### nullable bool类型
 
-obName、obNamespace、obGetter、obSetter、obAdd、obRemove、obFire之类的属性为可空bool属性，它的解析规则如下：
+obName、applyToMembers、applyToMethods之类的属性为可空bool属性，它的解析规则如下：
 
 - 如果未设置或者为长度为零的字符串，则解析为null
 - 如果为0、false则解析为false
@@ -124,7 +124,7 @@ type、method、field、event、property都可以定义modifier属性，指示�
 
 例如想仅对public和protected生效，可以可以配置为`public|protected`。
 
-## ClassType 类型
+## classType 类型
 
 type规则可以定义classType属性，指示当前规则对哪种类型生效。 classType如果为空，对所有类型都生效。如果非空，可以是以下值的**组合**，以`|`分割：
 
@@ -140,8 +140,7 @@ type规则可以定义classType属性，指示当前规则对哪种类型生效�
 
 |属性|可空|描述|
 |-|-|-|
-|name|否|name必须是被混淆的程序集，即必须在`AssemblySettings.AssemblyToObfuscate`出现。不允许重复出现同名assemly规则，即为每个混淆程序集最多指定一个assembly规则。|
-|obName|是|如果没设置默认为true。该属性指示是否混淆程序集内所有类型及类型成员|
+|name|否|name必须是被混淆的程序集，即必须在`AssemblySettings.AssemblyToObfuscate`出现。一个assembly可以有多个assembly规则|
 
 ### type 配置规则
 
@@ -150,12 +149,10 @@ type规则可以定义classType属性，指示当前规则对哪种类型生效�
 |name|是|name为通配符表达式。如果为空则表示匹配所有类型|
 |modifier|是|指示匹配哪些可见类型的目标|
 |classType|是|指示匹配哪种类型|
-|obName|是|如果没有设置则继承assembly的obName值。表示是否混淆本类型以及嵌套子类型及所有成员|
-|obNamespace|是|如果没有设置则继承assembly的obName值。表示是否混淆命名空间|
+|obName|是|表示是否混淆本类型的命名空间和类型名。如果自身是嵌套子类型没有设置则优先继承ApplyToMember为true的嵌套父类的obName，如果找不到可继承的值，则默认为true|
+|applyToMembers|是|是否将obName属性的值应用于所有成员，包括字段、类型、property、event及所有嵌套子类型（包括嵌套子类型的嵌套子类型）|
 
 type允许定义field、method、property、event类型的子元素。
-
-type的嵌套子类型如果没有设置obName或obNamespace，会继承它的上层type的相应属性。
 
 ### field 配置规则
 
@@ -163,7 +160,7 @@ type的嵌套子类型如果没有设置obName或obNamespace，会继承它的�
 |-|-|-|
 |name|是|name为通配符表达式。如果为空则表示匹配所有类型|
 |modifier|是|指示匹配哪些可见类型的目标|
-|obName|是|表示是否混淆字段名。如果没有设置则继承type的obName值。|
+|obName|是|表示是否混淆字段名。如果没有设置则并且type的applyToMembers属性为true并且type设置了obName属性，则继承type的obName值。|
 
 ### property 配置规则
 
@@ -171,9 +168,8 @@ type的嵌套子类型如果没有设置obName或obNamespace，会继承它的�
 |-|-|-|
 |name|是|name为通配符表达式。如果为空则表示匹配所有类型|
 |modifier|是|指示匹配哪些可见类型的目标|
-|obName|是|表示是否混淆property名。如果没有设置则继承所在type的obName值。|
-|obGetter|是|表示是否混淆它的getter函数。如果没有设置则继承property的obName属性的值。|
-|obSetter|是|表示是否混淆它的setter函数。如果没有设置则继承property的obName属性的值。|
+|obName|是|表示是否混淆property名。如果没有设置则并且type的applyToMembers属性为true并且type设置了obName属性，则继承type的obName值。|
+|applyToMethods|是|如果为true，并且obName不为空，则将obName属性应用于本property的getter、setter函数|
 
 ### event 配置规则
 
@@ -181,10 +177,8 @@ type的嵌套子类型如果没有设置obName或obNamespace，会继承它的�
 |-|-|-|
 |name|是|name为通配符表达式。如果为空则表示匹配所有类型|
 |modifier|是|指示匹配哪些可见类型的目标|
-|obName|是|表示是否混淆event名。如果没有设置则继承所在type的obName值。|
-|obAdd|是|表示是否混淆它的add函数。如果没有设置则继承event的obName属性的值。|
-|obRemove|是|表示是否混淆它的remove函数。如果没有设置则继承event的obName属性的值。|
-|obFire|是|表示是否混淆它的fire函数。如果没有设置则继承event的obName属性的值。|
+|obName|是|表示是否混淆event名。如果没有设置则并且type的applyToMembers属性为true并且type设置了obName属性，则继承type的obName值。|
+|applyToMethods|是|如果为true，并且obName不为空，则将obName属性应用于本property的add、remove、fire函数|
 
 ### method 配置规则
 
@@ -192,4 +186,4 @@ type的嵌套子类型如果没有设置obName或obNamespace，会继承它的�
 |-|-|-|
 |name|是|name为通配符表达式。如果为空则表示匹配所有类型|
 |modifier|是|指示匹配哪些可见类型的目标|
-|obName|是|表示是否混淆event名。如果没有设置，并且是property的getter或setter函数，或者是event的add、remove、fire函数，则继承相应的属性性。否则继承所在type的obName值。|
+|obName|是|表示是否混淆method名。如果没有设置，则优先继承。否则继承所在type的obName值。|
