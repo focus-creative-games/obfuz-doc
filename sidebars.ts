@@ -78,6 +78,7 @@ const sidebars: SidebarsConfig = {
         'help/faq',
       ],
     },
+    'help/releaselog',
   ],
 
 };
