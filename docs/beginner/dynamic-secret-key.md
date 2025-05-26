@@ -102,26 +102,26 @@ using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
 {
- [RuntimeInitializeOnLoadMethod(/*Could not decode attribute arguments.*/)]
- private static void SetUpStaticSecretKey()
- {
-  Debug.Log((object)"SetUpStaticSecret begin");
-  $A.$C<$A.$c>.$L = new global::$a.$A(Resources.Load<TextAsset>("Obfuz/defaultStaticSecretKey").bytes);
-  Debug.Log((object)"SetUpStaticSecret end");
- }
+    [RuntimeInitializeOnLoadMethod(/*Could not decode attribute arguments.*/)]
+    private static void SetUpStaticSecretKey()
+    {
+        Debug.Log((object)"SetUpStaticSecret begin");
+        $A.$C<$A.$c>.$L = new global::$a.$A(Resources.Load<TextAsset>("Obfuz/defaultStaticSecretKey").bytes);
+        Debug.Log((object)"SetUpStaticSecret end");
+    }
 
- private static void $a()
- {
-  $d.$a($A.$C<$A.$c>.$K(global::$C.$A, 0, 24, 137, 1750859568), $A.$C<$A.$c>.$d(1718597184, 154, 2114032877));
-  $A.$C<$A.$B>.$L = new global::$a.$A($d.$b($d.$A($A.$C<$A.$c>.$K(global::$C.$A, 24, 29, 98, -1513390007), $A.$C<$A.$c>.$d(-394605899, 193, -1119998407)), $A.$C<$A.$c>.$d(1579960075, 194, -1028386777)));
-  $d.$a($A.$C<$A.$c>.$K(global::$C.$A, 53, 22, 61, -331274448), $A.$C<$A.$c>.$d(1718597184, 154, 2114032877));
- }
+    private static void $a()
+    {
+        $d.$a($A.$C<$A.$c>.$K(global::$C.$A, 0, 24, 137, 1750859568), $A.$C<$A.$c>.$d(1718597184, 154, 2114032877));
+        $A.$C<$A.$B>.$L = new global::$a.$A($d.$b($d.$A($A.$C<$A.$c>.$K(global::$C.$A, 24, 29, 98, -1513390007), $A.$C<$A.$c>.$d(-394605899, 193, -1119998407)), $A.$C<$A.$c>.$d(1579960075, 194, -1028386777)));
+        $d.$a($A.$C<$A.$c>.$K(global::$C.$A, 53, 22, 61, -331274448), $A.$C<$A.$c>.$d(1718597184, 154, 2114032877));
+    }
 
- private void Start()
- {
-  $d.$B($A.$C<$A.$c>.$d(-1185287704, 255, -1146758192));
-  $d.$C($d.$c(this, $A.$C<$A.$c>.$d(694999971, 214, -840892815)), $A.$C<$A.$c>.$d(1262757717, 165, 2108602561));
- }
+    private void Start()
+    {
+        $d.$B($A.$C<$A.$c>.$d(-1185287704, 255, -1146758192));
+        $d.$C($d.$c(this, $A.$C<$A.$c>.$d(694999971, 214, -840892815)), $A.$C<$A.$c>.$d(1262757717, 165, 2108602561));
+    }
 }
 ```
 
@@ -133,10 +133,10 @@ using UnityEngine;
 
 public class Entry : MonoBehaviour
 {
- private void Start()
- {
-  $C.$a($A.$C<$A.$B>.$K($c.$A, 0, 11, 128, -835666756), $A.$C<$A.$B>.$d(1717964360, 44, -2091590008));
- }
+    private void Start()
+    {
+        $C.$a($A.$C<$A.$B>.$K($c.$A, 0, 11, 128, -835666756), $A.$C<$A.$B>.$d(1717964360, 44, -2091590008));
+    }
 }
 
 ```

@@ -98,19 +98,20 @@ HybridCLR默认的`HybridCLR/Generate/All`命令基于未混淆的程序集生�
 Entry类被混淆后的代码如下：
 
 ```csharp
-using Obfuz;
+using $A;
 using UnityEngine;
 
 public class Entry : MonoBehaviour
 {
- private void Start()
- {
-  $c.$a((object)$B.$a, EncryptionService<DefaultStaticEncryptionScope>.Decrypt(1718597184, 154, 2114032877));
- }
+    private void Start()
+    {
+        $c.$a($A.$C<$A.$c>.$K($d.$A, 0, 11, 32, 862320345), $A.$C<$A.$c>.$d(1718597184, 154, 2114032877));
+    }
 
- private void Update()
- {
- }
+    private void Update()
+    {
+    }
 }
+
 
 ```

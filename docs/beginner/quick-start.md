@@ -94,33 +94,31 @@ public class Bootstrap : MonoBehaviour
 ```csharp
 
 using $a;
-using Obfuz;
+using $A;
 using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
 {
- [RuntimeInitializeOnLoadMethod(/*Could not decode attribute arguments.*/)]
- private static void SetUpStaticSecretKey()
- {
-  Debug.Log((object)"SetUpStaticSecret begin");
-  EncryptionService<DefaultStaticEncryptionScope>.Encryptor = (IEncryptor)(object)new $A(Resources.Load<TextAsset>("Obfuz/defaultStaticSecretKey").bytes);
-  Debug.Log((object)"SetUpStaticSecret end");
- }
+    [RuntimeInitializeOnLoadMethod(/*Could not decode attribute arguments.*/)]
+    private static void SetUpStaticSecretKey()
+    {
+        Debug.Log((object)"SetUpStaticSecret begin");
+        $A.$C<$c>.$L = new global::$a.$A(Resources.Load<TextAsset>("Obfuz/defaultStaticSecretKey").bytes);
+        Debug.Log((object)"SetUpStaticSecret end");
+    }
 
- private int $a(int 1, int 1)
- {
-  return 1 + 1 + 1;
- }
+    private int $a(int 1, int 1)
+    {
+        return 1 + 1 + $A.$C<$c>.$I($d.$A, 0, 14, -2097817526);
+    }
 
- private void Start()
- {
-  $e.$a((object)$D.$a, EncryptionService<DefaultStaticEncryptionScope>.Decrypt(1718597184, 154, 2114032877));
-  int num = $e.$b((object)this, $e.$A((object)$d.$A, 0, 27, -201418147, EncryptionService<DefaultStaticEncryptionScope>.Decrypt(-1139589574, 85, -452785586)), $e.$A((object)$d.$A, 4, 153, -875938825, EncryptionService<DefaultStaticEncryptionScope>.Decrypt(-1139589574, 85, -452785586)), EncryptionService<DefaultStaticEncryptionScope>.Decrypt(1757957431, 242, 760404455));
-  $e.$a((object)string.Format($D.$A, num), EncryptionService<DefaultStaticEncryptionScope>.Decrypt(1718597184, 154, 2114032877));
- }
+    private void Start()
+    {
+        $e.$a($A.$C<$c>.$K($d.$A, 4, 12, 169, 534648667), $A.$C<$c>.$d(1718597184, 154, 2114032877));
+        int num = $e.$A(this, $A.$C<$c>.$I($d.$A, 16, 27, -201418147), $A.$C<$c>.$I($d.$A, 20, 153, -875938825), $A.$C<$c>.$d(1757957431, 242, 760404455));
+        $e.$a(string.Format($A.$C<$c>.$K($d.$A, 24, 7, 10, 1708888075), num), $A.$C<$c>.$d(1718597184, 154, 2114032877));
+    }
 }
-
-
 ```
 
 可以看到尽管没有对BootStrap标记为不混淆，没有对有`[RuntimeInitializeOnLoadMethod]`的SetUpStaticSecretKey函数禁用混淆，也没有对Awake和Start函数标记为不混淆，Obfuz会自动识别这些特殊的Unity类型和函数，不会混淆它们的名称，但仍然会对函数体进行混淆。
