@@ -5,8 +5,6 @@
 
 Obfuz 是一款开源、强大、易用及稳定可靠的充分满足商业化游戏项目需求的Unity代码混淆和加固解决方案。
 
-[English](./README-EN.md) | [中文](./README.md)
-
 [Github](https://github.com/focus-creative-games/obfuz) | [Gitee](https://gitee.com/focus-creative-games/obfuz)
 
 ---

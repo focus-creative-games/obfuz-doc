@@ -31,11 +31,13 @@ ObfuzIgnoreAttribute的代码实现如下：
 |参数|描述|
 |-|-|
 |scope|混淆作用范围。类型为ObfuzScope，默认值为Obfuzscope.All，即会禁用类型名、字段、函数、property、event及子类型的所有混淆|
-|ApplyToMembers|嵌套子类型是否继承当前ObfuzIgnoreAttribute，如果为true，所有嵌套子类型（包括嵌套子类型的嵌套子类型）也会等同定义了当前的ObfuzIgnoreAttribute。默认为true。此参数只对类型有效。|
+|ApplyToMembers|成员是否继承当前ObfuzIgnoreAttribute，如果为true，所有成员（字段、函数、property、event）也会等同定义了当前的ObfuzIgnoreAttribute。默认为true。此参数只对类型、property、event有效。|
+|ApplyToNestedTypes|嵌套子类型是否继承当前ObfuzIgnoreAttribute，如果为true，所有嵌套子类型也会等同定义了当前的ObfuzIgnoreAttribute。默认为true。此参数只对类型有效。|
 
 枚举类ObfuzScope的实现如下：
 
 ```csharp
+    [Flags]
     public enum ObfuzScope
     {
         None = 0x0,
@@ -45,15 +47,12 @@ ObfuzIgnoreAttribute的代码实现如下：
         MethodParameter = 0x8,
         MethodBody = 0x10,
         Method = MethodName | MethodParameter | MethodBody,
-        PropertyName = 020,
-        PropertyGetter = 0x40,
-        PropertySetter = 0x80,
-        Property = PropertyName | PropertyGetter | PropertySetter,
+        PropertyName = 0x20,
+        PropertyGetterSetterName = 0x40,
+        Property = PropertyName | PropertyGetterSetterName,
         EventName = 0x100,
-        EventAdd = 0x200,
-        EventRemove = 0x400,
-        EventFire = 0x800,
-        Event = EventName | EventAdd | EventRemove,
+        EventAddRemoveFireName = 0x200,
+        Event = EventName | PropertyGetterSetterName,
         Module = 0x1000,
         All = TypeName | Field | Method | Property | Event,
     }
