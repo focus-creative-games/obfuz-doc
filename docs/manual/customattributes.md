@@ -18,7 +18,7 @@ ObfuzIgnoreAttribute的代码实现如下：
     {
         public ObfuzScope Scope { get; set; }
 
-        public bool ApplyToMembers { get; set; } = true;
+        public bool ApplyToNestedTypes { get; set; } = true;
 
         public ObfuzIgnoreAttribute(ObfuzScope scope = ObfuzScope.All)
         {
@@ -31,7 +31,6 @@ ObfuzIgnoreAttribute的代码实现如下：
 |参数|描述|
 |-|-|
 |scope|混淆作用范围。类型为ObfuzScope，默认值为Obfuzscope.All，即会禁用类型名、字段、函数、property、event及子类型的所有混淆|
-|ApplyToMembers|成员是否继承当前ObfuzIgnoreAttribute，如果为true，所有成员（字段、函数、property、event）也会等同定义了当前的ObfuzIgnoreAttribute。默认为true。此参数只对类型、property、event有效。|
 |ApplyToNestedTypes|嵌套子类型是否继承当前ObfuzIgnoreAttribute，如果为true，所有嵌套子类型也会等同定义了当前的ObfuzIgnoreAttribute。默认为true。此参数只对类型有效。|
 
 枚举类ObfuzScope的实现如下：
@@ -61,15 +60,15 @@ ObfuzIgnoreAttribute的代码实现如下：
 
 ### 作用目标
 
-`ObfuzIgnoreAttribute`可以添加到类型、函数、字段、Property、event上，被添加的元数据会被禁用所有混淆操作。
+`ObfuzIgnoreAttribute`可以添加到类型、函数、字段、Property、event上，被添加的元数据会被禁用Scope中指定的混淆操作。
 
 |[ObfuzIgnore]添加的目标|描述|
 |-|-|
 |类型|该类型及所有内嵌子类型、成员字段、函数、Property、event都不会被混淆|
 |函数|该函数名及参数及函数体都不会被混淆。注意！函数代码中引用的符号如果被混淆或者加密，则仍然会被替换为混淆后的版本。显然必须这么做才能保证正确性。|
 |字段|会被禁用符号混淆、字段加密在内的所有可作用于字段的混淆操作|
-|property|会被禁用符号混淆在内的所有可作用于Property的混淆操作，但仍然会混淆getter和setter函数。如果想禁止混淆getter和setter函数需要在函数上添加`[ObfuzIgnore]`|
-|event|会被禁用符号混淆在内的所有可作用于event的混淆操作，但仍然会混淆add、remove函数。如果想禁止混淆这些函数需要在函数上添加`[ObfuzIgnore]`|
+|property|会被禁用符号混淆在内的所有可作用于Property的混淆操作|
+|event|会被禁用符号混淆在内的所有可作用于event的混淆操作|
 
 ### 其他说明
 
