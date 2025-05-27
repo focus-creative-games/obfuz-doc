@@ -73,27 +73,16 @@ Obfuz已经尽力考虑Unity引擎下常见的需要禁用混淆名称的场合�
 
 <obfuz>
     <assembly name="Obfuscated">
-      <type name="*.NotObfuscate" obName="0" applyToMembers="1"/>
-      <type name="*.Foo" classType="class|enum" obName="0"/>
-      <type name="*.NotObfuscateField">
-        <field name="a" obName="0"/>
-        <field name="b*" modifier="public|private" obName="0"/>
-      </type>
-      <type name="*.NotObfuscateMethod" obName="0">
-        <method name="Foo1" obName="0"/>
-        <method name="b*" obName="1"/>
-        <method name="c*" modifier="public" obName="0"/>
-      </type>
-      <type name="*.NotObfuscateProperty" obName="0">
-        <property name="X0" obName="0" applyToMethods="1"/>
-        <property name="b*" obName="0"/>
-        <property name="c*" modifier="private" obName="1"/>
-      </type>
-      <type name="*.NotObfuscateEvent" obName="0">
-        <event name="A1" obName="0" applyToMethods="1" />
-        <event name="b*" modifier="protected" obName="1"/>
-        <event name="c*" obName="0"/>
-      </type>
+      <type name="xxxx" obName="1" applyToMembers="none,field,methodName,method,propertyName,propertyGetterSetterName,property,eventName,eventAddRemoveFireName,event,all,*"
+        applyToNestedTypes="1"
+        modifier="public,protected,private"
+        classType="class,struct,enum,interface,delegate"
+        >
+          <field name="f" obName="0" modifier="public,protected,private"/>
+          <method name="m" obName="0" modifier="public,protected,private"/>
+          <property name="p" obName="0" applyToMembers="propertyGetterSetterName"/>
+          <event name="e" obName="0" applyToMembers="eventAddRemoveFireName"/>
+        </type>
     </assembly>
 
     <assembly name="Tests">
@@ -116,17 +105,17 @@ obName、applyToMembers、applyToMethods之类的属性为可空bool属性，它
 
 ## modifier 类型
 
-type、method、field、event、property都可以定义modifier属性，指示此项规则只哪些可见类型的目标生效。modifier如果为空，对所有可见类型的都生效。如果非空，可以是以下值的**组合**，以`|`分割：
+type、method、field、event、property都可以定义modifier属性，指示此项规则只哪些可见类型的目标生效。modifier如果为空，对所有可见类型的都生效。如果非空，可以是以下值的**组合**，以`,`分割：
 
-- public。 对public 元数据都生效。
-- protected。 对protected 元数据生效。
-- private。 对private 元数据生效。
+- public。 对public元数据都生效。如果目标是public嵌套类型，即使包围它的类型不是public，也匹配此条规则。
+- protected。 对protected 元数据生效。如果目标是protected嵌套类型，即使包围它的类型不是public或者protected，也匹配此条规则。
+- private。 对private 元数据生效。如果目标是private嵌套类型，无论包围它的类型的可见性如何都匹配此条规则。
 
 例如想仅对public和protected生效，可以可以配置为`public|protected`。
 
 ## classType 类型
 
-type规则可以定义classType属性，指示当前规则对哪种类型生效。 classType如果为空，对所有类型都生效。如果非空，可以是以下值的**组合**，以`|`分割：
+type规则可以定义classType属性，指示当前规则对哪种类型生效。 classType如果为空，对**所有类型都生效**。如果非空，可以是以下值的**组合**，以`,`分割：
 
 - class。 对普通类型生效，不包含struct、enum、interface、delegate。
 - struct。 对普通值类型生效，不包括enum。
@@ -135,6 +124,22 @@ type规则可以定义classType属性，指示当前规则对哪种类型生效�
 - delegate。对delegate类型生效。
 
 例如你想对所有非值类型生效，则可以配置为`class|interface|delegate`。
+
+## applyToMember类型
+
+applyToMember类型描述了对哪些元数据不混淆。可以为空，表示不作用于任何目标，或者是以下组合，以`,`分割：
+
+|类型|描述|
+|-|-|
+|none|不作用于任何目标|
+|field|作用于字段名|
+|method|作用于函数名|
+|propertyName|作用于property名，但不包含getter和setter函数名|
+|propertyGetterSetterName|作用于getter和setter函数名，但不包含property名|
+|property|等价于propertyName和propertyGetterSetterName的组合，作用于property名及getter和setter函数名|
+|eventName|作用于event名，但不包含add和remove和fire函数名|
+|eventAddRemoveFireName|作用于add和remove和fire函数名，但不包含event名|
+|event|等价于eventName和eventAddRemoveFireName的组合，作用于event名、add和remove和fire函数名|
 
 ### assembly 配置规则
 
@@ -150,7 +155,8 @@ type规则可以定义classType属性，指示当前规则对哪种类型生效�
 |modifier|是|指示匹配哪些可见类型的目标|
 |classType|是|指示匹配哪种类型|
 |obName|是|表示是否混淆本类型的命名空间和类型名。如果自身是嵌套子类型没有设置则优先继承ApplyToMember为true的嵌套父类的obName，如果找不到可继承的值，则默认为true|
-|applyToMembers|是|是否将obName属性的值应用于所有成员，包括字段、类型、property、event及所有嵌套子类型（包括嵌套子类型的嵌套子类型）|
+|applyToMembers|是|obName值的额外作用目标。如果obName为null，此applyToMember不会生效|
+|applyToNestedTypes|是|默认为true，是否将obName属性的值应用于所有嵌套子类型（包括嵌套子类型的嵌套子类型）|
 
 type允许定义field、method、property、event类型的子元素。
 
@@ -169,7 +175,7 @@ type允许定义field、method、property、event类型的子元素。
 |name|是|name为通配符表达式。如果为空则表示匹配所有类型|
 |modifier|是|指示匹配哪些可见类型的目标|
 |obName|是|表示是否混淆property名。如果没有设置则并且type的applyToMembers属性为true并且type设置了obName属性，则继承type的obName值。|
-|applyToMethods|是|如果为true，并且obName不为空，则将obName属性应用于本property的getter、setter函数|
+|applyToMembers|是|obName值的额外作用目标，有效取值只能为`propertyGetterSetterName`，取其他值没有意义。如果obName为null，此applyToMember不会生效|
 
 ### event 配置规则
 
@@ -178,7 +184,7 @@ type允许定义field、method、property、event类型的子元素。
 |name|是|name为通配符表达式。如果为空则表示匹配所有类型|
 |modifier|是|指示匹配哪些可见类型的目标|
 |obName|是|表示是否混淆event名。如果没有设置则并且type的applyToMembers属性为true并且type设置了obName属性，则继承type的obName值。|
-|applyToMethods|是|如果为true，并且obName不为空，则将obName属性应用于本property的add、remove、fire函数|
+|applyToMembers|是|obName值的额外作用目标，有效取值只能为`eventAddRemoveFireName`，取其他值没有意义。如果obName为null，此applyToMember不会生效|
 
 ### method 配置规则
 
