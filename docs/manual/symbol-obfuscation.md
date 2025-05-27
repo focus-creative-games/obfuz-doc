@@ -155,8 +155,8 @@ applyToMember类型描述了对哪些元数据不混淆。可以为空，表示�
 |modifier|是|指示匹配哪些可见类型的目标|
 |classType|是|指示匹配哪种类型|
 |obName|是|表示是否混淆本类型的命名空间和类型名。如果自身是嵌套子类型没有设置则优先继承ApplyToMember为true的嵌套父类的obName，如果找不到可继承的值，则默认为true|
-|applyToMembers|是|obName值的额外作用目标。如果obName为null，此applyToMember不会生效|
-|applyToNestedTypes|是|默认为true，是否将obName属性的值应用于所有嵌套子类型（包括嵌套子类型的嵌套子类型）|
+|applyToMembers|是|obName值的额外作用目标。默认值为空，不会作用于任何成员目标|
+|applyToNestedTypes|是|是否将obName属性的值应用于所有嵌套子类型（包括嵌套子类型的嵌套子类型）。默认为true。|
 
 type允许定义field、method、property、event类型的子元素。
 
@@ -166,7 +166,7 @@ type允许定义field、method、property、event类型的子元素。
 |-|-|-|
 |name|是|name为通配符表达式。如果为空则表示匹配所有类型|
 |modifier|是|指示匹配哪些可见类型的目标|
-|obName|是|表示是否混淆字段名。如果没有设置则并且type的applyToMembers属性为true并且type设置了obName属性，则继承type的obName值。|
+|obName|是|表示是否混淆字段名。如果obName为空，则尝试继承applyToMembers属性包含`field`的所在type的obName值|
 
 ### property 配置规则
 
@@ -175,7 +175,7 @@ type允许定义field、method、property、event类型的子元素。
 |name|是|name为通配符表达式。如果为空则表示匹配所有类型|
 |modifier|是|指示匹配哪些可见类型的目标|
 |obName|是|表示是否混淆property名。如果没有设置则并且type的applyToMembers属性为true并且type设置了obName属性，则继承type的obName值。|
-|applyToMembers|是|obName值的额外作用目标，有效取值只能为`propertyGetterSetterName`，取其他值没有意义。如果obName为null，此applyToMember不会生效|
+|applyToMembers|是|obName值的额外作用目标，有效取值只能为`propertyGetterSetterName`，取其他值没有意义。如果obName为空，则尝试继承applyToMembers属性包含`propertyName`的所在type的obName值|
 
 ### event 配置规则
 
@@ -184,7 +184,7 @@ type允许定义field、method、property、event类型的子元素。
 |name|是|name为通配符表达式。如果为空则表示匹配所有类型|
 |modifier|是|指示匹配哪些可见类型的目标|
 |obName|是|表示是否混淆event名。如果没有设置则并且type的applyToMembers属性为true并且type设置了obName属性，则继承type的obName值。|
-|applyToMembers|是|obName值的额外作用目标，有效取值只能为`eventAddRemoveFireName`，取其他值没有意义。如果obName为null，此applyToMember不会生效|
+|applyToMembers|是|obName值的额外作用目标，有效取值只能为`eventAddRemoveFireName`，取其他值没有意义。如果obName为空，则尝试继承applyToMembers属性包含`eventName`的所在type的obName值|
 
 ### method 配置规则
 
@@ -192,4 +192,4 @@ type允许定义field、method、property、event类型的子元素。
 |-|-|-|
 |name|是|name为通配符表达式。如果为空则表示匹配所有类型|
 |modifier|是|指示匹配哪些可见类型的目标|
-|obName|是|表示是否混淆method名。如果没有设置，则优先继承。否则继承所在type的obName值。|
+|obName|是|表示是否混淆method名。如果没有设置，则优先继承所属的applyToMember包含`propertyGetterSetterName`的property或applyToMember包含`eventAddRemoveFireName`的event，如果不存在相应的property或event规则，则尝试继承applyToMembers属性包含`method`的所在type的obName值。|
