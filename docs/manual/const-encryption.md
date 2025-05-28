@@ -14,8 +14,7 @@
 - float
 - double
 - string
-
-将来会进一步支持加密**数组类型**常量。
+- array 包含所有简单类型数组byte[]、sbyte[]、short[]、ushort[]、int[]、uint[]、long[]、ulong[]、float[]、double[]及高维简单数组数组（如float[,,]）
 
 ## 实现原理
 
@@ -89,7 +88,7 @@ whitelist配置了常量白名单，白名单内的常量不会被加密，这�
 |float-range|float范围，规则与int-range相同。|
 |double-range|double范围，规则与int-range相同。|
 |string-length-range|字符串长度范围，符合该长度范围的字符串不会被加密。规则与int-range相同。|
-|array-length-range|常量数组的长度范围，符合该长度范围的常量数组不会被加密。规则与int-range相同。**由于目前还不支持常量数组加密，此配置项目前没有实际效果。**|
+|array-length-range|常量数组的长度范围，符合该长度范围的常量数组不会被加密。规则与int-range相同。|
 
 ### global
 
