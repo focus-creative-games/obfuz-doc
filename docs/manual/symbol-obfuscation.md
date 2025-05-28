@@ -77,6 +77,9 @@ Obfuz已经尽力考虑Unity引擎下常见的需要禁用混淆名称的场合�
         applyToNestedTypes="1"
         modifier="public,protected,private"
         classType="class,struct,enum,interface,delegate"
+        inheritTypes="Unity.Entities.IComponentData,MyInterface"
+        hasCustomAttributes="test.MyCustomAttribute1,test.MyCustomAttribute2"
+
         >
           <field name="f" obName="0" modifier="public,protected,private"/>
           <method name="m" obName="0" modifier="public,protected,private"/>
@@ -155,6 +158,7 @@ applyToMember类型描述了对哪些元数据不混淆。可以为空，表示�
 |modifier|是|匹配哪些可见类型的目标|
 |classType|是|匹配哪种classType|
 |**inherit**|是|继承了某些类型或者实现了某些接口，可以配置多个，表示从其中任意一个继承。默认为空，跳过匹配检查。类型或者接口需要填全名但不区分程序集。例如`test.MyInterface`在两个程序集中都有定义，那么实现任何一个接口都认为是符合条件|
+|**hasCustomAttributes**|是|类型上是否有某些CustomAttribute。默认为空，跳过此项匹配检查。可以配置多个，表示包含其中至少一个CustomAttribute。CustomAttribute名需要为全名但不区分程序集|
 |obName|是|表示是否混淆本类型的命名空间和类型名。如果自身是嵌套子类型没有设置则优先继承ApplyToMember为true的嵌套父类的obName，如果找不到可继承的值，则默认为true|
 |applyToMembers|是|obName值的额外作用目标。默认值为空，不会作用于任何成员目标|
 |applyToNestedTypes|是|是否将obName属性的值应用于所有嵌套子类型（包括嵌套子类型的嵌套子类型）。默认为true。|
