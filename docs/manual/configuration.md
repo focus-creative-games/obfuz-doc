@@ -73,6 +73,7 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 |Use Consistent Namespace|是否为相同的Namespace生成同一个混淆后的Namespace。默认为true。如果为false，即使同名Namespace都会映射到不同的混淆后的命名空间。对于空Namespace，在混淆后保持为空，而不是为它生成混淆Namespace|
 |Symbol Mapping File|混淆符号映射文件，记录了类型、函数、字段等符号原始名和混淆名的映射关系。关闭Debug模式时，混淆符号时会在保证命名不冲突的情况下优先使用Symbol Mapping File中记录的混淆名，保证了增量映射的稳定性。另外Symbol Mapping File还被[DeobfuscateStackTrace](./deobfuscate-stacktrace)工具用于还原混淆后的函数栈日志为原始函数栈日志。为了保证增量混淆的稳定，请将Symbol Mapping File**加到版本管理**|
 |Rule Files|混淆规则配置文件。如果为空则对除了特殊符号外所有符号都进行混淆。详细配置规则见[符号混淆](./symbol-obfuscation)。|
+|Custom Rename Policy Types|自定义符号混淆策略类全名列表。因为类型全名不含程序集名，因此要求类型全名在AppDomain所有程序集中唯一。详细配置规则见[符号混淆](./symbol-obfuscation)。|
 
 ### Const Encrypt Settings
 

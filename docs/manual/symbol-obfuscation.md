@@ -61,6 +61,49 @@ Obfuz已经尽力考虑Unity引擎下常见的需要禁用混淆名称的场合�
 - 标记了Unity.Behaviour模块的`[BlackboardEnum]`特性的枚举类的类名极其枚举项名称
 - 其他情况
 
+## 自定义RenamePolicy
+
+`SymbolObfusSettings.CustomRenamePolicyTypes`中可以配置0到多个自定义RenamePolicy的类型全名。因为这个类型全名不含程序集名，因此要求这个类型全名在AppDomain所有程序集中唯一。
+
+自定义RenamePolicy必须实现`Obfuz.ObfusPasses.SymbolObfus.IObfuscationPolicy`接口或者继承自`Obfuz.ObfusPasses.SymbolObfus.Policies.ObfuscationPolicyBase`，并且有一个参数为object类型的构造函数。示例如下：
+
+```csharp
+using Obfuz.ObfusPasses.SymbolObfus.Policies;
+
+public class MyRenamePolicy : ObfuscationPolicyBase
+{
+    public MyRenamePolicy(object systemRenameObj)
+    {
+    }
+
+    public override bool NeedRename(dnlib.DotNet.TypeDef typeDef)
+    {
+        return typeDef.Name != "TestClassForCustomRenamePolicy";
+    }
+
+    public override bool NeedRename(dnlib.DotNet.MethodDef methodDef)
+    {
+        return methodDef.Name != "MethodForCustomRenamePolicy";
+    }
+
+    public override bool NeedRename(dnlib.DotNet.FieldDef fieldDef)
+    {
+        return fieldDef.Name != "fieldForCustomRenamePolicy";
+    }
+
+    public override bool NeedRename(dnlib.DotNet.PropertyDef propertyDef)
+    {
+        return propertyDef.Name != "PropertyForCustomRenamePolicy";
+    }
+
+    public override bool NeedRename(dnlib.DotNet.EventDef eventDef)
+    {
+        return eventDef.Name != "EventForCustomRenamePolicy";
+    }
+}
+
+```
+
 ## 规则文件
 
 
