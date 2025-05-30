@@ -20,6 +20,8 @@ ObfuzIgnoreAttribute的代码实现如下：
 
         public bool ApplyToNestedTypes { get; set; } = true;
 
+        public bool ApplyToChildTypes { get; set; } = false;
+
         public ObfuzIgnoreAttribute(ObfuzScope scope = ObfuzScope.All)
         {
             this.Scope = scope;
@@ -32,6 +34,11 @@ ObfuzIgnoreAttribute的代码实现如下：
 |-|-|
 |scope|混淆作用范围。类型为ObfuzScope，默认值为Obfuzscope.All，即会禁用类型名、字段、函数、property、event及子类型的所有混淆|
 |ApplyToNestedTypes|嵌套子类型是否继承当前ObfuzIgnoreAttribute，如果为true，所有嵌套子类型也会等同定义了当前的ObfuzIgnoreAttribute。默认为true。此参数只对类型有效。|
+|**ApplyToChildTypes**|继承本类型或者实现本接口类型的子类型是否继承当前ObfuzIgnoreAttribute。如果为true，所有子类型也会等同定义了当前的ObfuzIgnoreAttribute，除了ApplyToNestedTypes属性值。默认为false。此参数只对类型有效。|
+
+:::tip
+ApplyToChildTypes可以方便地将从某个class或者interface派生的类型统一施加某种混淆规则。
+:::
 
 枚举类ObfuzScope的实现如下：
 
