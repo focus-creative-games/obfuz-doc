@@ -27,7 +27,7 @@
 
 <obfuz>
     <assembly name="Assembly-CSharp">
-      <type name="SymbolObfus.Test1" obName="0"/> 不混淆Test1类自身及它的所有成员，包括嵌套类
+      <type name="SymbolObfus.Test1" obName="0" applyToMembers="*"/> 不混淆Test1类自身及它的所有成员，包括嵌套类
     </assembly>
 </obfuz>
 ```
