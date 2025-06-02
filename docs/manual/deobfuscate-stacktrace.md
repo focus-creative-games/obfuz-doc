@@ -7,8 +7,8 @@
 
 DeobfuscateStackTrace是一个基于`.net 8`开发的命令行工具，可以运行在Win、MacOS、Linux等所有.net支持的平台。
 
-源码在仓库根目录下的[DeobfuscateStackTrace](https://github.com/focus-creative-games/obfuz/tree/main/DeobfuscateStackTrace)。
-可以自己编译，也可以直接从github release链接[DeobfuscateStackTrace.7z](https://github.com/focus-creative-games/obfuz/releases/download/1.0.0-alpha/DeobfuscateStackTrace.7z)中下载。
+源码在仓库根目录下的[DeobfuscateStackTrace](https://github.com/focus-creative-games/obfuz-tools/tree/main/DeobfuscateStackTrace)。
+可以自己编译，也可以直接从github release链接[DeobfuscateStackTrace.7z](https://github.com/focus-creative-games/obfuz-tools/releases/download/v1.0.0/DeobfuscateStackTrace.7z)中下载。
 
 使用方式如下：
 

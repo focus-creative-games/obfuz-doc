@@ -1,6 +1,6 @@
 # 多个混淆程序集
 
-本示例演示如何使用多个混淆程序集与非混淆程序集。完整示例工程[MultiObfuscatedAssemblies](https://github.com/focus-creative-games/obfuz/tree/main/Samples/MultiObfuscatedAssemblies)。
+本示例演示如何使用多个混淆程序集与非混淆程序集。完整示例工程[MultiObfuscatedAssemblies](https://github.com/focus-creative-games/obfuz-samples/tree/main/MultiObfuscatedAssemblies)。
 
 示例工程包含以下程序集：
 

@@ -2,12 +2,12 @@
 
 Obfuz的Unity Package Manager URL安装地址：
 
-- gitee `https://gitee.com/focus-creative-games/obfuz.git?path=com.code-philosophy.obfuz`
-- github `https://github.com/focus-creative-games/obfuz.git?path=com.code-philosophy.obfuz`
+- gitee `https://gitee.com/focus-creative-games/obfuz.git`
+- github `https://github.com/focus-creative-games/obfuz.git`
 
 打开Unity Package Manager窗口，点击`Add package from URL...`，填入以上地址之一即可完成安装。
 
-如果想安装指定版本的Obfuz，可以在URL后添加`#{version}`，如`https://gitee.com/focus-creative-games/obfuz.git?path=com.code-philosophy.obfuz#v1.0.0-alpha`。
+如果想安装指定版本的Obfuz，可以在URL后添加`#{version}`，如`https://gitee.com/focus-creative-games/obfuz.git#v1.0.0-beta.2`。
 
 ## 支持的Unity版本与平台
 

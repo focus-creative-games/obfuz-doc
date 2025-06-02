@@ -4,7 +4,7 @@
 Obfuz支持Unity 2019+版本，同时也支持团结引擎1.0.0+，能在所有Unity和团结引擎支持的平台下正确工作。
 :::
 
-本文档将指引从零开始创建一个Obfuz示例项目。完整示例项目参见[QuickStart](https://github.com/focus-creative-games/obfuz/tree/main/Samples/QuickStart).
+本文档将指引从零开始创建一个Obfuz示例项目。完整示例项目参见[QuickStart](https://github.com/focus-creative-games/obfuz-samples/tree/main/QuickStart).
 
 ## 创建项目
 
@@ -14,8 +14,8 @@ Obfuz支持Unity 2019+版本，同时也支持团结引擎1.0.0+，能在所有U
 
 Obfuz的Unity Package Manager URL安装地址：
 
-- gitee `https://gitee.com/focus-creative-games/obfuz.git?path=com.code-philosophy.obfuz`
-- github `https://github.com/focus-creative-games/obfuz.git?path=com.code-philosophy.obfuz`
+- gitee `https://gitee.com/focus-creative-games/obfuz.git`
+- github `https://github.com/focus-creative-games/obfuz.git`
 
 打开Unity Package Manager窗口，点击`Add package from URL...`，填入以上地址之一即可完成安装。
 

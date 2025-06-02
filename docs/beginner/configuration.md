@@ -1,6 +1,6 @@
 # 自定义混淆规则
 
-本示例演示如何配置混淆规则文件，完整示例项目参见[CustomConfigure](https://github.com/focus-creative-games/obfuz/tree/main/Samples/CustomConfigure)。
+本示例演示如何配置混淆规则文件，完整示例项目参见[CustomConfigure](https://github.com/focus-creative-games/obfuz-samples/tree/main/CustomConfigure)。
 
 ## 修改EncryptionVM相关设置
 
@@ -98,7 +98,7 @@
 
 ## 添加测试代码
 
-文件比较多，请直接参考[CustomConfigure](https://github.com/focus-creative-games/obfuz/tree/main/Samples/CustomConfigure)。
+文件比较多，请直接参考[CustomConfigure](https://github.com/focus-creative-games/obfuz-samples/tree/main/CustomConfigure)。
 
 ## 构建&运行
 

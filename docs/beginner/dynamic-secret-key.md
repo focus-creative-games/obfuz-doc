@@ -2,7 +2,7 @@
 
 动态Secret适合那些运行一段时间后才执行其逻辑的模块，常用于热更新程序集，详细文档见[加密](../manual/encryption.md)。
 
-本项目演示如何使用动态Secret。完整示例项目参见[DynamicSecretKey](https://github.com/focus-creative-games/obfuz/tree/main/Samples/DynamicSecretKey)。
+本项目演示如何使用动态Secret。完整示例项目参见[DynamicSecretKey](https://github.com/focus-creative-games/obfuz-samples/tree/main/DynamicSecretKey)。
 
 ## 安装
 

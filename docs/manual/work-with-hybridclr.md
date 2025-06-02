@@ -24,8 +24,8 @@ HybridCLR默认的`HybridCLR/Generate/All`命令基于未混淆的程序集生�
 
 用于Unity Package的URL安装地址：
 
-- `https://github.com/focus-creative-games/obfuz.git?path=com.code-philosophy.obfuz4hybridclr`
-- `https://gitee.com/focus-creative-games/obfuz.git?path=com.code-philosophy.obfuz4hybridclr`
+- `https://github.com/focus-creative-games/obfuz4hybridclr.git`
+- `https://gitee.com/focus-creative-games/obfuz4hybridclr.git`
 
 ## 替换`HybridCLR/Generate/All`
 

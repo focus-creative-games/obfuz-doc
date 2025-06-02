@@ -1,6 +1,6 @@
 # Obfuz+HybridCLR
 
-本工程演示如何将Obfuz与HybridCLR一起使用，完整示例项目参见[WorkWithHybridCLR](https://github.com/focus-creative-games/obfuz/tree/main/Samples/WorkWithHybridCLR)。
+本工程演示如何将Obfuz与HybridCLR一起使用，完整示例项目参见[WorkWithHybridCLR](https://github.com/focus-creative-games/obfuz-samples/tree/main/WorkWithHybridCLR)。
 
 详细文档见[与HybridCLR协同工作](../manual/work-with-hybridclr)。
 
@@ -9,8 +9,8 @@
 安装以下插件：
 
 - com.code-philosophy.hybridclr `https://github.com/focus-creative-games/hybridclr_unity.git`
-- com.code-philosophy.obfuz `https://github.com/focus-creative-games/obfuz.git?path=com.code-philosophy.obfuz`
-- com.code-philosophy.obfuz4hybridclr `https://github.com/focus-creative-games/obfuz.git?path=com.code-philosophy.obfuz4hybridclr`
+- com.code-philosophy.obfuz `https://github.com/focus-creative-games/obfuz.git`
+- com.code-philosophy.obfuz4hybridclr `https://github.com/focus-creative-games/obfuz4hybridclr.git`
 
 obufz4hybridclr是一个Obfuz扩展包，用于支持HybridCLR热更新工作流。
 
