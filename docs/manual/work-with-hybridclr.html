@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">与HybridCLR协同工作 | Obfuz</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.obfuz.com/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://www.obfuz.com/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://www.obfuz.com/docs/manual/work-with-hybridclr"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="与HybridCLR协同工作 | Obfuz"><meta data-rh="true" name="description" content="HybridCLR工作流并未考虑到代码混淆的情况，如果直接使用会遇到一些问题。"><meta data-rh="true" property="og:description" content="HybridCLR工作流并未考虑到代码混淆的情况，如果直接使用会遇到一些问题。"><link data-rh="true" rel="icon" href="/img/favicon.png"><link data-rh="true" rel="canonical" href="https://www.obfuz.com/docs/manual/work-with-hybridclr"><link data-rh="true" rel="alternate" href="https://www.obfuz.com/docs/manual/work-with-hybridclr" hreflang="en"><link data-rh="true" rel="alternate" href="https://www.obfuz.com/docs/manual/work-with-hybridclr" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.ff9dae79.css">
-<script src="/assets/js/runtime~main.de2b5009.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.419489da.js" defer="defer"></script>
 <script src="/assets/js/main.b32dcebc.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -23,8 +23,8 @@
 <p>我们提供com.code-philosophy.obfuz4hybridclr扩展包以解决hybridclr热更新工作流的问题。</p>
 <p>用于Unity Package的URL安装地址：</p>
 <ul>
-<li><code>https://github.com/focus-creative-games/obfuz.git?path=com.code-philosophy.obfuz4hybridclr</code></li>
-<li><code>https://gitee.com/focus-creative-games/obfuz.git?path=com.code-philosophy.obfuz4hybridclr</code></li>
+<li><code>https://github.com/focus-creative-games/obfuz4hybridclr.git</code></li>
+<li><code>https://gitee.com/focus-creative-games/obfuz4hybridclr.git</code></li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="替换hybridclrgenerateall">替换<code>HybridCLR/Generate/All</code><a href="#替换hybridclrgenerateall" class="hash-link" aria-label="Direct link to 替换hybridclrgenerateall" title="Direct link to 替换hybridclrgenerateall">​</a></h2>
 <p>obfuz4hybridclr提供了适合混淆工作流的GenerateAll命令，请在构建过程替换<code>HybridCLR/Generate/All</code>命令为<code>HybridCLR/ObfuzExtension/GenerateAll</code>。</p>

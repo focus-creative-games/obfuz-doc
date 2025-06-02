@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">还原混淆堆栈日志 | Obfuz</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.obfuz.com/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://www.obfuz.com/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://www.obfuz.com/docs/manual/deobfuscate-stacktrace"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="还原混淆堆栈日志 | Obfuz"><meta data-rh="true" name="description" content="混淆后代码中输出的日志中的函数堆栈是混淆后的名称，这给跟踪问题带来很大障碍。对照symbol mapping文件（文档见符号混淆）"><meta data-rh="true" property="og:description" content="混淆后代码中输出的日志中的函数堆栈是混淆后的名称，这给跟踪问题带来很大障碍。对照symbol mapping文件（文档见符号混淆）"><link data-rh="true" rel="icon" href="/img/favicon.png"><link data-rh="true" rel="canonical" href="https://www.obfuz.com/docs/manual/deobfuscate-stacktrace"><link data-rh="true" rel="alternate" href="https://www.obfuz.com/docs/manual/deobfuscate-stacktrace" hreflang="en"><link data-rh="true" rel="alternate" href="https://www.obfuz.com/docs/manual/deobfuscate-stacktrace" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.ff9dae79.css">
-<script src="/assets/js/runtime~main.de2b5009.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.419489da.js" defer="defer"></script>
 <script src="/assets/js/main.b32dcebc.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -13,8 +13,8 @@
 记录的原始函数与混淆后函数的映射关系，人工还出原始堆栈的工作非常烦琐。Obfuz提供了<code>DeobfuscateStackTrace</code>工具用来自动化还原混淆堆栈。</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="deobfuscatestacktrace工具">DeobfuscateStackTrace工具<a href="#deobfuscatestacktrace工具" class="hash-link" aria-label="Direct link to DeobfuscateStackTrace工具" title="Direct link to DeobfuscateStackTrace工具">​</a></h2>
 <p>DeobfuscateStackTrace是一个基于<code>.net 8</code>开发的命令行工具，可以运行在Win、MacOS、Linux等所有.net支持的平台。</p>
-<p>源码在仓库根目录下的<a href="https://github.com/focus-creative-games/obfuz/tree/main/DeobfuscateStackTrace" target="_blank" rel="noopener noreferrer">DeobfuscateStackTrace</a>。
-可以自己编译，也可以直接从github release链接<a href="https://github.com/focus-creative-games/obfuz/releases/download/1.0.0-alpha/DeobfuscateStackTrace.7z" target="_blank" rel="noopener noreferrer">DeobfuscateStackTrace.7z</a>中下载。</p>
+<p>源码在仓库根目录下的<a href="https://github.com/focus-creative-games/obfuz-tools/tree/main/DeobfuscateStackTrace" target="_blank" rel="noopener noreferrer">DeobfuscateStackTrace</a>。
+可以自己编译，也可以直接从github release链接<a href="https://github.com/focus-creative-games/obfuz-tools/releases/download/v1.0.0/DeobfuscateStackTrace.7z" target="_blank" rel="noopener noreferrer">DeobfuscateStackTrace.7z</a>中下载。</p>
 <p>使用方式如下：</p>
 <ul>
 <li><code>DeobfuscateStackTrace --help</code> 查看帮助。</li>
