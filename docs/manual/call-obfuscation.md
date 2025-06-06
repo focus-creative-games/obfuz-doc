@@ -62,6 +62,8 @@ encrypedIndex在执行该代码位置时才被解密，反编译代码后无法�
           <method name="NotCache" cacheCallIndexInLoop="0"/>
           <method name="Cache" cacheCallIndexInLoop="1"/>
       </type>
+      <type name="Aaaa.TopClass/SubClass">
+      </type>
   </assembly>
 </obfuz>
 ```
@@ -86,7 +88,7 @@ assembly的子元素类型只能是type。
 
 |属性|可空|默认值|描述|
 |-|-|-|-|
-|name|是|无|名字为通配符表达式，如果为空，则表示匹配所有程序集|
+|name|是|无|名字为通配符表达式，如果为空，则表示匹配所有程序集。嵌套类型使用`/`划分声明所在类型和被包围的子类型，如`test.ClassA/ClassB`。|
 |obfuscate|是|继承assembly的同名字段的值|是否是混淆调用本类型内的函数|
 
 type的子元素类型只能是method。

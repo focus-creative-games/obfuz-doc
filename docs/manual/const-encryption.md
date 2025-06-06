@@ -67,6 +67,8 @@ rvaData也是以加密形式保存的，即每个常量在被运行时解密时�
         <type name="*">
             <method name="*" cacheConstInLoop="1"/>
         </type>
+      <type name="Aaaa.TopClass/SubClass">
+      </type>
     </assembly>
 </obfuz>
 ```
@@ -123,7 +125,7 @@ assembly的子元素只能为type。
 
 |属性|可空|默认值|描述|
 |-|-|-|-|
-|name|否||类型名的通配字符串，如果为空表示匹配所有类型|
+|name|否||类型名的通配字符串，如果为空表示匹配所有类型。嵌套类型使用`/`划分声明所在类型和被包围的子类型，如`test.ClassA/ClassB`。|
 |其他|是|继承assembly中同名选项|global中所有选项都可以使用，如果未定义，就继承assembly中同名选项的值|
 
 由于常量只能出现在函数代码中，因此type的子元素只能为method。

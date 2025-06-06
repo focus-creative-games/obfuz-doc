@@ -128,7 +128,9 @@ public class MyRenamePolicy : ObfuscationPolicyBase
           <method name="m" obName="0" modifier="public,protected,private"/>
           <property name="p" obName="0" applyToMembers="propertyGetterSetterName"/>
           <event name="e" obName="0" applyToMembers="eventAddRemoveFireName"/>
-        </type>
+      </type>
+      <type name="Aaaa.TopClass/SubClass">
+      </type>
     </assembly>
 
     <assembly name="Tests">
@@ -197,7 +199,7 @@ applyToMember类型描述了对哪些元数据不混淆。可以为空，表示�
 
 |属性|可空|描述|
 |-|-|-|
-|name|是|name为通配符表达式。如果为空则表示匹配所有类型|
+|name|是|name为通配符表达式。如果为空则表示匹配所有类型。嵌套类型使用`/`划分声明所在类型和被包围的子类型，如`test.ClassA/ClassB`。|
 |modifier|是|匹配哪些可见类型的目标|
 |classType|是|匹配哪种classType|
 |**inherit**|是|继承了某些类型或者实现了某些接口，可以配置多个，表示从其中任意一个继承。默认为空，跳过匹配检查。类型或者接口需要填全名但不区分程序集。例如`test.MyInterface`在两个程序集中都有定义，那么实现任何一个接口都认为是符合条件|

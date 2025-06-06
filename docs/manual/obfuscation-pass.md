@@ -55,7 +55,7 @@ Obfuz已经考虑到Unity的特殊性，对于无法被混淆的情形（如不�
 - 次层tag必须为`assembly`，可以有多个。name属性必须为被混淆的程序集，即必须在`AssemblySettings.AssemblyToObfuscate`出现。不允许重复出现同名assemly规则，
 即为每个混淆程序集最多指定一个assembly规则。如果没有为某个被混淆程序集配置assembly规则，则使用`EnabledPass`中启用的所有Pass。
 - assembly中只能配置type规则
-- type中只能配置field、method、event、property规则。属性name可选，如果未配置则表示对assembly中所有类型生效，如果配置，则可以是通配字符串表达式（注意！不是正则表达式）。
+- type中只能配置field、method、event、property规则。属性name可选，如果未配置则表示对assembly中所有类型生效，如果配置，则可以是通配字符串表达式（注意！不是正则表达式）。嵌套类型使用`/`划分声明所在类型和被包围的子类型，如`test.ClassA/ClassB`。
 - field为叶节点规则，无法嵌套子规则。属性name为空时匹配所有，非空时为通配字符串表达式。
 - method为叶节点规则，无法嵌套子规则。属性name为空时匹配所有，非空时为通配字符串表达式。
 - property为叶节点规则，无法嵌套子规则。属性name为空时匹配所有，非空时为通配字符串表达式。
