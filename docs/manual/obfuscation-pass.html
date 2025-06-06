@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">Obfuscation Pass | Obfuz</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.obfuz.com/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://www.obfuz.com/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://www.obfuz.com/docs/manual/obfuscation-pass"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Obfuscation Pass | Obfuz"><meta data-rh="true" name="description" content="Obfuz支持多种混淆算法，混淆时会按照某个顺序依次执行每个混淆算法，最终输出混淆后的程序集。由于这些混淆算法是一趟趟执行的，我们称之为Obfuscation Pass。"><meta data-rh="true" property="og:description" content="Obfuz支持多种混淆算法，混淆时会按照某个顺序依次执行每个混淆算法，最终输出混淆后的程序集。由于这些混淆算法是一趟趟执行的，我们称之为Obfuscation Pass。"><link data-rh="true" rel="icon" href="/img/favicon.png"><link data-rh="true" rel="canonical" href="https://www.obfuz.com/docs/manual/obfuscation-pass"><link data-rh="true" rel="alternate" href="https://www.obfuz.com/docs/manual/obfuscation-pass" hreflang="en"><link data-rh="true" rel="alternate" href="https://www.obfuz.com/docs/manual/obfuscation-pass" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.ff9dae79.css">
-<script src="/assets/js/runtime~main.4cac2397.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.b47ee157.js" defer="defer"></script>
 <script src="/assets/js/main.b32dcebc.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -51,7 +51,7 @@
 <li>次层tag必须为<code>assembly</code>，可以有多个。name属性必须为被混淆的程序集，即必须在<code>AssemblySettings.AssemblyToObfuscate</code>出现。不允许重复出现同名assemly规则，
 即为每个混淆程序集最多指定一个assembly规则。如果没有为某个被混淆程序集配置assembly规则，则使用<code>EnabledPass</code>中启用的所有Pass。</li>
 <li>assembly中只能配置type规则</li>
-<li>type中只能配置field、method、event、property规则。属性name可选，如果未配置则表示对assembly中所有类型生效，如果配置，则可以是通配字符串表达式（注意！不是正则表达式）。</li>
+<li>type中只能配置field、method、event、property规则。属性name可选，如果未配置则表示对assembly中所有类型生效，如果配置，则可以是通配字符串表达式（注意！不是正则表达式）。嵌套类型使用<code>/</code>划分声明所在类型和被包围的子类型，如<code>test.ClassA/ClassB</code>。</li>
 <li>field为叶节点规则，无法嵌套子规则。属性name为空时匹配所有，非空时为通配字符串表达式。</li>
 <li>method为叶节点规则，无法嵌套子规则。属性name为空时匹配所有，非空时为通配字符串表达式。</li>
 <li>property为叶节点规则，无法嵌套子规则。属性name为空时匹配所有，非空时为通配字符串表达式。</li>
