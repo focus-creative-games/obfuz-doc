@@ -99,7 +99,7 @@ public class B
 }
 
 // Assembly-CSharp中类All的代码。
-// 因此All是MonoBehaviour子类，它的类名和字段没有被混淆
+// 由于All是MonoBehaviour子类，它的类名和字段没有被混淆。
 
 using $A;
 using UnityEngine;
