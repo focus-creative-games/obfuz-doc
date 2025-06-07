@@ -51,17 +51,26 @@ public static class BuildCommand
     public static void CompileAndObfuscateAndCopyToStreamingAssets()
     {
         BuildTarget target = EditorUserBuildSettings.activeBuildTarget;
-        ObfuscateUtil.CompileAndObfuscateHotUpdateAssemblies(target);
+        CompileDllCommand.CompileDll(target);
+
+        string obfuscatedHotUpdateDllPath = PrebuildCommandExt.GetObfuscatedHotUpdateAssemblyOutputPath(target);
+        ObfuscateUtil.ObfuscateHotUpdateAssemblies(target, obfuscatedHotUpdateDllPath);
 
         Directory.CreateDirectory(Application.streamingAssetsPath);
 
         string hotUpdateDllPath = $"{SettingsUtil.GetHotUpdateDllsOutputDirByTarget(target)}";
+        List<string> obfuscationRelativeAssemblyNames = ObfuzSettings.Instance.assemblySettings.GetObfuscationRelativeAssemblyNames();
+
         foreach (string assName in SettingsUtil.HotUpdateAssemblyNamesIncludePreserved)
         {
-            string srcFile = $"{hotUpdateDllPath}/{assName}.dll";
+            string srcDir = obfuscationRelativeAssemblyNames.Contains(assName) ? obfuscatedHotUpdateDllPath : hotUpdateDllPath;
+            string srcFile = $"{srcDir}/{assName}.dll";
             string dstFile = $"{Application.streamingAssetsPath}/{assName}.dll.bytes";
-            File.Copy(srcFile, dstFile, true);
-            Debug.Log($"[CompileAndObfuscate] Copy {srcFile} to {dstFile}");
+            if (File.Exists(srcFile))
+            {
+                File.Copy(srcFile, dstFile, true);
+                Debug.Log($"[CompileAndObfuscate] Copy {srcFile} to {dstFile}");
+            }
         }
     }
 }
@@ -80,11 +89,11 @@ HybridCLR默认的`HybridCLR/Generate/All`命令基于未混淆的程序集生�
 
 解决办法是使用Obfuz4HybridCLR专门提供的`HybridCLR/ObfuzExtension/GenerateAll`命令。
 
-- 运行`HybridCLR/ObfuzExtension/GenerateAll`
+运行`HybridCLR/ObfuzExtension/GenerateAll`。
 
 ## 生成混淆后的热更新程序集并且放到StreamingAssets目录下
 
-- 运行`Build/CompileAndObfuscateAndCopyToStreamingAssets`
+运行`Build/CompileAndObfuscateAndCopyToStreamingAssets`。
 
 ## 打包&运行
 
