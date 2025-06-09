@@ -36,8 +36,9 @@ Obfuz和HybridCLR插件都包含了dnlib插件。对于Unity 2021及更早版本
 ## 添加混淆热更新代码的构建代码
 
 ```csharp
-
 using HybridCLR.Editor;
+using HybridCLR.Editor.Commands;
+using Obfuz.Settings;
 using Obfuz4HybridCLR;
 using System.Collections;
 using System.Collections.Generic;
