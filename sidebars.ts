@@ -55,6 +55,7 @@ const sidebars: SidebarsConfig = {
         'manual/method-body-obfuscation',
         'manual/obfuscation-pass',
         'manual/customattributes',
+        'manual/obfuscation-instincts',
         'manual/symbol-obfuscation',
         'manual/const-encryption',
         'manual/field-encryption',
