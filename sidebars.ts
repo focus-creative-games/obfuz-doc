@@ -37,6 +37,7 @@ const sidebars: SidebarsConfig = {
         'beginner/configuration',
         'beginner/dynamic-secret-key',
         'beginner/work-with-hybridclr',
+        'beginner/work-with-xlua',
       ],
     },
     {
@@ -64,6 +65,7 @@ const sidebars: SidebarsConfig = {
         'manual/run-obfuscation-standalonely',
         'manual/incremental-obfuscation-and-hotupdate',
         'manual/work-with-hybridclr',
+        'manual/work-with-xlua',
         'manual/serialization-reflection',
         'manual/deobfuscate-stacktrace',
       ],
