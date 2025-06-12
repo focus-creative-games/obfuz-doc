@@ -41,7 +41,7 @@
 
 <obfuz>
 
-    <whitelist type="int">-100,100</whitelist> 不加密 [-100, 100]范围内的常量
+    <whitelist type="int-range">-100,100</whitelist> 不加密 [-100, 100]范围内的常量
     <whitelist type="string-length-range">,3</whitelist> 不加密长度小于等于3的字符串
     
     <assembly name="Assembly-CSharp">
