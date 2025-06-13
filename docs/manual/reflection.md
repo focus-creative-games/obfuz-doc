@@ -15,6 +15,10 @@ Obfuz与Unity工作流深度集成，已经内置了以下规则：
 
 更多的规则可查看文档[符号混淆](./symbol-obfuscation)。不在默认规则内的类型需要使用下面的特殊的解决办法。
 
+## 离线检测反射代码的兼容问题
+
+Obfuz支持检测潜在的在符号混淆后会失败的代码，打印错误或警告。详细文档见[Detect Reflection Compatibility](./symbol-obfuscation#detect-reflection-compatibility)。
+
 ## 运行时反射相关支持
 
 ### ObfuscationTypeMapper

@@ -72,6 +72,7 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 |Obfuscated Name Prefix|混淆名的前缀，会为所有生成的混淆符号前加上此前缀。默认为`$`。尽管配置为空也不影响生成不冲突的混淆名，但加上前缀有助于快速区分正常名与非混淆名|
 |Use Consistent Namespace|是否为相同的Namespace生成同一个混淆后的Namespace。默认为true。如果为false，即使同名Namespace都会映射到不同的混淆后的命名空间。对于空Namespace，在混淆后保持为空，而不是为它生成混淆Namespace|
 |Keep Unknown Symbol In Symbol Mapping File|是否保留symbol mapping文件中未知的符号映射记录。默认为true。执行热更新混淆时输出的symbol mapping文件中的记录是完整的，但在构建过程中由于Unity的裁剪行为，某些元数据被裁剪后，在symbol mapping文件中找不到，如果将这些记录从symbol mapping文件中移除，会导致构建时生成的symbol mapping不稳定。|
+|Detect Reflection Compatibility|是否检测反射代码的兼容性问题。默认为true。如果为true会扫描所有反射操作，如果与符号混淆不兼容会打印错误或者警告。详细文档见[符号混淆](./symbol-obfuscation)|
 |Symbol Mapping File|混淆符号映射文件，记录了类型、函数、字段等符号原始名和混淆名的映射关系。关闭Debug模式时，混淆符号时会在保证命名不冲突的情况下优先使用symbolMappingFile中记录的混淆名，保证了增量映射的稳定性。另外symbolMappingFile还被[DeobfuscateStackTrace](./deobfuscate-stacktrace)工具用于还原混淆后的函数栈日志为原始函数栈日志。为了保证增量混淆的稳定，请将symbolMappingFile**加到版本管理**|
 |Debug Symbol Mapping File|开启Debug模式时使用混淆符号映射文件，记录了类型、函数、字段等符号原始名和混淆名的映射关系。Debug模式下不会从debugSymbolMappingFile文件中读取映射关系，但在混淆完成后会保存映射关系到debugSymbolMappingFile文件。debugSymbolMappingFile也会被[DeobfuscateStackTrace](./deobfuscate-stacktrace)工具用于还原混淆后的函数栈日志为原始函数栈日志。|
 |Rule Files|混淆规则配置文件。如果为空则对除了特殊符号外所有符号都进行混淆。详细配置规则见[符号混淆](./symbol-obfuscation)。|

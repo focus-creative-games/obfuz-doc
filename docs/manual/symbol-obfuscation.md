@@ -48,6 +48,70 @@ Debug模式混淆名不受混淆名前缀配置的影响。以`Name`为例，即
 
 `SymbolObfusSettings.Debug`字段配置了是否开启Debug模式，默认关闭。
 
+## Detect Reflection Compatibility
+
+在符号混淆后，反射相关代码是最容易出现运行问题的代码。为了减少定位问题的时间，Obfuz支持混淆时检测潜在的在符号混淆后会失败的代码，打印错误或警告。
+
+Obfuz检测以下函数调用：
+
+- `Enum.Parse`
+- `Enum.Parse<T>`
+- `Enum.TryParse<T>`
+- `Enum.GetName`
+- `Enum.GetNames`
+- `<EnumType>.ToString`
+- `Type.GetType`
+- `Assembly.GetType`
+- `Type.GetField`
+- `Type.GetFields`
+- `Type.GetMethod`
+- `Type.GetMethods`
+- `Type.GetProperty`
+- `Type.GetProperties`
+- `Type.GetEvent`
+- `Type.GetEvents`
+- `Type.GetMember`
+- `Type.GetMembers`
+
+Obfuz会尽可能从上下文中找到这些函数调用作用的类型，如果能找到，并且类型名被混淆，则打印错误，如果无法确定作用类型，则打印警告。
+
+示例如下：
+
+```csharp
+
+// MyColor类型名和枚举项都会被混淆
+enum MyColor
+{
+    A,
+    B,
+    C,
+}
+
+class TestDetectReflectionCompatibility
+{
+    void TestKnownEnum()
+    {
+        Enum.Parse(typeof(MyColor)， "A"); // 打印错误，因为可以推断出要Parse的类型是MyColor，而MyColor会被混淆，运行必然出错
+        Enum.Parse<MyColor>("A"); // 打印错误，因为可以推断出要Parse的类型是MyColor，而MyColor会被混淆，运行必然出错
+        MyColor.A.ToString(); // 打印错误，因为可以推断出要ToString的类型是MyColor，而MyColor枚举项会被混淆，运行必然出错
+    }
+
+    void TestUnknownEnum(Type type)
+    {
+        Enum.Parse(type, "A"); // 打印警告，因为无法推断出被Parse的类型。
+    }
+}
+
+```
+
+打印的错误或者警告日志格式类似：`[ReflectionCompatibilityDetector] Reflection compatibility issue in {method}(): Enum.GetNams field of type:{type full name} is renamed.`
+
+:::tip
+
+混淆后在Console的搜索框上填入`[ReflectionCompatibilityDetector]`可以快速看到所有错误或者警告日志。
+
+:::
+
 ## 默认禁用符号混淆的目标
 
 Obfuz已经尽力考虑Unity引擎下常见的需要禁用混淆名称的场合，以下目标不会被混淆，也不会受规则文件的影响:
