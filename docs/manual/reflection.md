@@ -15,6 +15,26 @@ Obfuz与Unity工作流深度集成，已经内置了以下规则：
 
 更多的规则可查看文档[符号混淆](./symbol-obfuscation)。不在默认规则内的类型需要使用下面的特殊的解决办法。
 
+## 运行时反射相关支持
+
+### ObfuscationTypeMapper
+
+Obfuz提供了`Obfuz.ObfuscationTypeMapper`维护混淆前类型全名到类型的映射关系，ObfuscationTypeMapper提供了以下接口：
+
+- `Type GetTypeByOriginalFullName(Assembly assembly, string originalFullName)` 根据原始类型名查找它的Type。
+- `string GetOriginalTypeFullName(Type type)` 根据Type获得它的原始类型全名。
+- `string GetOriginalTypeFullNameOrCurrent(Type type)` 根据Type获得它的原始类型全名，如果在注册的映射类型字典中找不到该类型，则返回类型的`Type.FullName`值。
+
+### ObfuscationInstincts
+
+Obfuz提供了[ObfuscationInstincts](./obfuscation-instincts)用于获取原始类型名。
+
+ObfuscationTypeMapper用于只知道运行时`Type`变量的情况下获得原始类型名，如果当前位置知道是哪个具体类型，
+ObfuscationInstincts提供了更直接的接口获取原始类型名，并不需要注册类型映射。
+
+- `FullNameOf<T>` 返回类型的原始类型命名
+- `NameOf<T>` 返回类型的原始类型名，不含命名空间
+
 ## 解决混淆后反射找不到类型的问题
 
 ### 1. 对需要反射查找的元数据禁用符号混淆
@@ -70,16 +90,6 @@ class MyClass
 
 
 ```
-
-ObfuscationTypeMapper还提供了以下接口：
-
-- `string GetOriginalTypeFullName(Type type)` 根据Type获得它的原始类型全名。
-- `string GetOriginalTypeFullNameOrCurrent(Type type)` 根据Type获得它的原始类型全名，如果在注册的映射类型字典中找不到该类型，则返回类型的`Type.FullName`值。
-
-以上两个接口用于只知道运行时`Type`变量的情况下获得原始类型名，如果当前位置知道是哪个具体类型，`ObfuscationInstincts`提供了更直接的接口获取原始类型名，并不需要提前注册类型映射。
-
-- `FullNameOf<T>` 返回类型的原始类型命名
-- `NameOf<T>` 返回类型的原始类型名，不含命名空间
 
 ### 3. 手动维护原始名称与类型的映射关系
 
