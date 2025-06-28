@@ -11,10 +11,21 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 |选项|描述|
 |-|-|
 |Enable| 是否开启Obfuz混淆功能。如果被禁用，Obfuz不会再在构建过程中混淆程序集，但不影响开发者主动调用混淆接口对某些程序集进行混淆。|
+|Build Pipeline Settings|构建管线相关设置|
 |Assembly Settings |混淆程序集相关设置|
 |Obfuscation Pass Settings|**Obfuscation Pass**相关设置|
 |Secret Settings|加密相关设置|
 |Encryption VM Settings|加密虚拟机相关设置|
+|Garbage Code Generation Settings|垃圾代码生成相关设置|
+
+### Build Pipeline Settings
+
+设置构建管线相关参数。
+
+|选项|描述|
+|-|-|
+|Link Xml Process Callback Order|LinkXmlProcess的callbackOrder。默认值为10000|
+|Obfuscation Process Callback Order|ObfuscationProcess的callbackOrder。默认值为10000|
 
 ### Assembly Settings
 
@@ -57,6 +68,29 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 |Code Generation Secret Key|生成虚拟机用到的起始随机数密钥兼种子。发布App后请不要修改此值。|
 |Encryption Op Code Count|加密虚拟机的指令数。它的值必须是2的幂并且不小于64，默认值为256。建议不要超过1024。发布App后请不要修改值。|
 |Code Output Path|生成的加密虚拟机代码的输出路径。默认为`Assets/Obfuz/GeneratedEncryptionVirtualMachine.cs`。加密虚拟机全局唯一。如果有AOT程序集被混淆，由于初始化时机的原因，加密虚拟机代码必须放到AOT程序集中。如果只对热更新代码混淆，EncryptionVM的代码也可以放到热更新程序集中。|
+
+### Garbage Code Generator Settings
+
+垃圾代码生成器相关设置。详细文档见[垃圾代码生成](./garbage-code-generation)。
+
+|选项|描述|
+|-|-|
+|Code Generation Secret Key|生成垃圾代码使用的独立的密钥|
+|Default Task| 默认的生成任务|
+|Additional Tasks|额外可选的生成任务。每个任务与DefaultTask结构完全相同|
+
+任务的字段介绍：
+
+|选项|描述|
+|-|-|
+|Code Generation Random Seed|生成垃圾代码使用的随机器种子|
+|Class Namespace| 生成的垃圾代码类的命名空间|
+|Class Name Prefix|生成的垃圾代码类的类名前缀。最终生成的类名为`{类名前缀}_1`、`{类名前缀}_2`等。|
+|Class Count|生成的垃圾类的个数|
+|Method Count Per Class|垃圾类的函数个数|
+|Field Count Per Class|垃圾类的字段个数|
+|Garbage Code Type|生成的垃圾类代码类别。不同类别生成的代码有较大差异|
+|Output Path|垃圾代码的输出路径|
 
 ## Obfuscation Pass相关设置
 
@@ -131,26 +165,3 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 |-|-|
 |Min Instruction Count Of Basic Block To Obfuscated|被混淆的[基本块](https://en.wikipedia.org/wiki/Basic_block)的最小指令数|
 |Rule Files| 加密规则文件列表。可以为0到多个。如果为空会对所有常量进行混淆。详细配置规则见[函数调用混淆](./call-obfuscation)。|
-
-## Garbage Code Generator Settings
-
-垃圾代码生成器相关设置。详细文档见[垃圾代码生成](./garbage-code-generation)。
-
-|选项|描述|
-|-|-|
-|Code Generation Secret Key|生成垃圾代码使用的独立的密钥|
-|Default Task| 默认的生成任务|
-|Additional Tasks|额外可选的生成任务。每个任务与DefaultTask结构完全相同|
-
-任务的字段介绍：
-
-|选项|描述|
-|-|-|
-|Code Generation Random Seed|生成垃圾代码使用的随机器种子|
-|Class Namespace| 生成的垃圾代码类的命名空间|
-|Class Name Prefix|生成的垃圾代码类的类名前缀。最终生成的类名为`{类名前缀}_1`、`{类名前缀}_2`等。|
-|Class Count|生成的垃圾类的个数|
-|Method Count Per Class|垃圾类的函数个数|
-|Field Count Per Class|垃圾类的字段个数|
-|Garbage Code Type|生成的垃圾类代码类别。不同类别生成的代码有较大差异|
-|Output Path|垃圾代码的输出路径|
