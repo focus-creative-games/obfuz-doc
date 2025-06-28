@@ -87,6 +87,22 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 |Encryption level|加密级别，取值范围为`[1, 4]`,默认为1。 加密级别越高，加密越复杂，解密也会越耗时。|
 |Rule Files| 加密规则文件列表。可以为0到多个。如果为空会对所有常量进行混淆。详细配置规则见[常量混淆](./const-encryption)。|
 
+### Eval Stack Obfus Settings
+
+执行栈的混淆设置。支持通过规则文件非常精细地控制范围和加密效果。补充文档见[执行栈混淆](./eval-stack-obfuscation)。
+
+|选项|描述|
+|-|-|
+|Rule Files| 加密规则文件列表。可以为0到多个。如果为空会对所有常量进行混淆。详细配置规则见[执行栈混淆](./eval-stack-obfuscation)。|
+
+### Expr Obfus Settings
+
+表达式混淆相关设置。支持通过规则文件非常精细地控制范围和加密效果。补充文档见[表达式混淆](./expr-obfuscation)。
+
+|选项|描述|
+|-|-|
+|Rule Files| 加密规则文件列表。可以为0到多个。如果为空会对所有常量进行混淆。详细配置规则见[表达式混淆](./expr-obfuscation)。|
+
 ### Field Encrypt Settings
 
 变量内存加密相关设置。支持通过规则文件非常精细地控制加密范围和效果。补充文档见[字段加密](./field-encryption)。
@@ -106,3 +122,35 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 |maxProxyMethodCountPerDispatchMethod|每个dispatch函数最多包含多少个proxy函数。默认为100。建议这个值不要超过1000。|
 |obfuscateCallToMethodInMscorlib|是否混淆对mscorlib中函数的调用。默认为false。此选项和混淆规则文件中的whitelist配置会同时生效，如果禁用此选项或者说whitelist程序集中包含了mscorlib，都会导致不混淆对mscorlib程序集中函数的调用。|
 |Rule Files| 加密规则文件列表。可以为0到多个。如果为空会对所有常量进行混淆。详细配置规则见[函数调用混淆](./call-obfuscation)。|
+
+### Control Flow Obfus Settings
+
+控制流混淆相关设置。 支持通过规则文件非常精细地控制加密范围和效果。补充文档见[控制流混淆](./control-flow-obfuscation)。
+
+|选项|描述|
+|-|-|
+|Min Instruction Count Of Basic Block To Obfuscated|被混淆的[基本块](https://en.wikipedia.org/wiki/Basic_block)的最小指令数|
+|Rule Files| 加密规则文件列表。可以为0到多个。如果为空会对所有常量进行混淆。详细配置规则见[函数调用混淆](./call-obfuscation)。|
+
+## Garbage Code Generator Settings
+
+垃圾代码生成器相关设置。详细文档见[垃圾代码生成](./garbage-code-generation)。
+
+|选项|描述|
+|-|-|
+|Code Generation Secret Key|生成垃圾代码使用的独立的密钥|
+|Default Task| 默认的生成任务|
+|Additional Tasks|额外可选的生成任务。每个任务与DefaultTask结构完全相同|
+
+任务的字段介绍：
+
+|选项|描述|
+|-|-|
+|Code Generation Random Seed|生成垃圾代码使用的随机器种子|
+|Class Namespace| 生成的垃圾代码类的命名空间|
+|Class Name Prefix|生成的垃圾代码类的类名前缀。最终生成的类名为`{类名前缀}_1`、`{类名前缀}_2`等。|
+|Class Count|生成的垃圾类的个数|
+|Method Count Per Class|垃圾类的函数个数|
+|Field Count Per Class|垃圾类的字段个数|
+|Garbage Code Type|生成的垃圾类代码类别。不同类别生成的代码有较大差异|
+|Output Path|垃圾代码的输出路径|

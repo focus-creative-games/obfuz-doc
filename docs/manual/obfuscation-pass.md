@@ -22,8 +22,11 @@ Obfuz的混淆（或加密）流程的执行方式为先判定对目标是否启
 
 - Symbol Obfuscation（符号混淆）
 - Const Encryption（常量加密）
+- Eval Stack Obfusaction （局部与临时变量混淆）
+- Expr Obfusaction （表达式混淆）
 - Field Encryption（字段加密）
 - Call Obfusaction（函数调用混淆）
+- Control Flow Obfusaction （控制流混淆）
 - CleanUp Pass。没有任何混淆操作，只执行一些清理操作（如优化冗余代码等）。
 - RemoveObfuzAttributesPass。 最后一个Pass，移除最终的代码中用不到的`[ObfuzIgnore]`特性。
 

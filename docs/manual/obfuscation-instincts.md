@@ -1,4 +1,4 @@
-# ObfuscationInstincts
+# Obfuscation Instincts
 
 `Obfuz.ObfuscationInstincts`类提供一些特殊函数，可以获得混淆相关的元数据信息。
 
