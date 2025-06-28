@@ -10,7 +10,6 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 
 |选项|描述|
 |-|-|
-|Enable| 是否开启Obfuz混淆功能。如果被禁用，Obfuz不会再在构建过程中混淆程序集，但不影响开发者主动调用混淆接口对某些程序集进行混淆。|
 |Build Pipeline Settings|构建管线相关设置|
 |Assembly Settings |混淆程序集相关设置|
 |Obfuscation Pass Settings|**Obfuscation Pass**相关设置|
@@ -24,6 +23,7 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 
 |选项|描述|
 |-|-|
+|Enable| 是否开启Obfuz混淆功能。如果被禁用，Obfuz不会再在构建过程中混淆程序集，但不影响开发者主动调用混淆接口对某些程序集进行混淆。|
 |Link Xml Process Callback Order|LinkXmlProcess的callbackOrder。默认值为10000|
 |Obfuscation Process Callback Order|ObfuscationProcess的callbackOrder。默认值为10000|
 
