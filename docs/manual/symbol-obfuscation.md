@@ -184,7 +184,7 @@ public class MyRenamePolicy : ObfuscationPolicyBase
         applyToNestedTypes="1"
         modifier="public,protected,private"
         classType="class,struct,enum,interface,delegate"
-        inheritTypes="Unity.Entities.IComponentData,MyInterface"
+        inherit="Unity.Entities.IComponentData,MyInterface"
         hasCustomAttributes="test.MyCustomAttribute1,test.MyCustomAttribute2"
 
         >

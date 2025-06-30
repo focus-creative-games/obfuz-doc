@@ -26,6 +26,13 @@
 
 还无法解决，请构造出复现工程，向我们报告。
 
+### `[ReflectionCompatiblityDetector] Refleciton compatility issue in ...`
+
+Symbol Obfusaction Pass会检测混淆符号名称后潜在的反射或者其他逻辑上可能出现错误的代码。Obfuz无法准确判断某种潜在出错的代码是不是真的有问题。
+对于这种错误或者警告，请人工核实。如果确实无问题，可以忽略这个错误或者警告日志。
+
+如果已经检查了所有代码都没有问题，不想看到这些日志，你可以在ObfuzSettings.SybmolObfusSettings中禁用反射兼容性检测，详细文档见[符号混淆](../manual/symbol-obfuscation)。
+
 ## 运行过程中发生异常
 
 ### `exception:The type initializer for '$$Obfuz$RVA$' threw an exception., stack:  at ...`
