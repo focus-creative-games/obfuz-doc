@@ -17,6 +17,19 @@ encrypedIndex在执行该代码位置时才被解密，反编译代码后无法�
 
 `ObfuzSettings.CallEncryptSettings`中包含常量加密相关设置，详细见文档[设置](./configuration)。
 
+## Proxy Mode
+
+有多种对函数调用进行混淆的方法。
+
+|Mode|描述|
+|-|-|
+|Dispatch|将函数调用转化成通过另一个dispatch函数间接调用的方式，通过dispatch函数的index决定实际调用的函数。index值是一个加密的值，只有运行时才会解密，因此可以很好阻止破解者分析调用关系。|
+|Delegate|将函数调用转化为一个预计算的delegate。delegate对象在运行时才绑定到一个`delegate[]`的某个index对应的元素。index值是一个加密的值，只有运行时才会解密，因此可以很好阻止破解者分析调用关系。|
+
+Delegate与Dispatch的混淆程度及运行性能没有显著的区别。Delegate相比Dispatch的优点是生成的混淆代码更稳定，当代码变动时，生成的混淆代码差异更小。
+
+对于大多数项目建议取Dispatch模式即可。对于HybridCLR的旗舰版本用户，减少代码变动可以减少切换为解释执行执行的函数的数量，提升DHE的性能，因此建议取Delegate模式。
+
 ## 加密级别
 
 加密级别影响调用`EncryptionService<Scope>::Encrypt`时传递的`ops`参数。关于ops参数的详细介绍可见文档[加密](./encryption)。
@@ -49,20 +62,16 @@ encrypedIndex在执行该代码位置时才被解密，反编译代码后无法�
     </assembly>
   </whitelist>
   
-  <global disableObfuscation="0" obfuscateCallInLoop="1"  cacheCallIndexInLoop="1" cacheCallIndexNotInLoop="0">
+  <global obfuscationLevel="Basic">
 
   </global>
   
   <assembly name="Obfus2">
-      <type name="*.TestNotObfusTypeAllMethods" disableObfuscation="1"/>
+      <type name="*.TestNotObfusTypeAllMethods" obfuscationLevel="None"/>
       <type name="*.TestNotObfusTypeSomeMethods">
-          <method name="NotObfus*" disableObfuscation="1"/>
+          <method name="NotObfus*" obfuscationLevel="None"/>
       </type>
-      <type name="*.TestObfusCache">
-          <method name="NotCache" cacheCallIndexInLoop="0"/>
-          <method name="Cache" cacheCallIndexInLoop="1"/>
-      </type>
-      <type name="Aaaa.TopClass/SubClass">
+      <type name="Aaaa.TopClass/SubClass" obfuscationLevel="Advanced">
       </type>
   </assembly>
 </obfuz>
@@ -106,10 +115,7 @@ global中定义了全局默认加密参数，。
 
 |属性|可空|默认值|描述|
 |-|-|-|-|
-|disableObfuscation|是|0|是否禁用加密，它的优先级高于`obfuscateCallInLoop`之类的参数|
-|obfuscateCallInLoop|是|1|是否混淆循环中的函数调用。由于循环会多次执行，如果加密循环中的常量可能会对性能影响较大。例如 `for (int i = 0; i < 100; i++) { a.Call(); }` 启动循环加密后会显著降低性能 |
-|cacheCallIndexInLoop|是|1|是否缓存循环中的dispatch函数的index变量。如果为是，则会在静态变量中保存解密后的index值，避免每次的解密开销。|
-|cacheCallIndexNotInLoop|是|0|是否缓存不在循环中的dispatch函数的index变量。|
+|obfuscationLevel|是|None|混淆级别，可以取None、Basic、Advanced、MostAdvanced这几个值|
 
 ### assembly
 

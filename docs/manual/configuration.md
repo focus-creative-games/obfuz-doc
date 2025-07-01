@@ -152,6 +152,7 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 
 |选项|描述|
 |-|-|
+|Proxy Mode|函数调用的混淆方式，详细介绍见[函数调用混淆](./call-obfuscation)。|
 |Encryption level|加密级别，取值范围为`[1, 4]`,默认为1。 加密级别越高，加密越复杂，解密也会越耗时。|
 |maxProxyMethodCountPerDispatchMethod|每个dispatch函数最多包含多少个proxy函数。默认为100。建议这个值不要超过1000。|
 |obfuscateCallToMethodInMscorlib|是否混淆对mscorlib中函数的调用。默认为false。此选项和混淆规则文件中的whitelist配置会同时生效，如果禁用此选项或者说whitelist程序集中包含了mscorlib，都会导致不混淆对mscorlib程序集中函数的调用。|
