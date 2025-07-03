@@ -96,10 +96,11 @@ Obfuz已经考虑到Unity的特殊性，对于无法被混淆的情形（如不�
 
 enable与disable属性用于设置当前规则中开启或者禁用哪些Pass。
 
-配置格式为`"{+}(SymbolObfus|ConstEncrypt|FieldEncrypt|CallObfus){|(SymbolObfus|ConstEncrypt|FieldEncrypt|CallObfus)}..."`。
+配置格式为`"{+}(PASS_NAME1|PASS_NAME2...){|(PASS_NAME1|PASS_NAME2...)}..."`。
 
 - 如果值以`+`开关，则表示是在父节点上启用的pass上进行增量修改。
 - 如果没有以`+`开启，则表示在`ObfuscationPassSettings.EnabledPasses`的值的基础上启用或者禁用某些Pass。
+- PASS_NAME的取值可以为`ConstEncrypt、FieldEncrypt、SymbolObfus、CallObfus、ExprObfus、ControlFlowObfus、EvalStackObfus`等Pass类型。详见`Obfuz.ObfusPasses.ObfuscationPassType`类定义。
 
 例如，假设EnabledPass=`SymbolObfus|ConstEncrypt|FieldEncrypt`，使用以下配置。
 
