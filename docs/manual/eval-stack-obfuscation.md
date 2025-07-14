@@ -22,7 +22,7 @@
 
 <obfuz>
 
-  <global obfuscationLevel="Basic" obfuscationPercentage="0.3">
+  <global obfuscationLevel="Basic" obfuscationPercentage="0.05">
 
   </global>
   
@@ -46,7 +46,7 @@ global中定义了全局默认加密参数，。
 |属性|可空|默认值|描述|
 |-|-|-|-|
 |obfuscationLevel|是|None|混淆级别，可以取None、Basic、Advanced、MostAdvanced这几个值|
-|obfuscationPercentage|是|0.5|混淆概率。取值`[0 - 1]`之间|
+|obfuscationPercentage|是|0.05|混淆概率。取值`[0 - 1]`之间。由于Eval Stack Obfuscation会巨幅增加最终dll大小，建议**本参数的值不要超过0.1**|
 
 ### assembly
 
