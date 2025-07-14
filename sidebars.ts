@@ -70,6 +70,7 @@ const sidebars: SidebarsConfig = {
         'manual/incremental-obfuscation-and-hotupdate',
         'manual/serialization',
         'manual/reflection',
+        'manual/impact-dll-size',
         'manual/work-with-hybridclr',
         'manual/work-with-xlua',
         'manual/deobfuscate-stacktrace',
