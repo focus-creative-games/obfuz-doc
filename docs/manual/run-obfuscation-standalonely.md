@@ -69,7 +69,12 @@ public static class ObfuscateUtil
         var obfuzSettings = ObfuzSettings.Instance;
 
         var assemblySearchDirs = assemblySearchPaths;
-        ObfuscatorBuilder builder = ObfuscatorBuilder.FromObfuzSettings(obfuzSettings, target, true);
+
+        // 默认的dll搜索路径不会包含UnityEditor相关程序集。
+        // 如果被混淆的程序集只在Editor下使用，它引用了UnityEditor相关程序集，
+        // 则需要 searchPathIncludeUnityEditorDll=true
+        bool searchPathIncludeUnityEditorDll = false;
+        ObfuscatorBuilder builder = ObfuscatorBuilder.FromObfuzSettings(obfuzSettings, target, true, searchPathIncludeUnityEditorDll);
         builder.InsertTopPriorityAssemblySearchPaths(assemblySearchDirs);
 
         string obfuscatedAssemblyOutputPath = obfuzSettings.GetObfuscatedAssemblyOutputPath(target);
