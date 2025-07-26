@@ -2,7 +2,7 @@
 
 本工程演示如何将Obfuz与XLua一起使用，完整示例项目参见[WorkWithXLua](https://github.com/focus-creative-games/obfuz-samples/tree/main/WorkWithXLua)。
 
-详细文档见[与XLua协同工作](../manual/work-with-xlua)。
+详细文档见[与XLua协同工作](../manual/xlua/work-with-xlua)。
 
 ## 安装
 

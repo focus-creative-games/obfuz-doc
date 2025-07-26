@@ -7,7 +7,7 @@ HybridCLR工作流并未考虑到代码混淆的情况，如果直接使用会�
 ### 同时安装Obfuz和HybridCLR后dnlib插件冲突的问题
 
 Obfuz和HybridCLR插件都包含了dnlib插件。对于Unity 2021及更早版本，当两个package中包含同名插件时会产生错误。
-解决办法为将这两个插件之一（不必两个都改为本地安装）改为本地安装，即将Obfuz或HybridCLR下载到本地，移除其中包含的dnlib.dll，再放到Packages目录下。
+解决办法为将HybridCLR下载到本地，移除其中包含的dnlib.dll，再放到Packages目录下。
 
 ### 被混淆的AOT程序集的裁剪问题
 
@@ -38,3 +38,7 @@ obfuz4hybridclr提供了适合混淆工作流的GenerateAll命令，请在构建
 obfuz4hybridclr提供了同时完成编译和混淆热更新代码的命令，请替换`HybridCLR/Generate/ActiveBuildTarget`为`HybridCLR/Obfuz/Extension/CompileAndObfuscateDll`。
 
 如果是代码中调用`HybridCLR.Editor.Commands.CompileDllCommand.CompileDll`，则替换为`Obfuz4HybridCLR.PrebuildCommandExt.CompileAndObfuscateDll`。
+
+## 使用多态dll
+
+多态dll是一种全新的支持随机化的自定义文件结构，可以有效对抗恶意破解和篡改。详细文档见[多态dll文件](./polymorphic-dll)。

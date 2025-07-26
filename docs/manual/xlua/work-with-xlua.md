@@ -20,7 +20,7 @@ xLua注册C#类型时并不是直接使用类型名字符串，而是调用了Ty
 但很显然，如果注册类型很多，极容易写错。另外随着类型名重构，也很有可能忘了同步修改这儿的代码。
 
 幸运的是，`ObfuscationInstincts::RegisterReflectionType`提供一种非常便捷的注册方式，你使用`ObfuscationInstincts::RegisterReflectionType<My.TestClass>()`即可
-正确注册类型名与原始名的映射关系。这其中有一些黑科技，具体原理见[ObfuscationInstrincts](./obfuscation-instincts)。
+正确注册类型名与原始名的映射关系。这其中有一些黑科技，具体原理见[ObfuscationInstrincts](../obfuscation-instincts)。
 
 :::warning
 

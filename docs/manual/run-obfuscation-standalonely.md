@@ -4,7 +4,7 @@
 
 :::warning
 如果你正在使用HybridCLR，强烈使用`com.cod-philosphy.obfuz4hybridclr` package，因为它已经提供所有HybridCLR热更新需要的代码，使用更方便简单。
-详细文档见[与HybridCLR协同工作](./work-with-hybridclr)。
+详细文档见[与HybridCLR协同工作](./hybridclr/work-with-hybridclr)。
 :::
 
 ## 生成需要被混淆的dll

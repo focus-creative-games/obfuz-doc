@@ -71,8 +71,29 @@ const sidebars: SidebarsConfig = {
         'manual/serialization',
         'manual/reflection',
         'manual/impact-dll-size',
-        'manual/work-with-hybridclr',
-        'manual/work-with-xlua',
+        {
+          type: 'category',
+          label: 'HybridCLR',
+          link: {
+            type: 'generated-index',
+            slug: '/manual/hybridclr',
+          },
+          items: [
+            'manual/hybridclr/work-with-hybridclr',
+            'manual/hybridclr/polymorphic-dll',
+          ]
+        },
+        {
+          type: 'category',
+          label: 'xLua',
+          link: {
+            type: 'generated-index',
+            slug: '/manual/xlua',
+          },
+          items: [
+            'manual/xlua/work-with-xlua',
+          ]
+        },
         'manual/deobfuscate-stacktrace',
       ],
     },
