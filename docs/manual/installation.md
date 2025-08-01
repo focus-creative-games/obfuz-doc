@@ -21,4 +21,5 @@ Obfuz的Unity Package Manager URL安装地址：
 ## 解决与HybridCLR兼容问题
 
 Obfuz和HybridCLR插件都包含了dnlib插件。对于Unity 2021及更早版本，当两个package中包含同名插件时会产生错误。
-解决办法为将这两个插件之一（不必两个都改为本地安装）改为本地安装，即将Obfuz或HybridCLR下载到本地，移除其中包含的dnlib.dll，再放到Packages目录下。
+
+解决办法为将HybridCLR下载到本地，移除其中包含的dnlib.dll，再放到Packages目录下。
