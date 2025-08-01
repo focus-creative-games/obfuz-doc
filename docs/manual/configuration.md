@@ -121,6 +121,14 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 |Encryption level|加密级别，取值范围为`[1, 4]`,默认为1。 加密级别越高，加密越复杂，解密也会越耗时。|
 |Rule Files| 加密规则文件列表。可以为0到多个。如果为空会对所有常量进行混淆。详细配置规则见[常量混淆](./const-encryption)。|
 
+### Remove Const Field Settings
+
+移除const常量字段相关设置。支持通过规则文件精细地控制要保留哪些const字段。补充文档见[移除常量字段](./remove-const-field)。
+
+|选项|描述|
+|-|-|
+|Rule Files| 加密规则文件列表。可以为0到多个。如果为空会对所有常量进行混淆。详细配置规则见[移除常量字段](./remove-const-field)。|
+
 ### Eval Stack Obfus Settings
 
 执行栈的混淆设置。支持通过规则文件非常精细地控制范围和加密效果。补充文档见[执行栈混淆](./eval-stack-obfuscation)。

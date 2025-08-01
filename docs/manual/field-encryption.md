@@ -78,8 +78,8 @@ class A
 <obfuz>
     <assembly name="Obfus1">
         <type name="*">
-            <field name="a" encrypt="1"/>
-            <field name="a" encrypt="0"/>
+            <field name="a"/>
+            <field name="b"/>
         </type>
     </assembly>
 </obfuz>
@@ -108,5 +108,4 @@ assembly的子元素只能为type。
 
 |属性|可空|默认值|描述|
 |-|-|-|-|
-|name|否||类型名的通配字符串，如果为空表示匹配所有类型|
-|encrypt|是|0|是否加密此字段|
+|name|否||被加密的字段名。字段名的通配字符串，如果为空表示匹配所有类型|

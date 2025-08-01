@@ -22,6 +22,7 @@ Obfuz的混淆（或加密）流程的执行方式为先判定对目标是否启
 
 - Symbol Obfuscation（符号混淆）
 - Const Encryption（常量加密）
+- Remove Const Field （移除const常量字段）
 - Eval Stack Obfusaction （局部与临时变量混淆）
 - Expr Obfusaction （表达式混淆）
 - Field Encryption（字段加密）
@@ -32,8 +33,6 @@ Obfuz的混淆（或加密）流程的执行方式为先判定对目标是否启
 
 后续将会支持的Obfuscation Pass有：
 
-- Expression Obfusaction（表达式混淆）
-- ControlFlow Obfuscation（控制流混淆）
 - 加水印
 - Anti-Debugger、Anti-Damper、Anti-Dumping
 
@@ -100,7 +99,7 @@ enable与disable属性用于设置当前规则中开启或者禁用哪些Pass。
 
 - 如果值以`+`开关，则表示是在父节点上启用的pass上进行增量修改。
 - 如果没有以`+`开启，则表示在`ObfuscationPassSettings.EnabledPasses`的值的基础上启用或者禁用某些Pass。
-- PASS_NAME的取值可以为`ConstEncrypt、FieldEncrypt、SymbolObfus、CallObfus、ExprObfus、ControlFlowObfus、EvalStackObfus`等Pass类型。详见`Obfuz.ObfusPasses.ObfuscationPassType`类定义。
+- PASS_NAME的取值可以为`ConstEncrypt、RemoveConstField、FieldEncrypt、SymbolObfus、CallObfus、ExprObfus、ControlFlowObfus、EvalStackObfus`等Pass类型。详见`Obfuz.ObfusPasses.ObfuscationPassType`类定义。
 
 例如，假设EnabledPass=`SymbolObfus|ConstEncrypt|FieldEncrypt`，使用以下配置。
 
