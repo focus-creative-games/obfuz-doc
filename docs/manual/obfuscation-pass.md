@@ -30,10 +30,10 @@ Obfuz的混淆（或加密）流程的执行方式为先判定对目标是否启
 - Control Flow Obfusaction （控制流混淆）
 - CleanUp Pass。没有任何混淆操作，只执行一些清理操作（如优化冗余代码等）。
 - RemoveObfuzAttributesPass。 最后一个Pass，移除最终的代码中用不到的`[ObfuzIgnore]`特性。
+- Watermark Pass （添加水印）
 
 后续将会支持的Obfuscation Pass有：
 
-- 加水印
 - Anti-Debugger、Anti-Damper、Anti-Dumping
 
 ## 设置

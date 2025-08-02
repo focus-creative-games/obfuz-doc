@@ -175,6 +175,15 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 |Min Instruction Count Of Basic Block To Obfuscated|被混淆的[基本块](https://en.wikipedia.org/wiki/Basic_block)的最小指令数|
 |Rule Files| 加密规则文件列表。可以为0到多个。如果为空会对所有常量进行混淆。详细配置规则见[函数调用混淆](./call-obfuscation)。|
 
+### Watermark Settings
+
+代码水印相关设置。补充文档见[代码水印](./watermark)。
+
+|选项|描述|
+|-|-|
+|Text|代码中嵌入的水印文本|
+|Signature Length|嵌入的水印文本的Hash签名长度|
+
 ### PolyMorphic Dll Settings
 
 多态dll相关设置。 补充文档见[多态dll文件](./hybridclr/polymorphic-dll)。

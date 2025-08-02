@@ -65,6 +65,7 @@ const sidebars: SidebarsConfig = {
         'manual/expr-obfuscation',
         'manual/call-obfuscation',
         'manual/control-flow-obfuscation',
+        'manual/watermark',
         'manual/garbage-code-generation',
         'manual/build-pipeline',
         'manual/run-obfuscation-standalonely',
