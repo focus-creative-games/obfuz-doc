@@ -35,6 +35,13 @@ Symbol Obfusaction Pass会检测混淆符号名称后潜在的反射或者其他
 
 ## 运行过程中发生异常
 
+### TypeLoadException: Could not resolve type with token 010001ec from typeref (expected class '$a.$d`1' in assembly 'Obfuz.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null')
+
+**不要在Editor下**测试混淆程序集。
+
+在Editor下已经存在被混淆的程序集（包括Obfuz.Runtime）的原始未混淆的代码。混淆程序集引用的是混淆后的类型和函数，
+运行时会出现找不到类的错误！
+
 ### `exception:The type initializer for '$$Obfuz$RVA$' threw an exception., stack:  at ...`
 
 还未初始化`EncrytionService<T>::Encryptor`就运行了混淆代码。解决办法为先初始化`EncryptionService<T>::Encryptor`，详细文档见[初始化Encryptor](../manual/encryption.md#初始化encryptor)。
