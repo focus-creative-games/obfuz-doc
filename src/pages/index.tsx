@@ -11,6 +11,7 @@ import Translate, {translate} from '@docusaurus/Translate';
 
 const texts = [
   {id:1, title:<Translate>Obfuz 入门</Translate>},
+  {id:2, title:<Translate>功能强大的开源 Unity 代码混淆插件</Translate>},
 ]
 
 function HomepageHeader() {
@@ -21,7 +22,7 @@ function HomepageHeader() {
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle">{texts[1].title}</p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"

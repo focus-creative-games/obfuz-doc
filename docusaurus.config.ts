@@ -5,6 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
+  // 将标题和标语改为支持多语言的格式
   title: 'Obfuz',
   tagline: '功能强大的开源 Unity 代码混淆插件​',
   favicon: 'img/favicon.png',
@@ -24,12 +25,17 @@ const config: Config = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'zh',
+    locales: ['zh', 'en'],
+    localeConfigs: {
+      'zh': {
+        label: '中文',
+      },
+      'en': {
+        label: 'English',
+      },
+    },
   },
 
   presets: [
@@ -91,9 +97,12 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: '文档',
+          label: 'Documentation',
         },
-        //{to: '/blog', label: 'Blog', position: 'left'},
+        {
+          type: 'localeDropdown',
+          position: 'right',
+        },
         {
           href: 'https://github.com/focus-creative-games/obfuz',
           label: 'GitHub',
