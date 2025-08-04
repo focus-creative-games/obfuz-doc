@@ -37,10 +37,12 @@ Symbol Obfusaction Pass会检测混淆符号名称后潜在的反射或者其他
 
 ### TypeLoadException: Could not resolve type with token 010001ec from typeref (expected class '$a.$d`1' in assembly 'Obfuz.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null')
 
-**不要在Editor下**测试混淆程序集。
+**不要在Editor下**测试运行混淆后的代码。
 
 在Editor下已经存在被混淆的程序集（包括Obfuz.Runtime）的原始未混淆的代码。混淆程序集引用的是混淆后的类型和函数，
 运行时会出现找不到类的错误！
+
+如果你一定要测试，请禁用Obfuz.Runtime的混淆，然后将混淆后的程序集以dll的形式复制到一个新的Unity工程，该工程移除了被混淆程序集的原始代码。
 
 ### `exception:The type initializer for '$$Obfuz$RVA$' threw an exception., stack:  at ...`
 

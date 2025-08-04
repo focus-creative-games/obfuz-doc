@@ -35,6 +35,14 @@ If all code is verified and you want to suppress these logs, disable reflection 
 
 ## Exceptions During Runtime
 
+### TypeLoadException: Could not resolve type with token 010001ec from typeref (expected class '$a.$d`1' in assembly 'Obfuz.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null')
+
+**Do not test and run the obfuscated code in the Editor.**
+
+In the Editor, the original unobfuscated code of the obfuscated assemblies (including Obfuz.Runtime) already exists. The obfuscated assemblies reference obfuscated types and functions, which will cause runtime errors such as "type not found"!
+
+If you must test it, disable obfuscation for Obfuz.Runtime, then copy the obfuscated assemblies (DLLs) into a new Unity project where the original source code of the obfuscated assemblies has been removed.
+
 ### `exception:The type initializer for '$$Obfuz$RVA$' threw an exception., stack:  at ...`
 
 This occurs when obfuscated code runs before `EncrytionService<T>::Encryptor` is initialized. Solution: Initialize `EncryptionService<T>::Encryptor` first. See [Initialize Encryptor](../manual/encryption.md#initializing encryptor) for details.
