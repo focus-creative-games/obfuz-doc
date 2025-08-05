@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">与HybridCLR协同工作 | Obfuz</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.obfuz.com/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://www.obfuz.com/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://www.obfuz.com/docs/manual/hybridclr/work-with-hybridclr"><meta data-rh="true" property="og:locale" content="zh"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh"><meta data-rh="true" name="docsearch:language" content="zh"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="与HybridCLR协同工作 | Obfuz"><meta data-rh="true" name="description" content="HybridCLR工作流并未考虑到代码混淆的情况，如果直接使用会遇到一些问题。"><meta data-rh="true" property="og:description" content="HybridCLR工作流并未考虑到代码混淆的情况，如果直接使用会遇到一些问题。"><link data-rh="true" rel="icon" href="/img/favicon.png"><link data-rh="true" rel="canonical" href="https://www.obfuz.com/docs/manual/hybridclr/work-with-hybridclr"><link data-rh="true" rel="alternate" href="https://www.obfuz.com/docs/manual/hybridclr/work-with-hybridclr" hreflang="zh"><link data-rh="true" rel="alternate" href="https://www.obfuz.com/en/docs/manual/hybridclr/work-with-hybridclr" hreflang="en"><link data-rh="true" rel="alternate" href="https://www.obfuz.com/docs/manual/hybridclr/work-with-hybridclr" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.ff9dae79.css">
-<script src="/assets/js/runtime~main.ac2c1efb.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.9c996dbd.js" defer="defer"></script>
 <script src="/assets/js/main.73aed02f.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -12,7 +12,7 @@
 <p>HybridCLR工作流并未考虑到代码混淆的情况，如果直接使用会遇到一些问题。</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="遇到的问题">遇到的问题<a href="#遇到的问题" class="hash-link" aria-label="遇到的问题的直接链接" title="遇到的问题的直接链接">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="同时安装obfuz和hybridclr后dnlib插件冲突的问题">同时安装Obfuz和HybridCLR后dnlib插件冲突的问题<a href="#同时安装obfuz和hybridclr后dnlib插件冲突的问题" class="hash-link" aria-label="同时安装Obfuz和HybridCLR后dnlib插件冲突的问题的直接链接" title="同时安装Obfuz和HybridCLR后dnlib插件冲突的问题的直接链接">​</a></h3>
-<p>Obfuz和HybridCLR插件都包含了dnlib插件。对于Unity 2021及更早版本，当两个package中包含同名插件时会产生错误。
+<p>Obfuz和HybridCLR插件都包含了dnlib插件。在Unity Editor中当两个package中包含同名插件时会产生错误。
 解决办法为将HybridCLR下载到本地，移除其中包含的dnlib.dll，再放到Packages目录下。</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="被混淆的aot程序集的裁剪问题">被混淆的AOT程序集的裁剪问题<a href="#被混淆的aot程序集的裁剪问题" class="hash-link" aria-label="被混淆的AOT程序集的裁剪问题的直接链接" title="被混淆的AOT程序集的裁剪问题的直接链接">​</a></h3>
 <p>HybridCLR默认的<code>HybridCLR/Generate/All</code>命令基于未混淆的程序集生成link.xml。如果有一部分AOT程序集被混淆了，基于未混淆代码生成link.xml中保留的类型和函数都是混淆前的名字，
