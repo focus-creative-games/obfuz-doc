@@ -6,7 +6,7 @@ HybridCLR工作流并未考虑到代码混淆的情况，如果直接使用会�
 
 ### 同时安装Obfuz和HybridCLR后dnlib插件冲突的问题
 
-Obfuz和HybridCLR插件都包含了dnlib插件。对于Unity 2021及更早版本，当两个package中包含同名插件时会产生错误。
+Obfuz和HybridCLR插件都包含了dnlib插件。在Unity Editor中当两个package中包含同名插件时会产生错误。
 解决办法为将HybridCLR下载到本地，移除其中包含的dnlib.dll，再放到Packages目录下。
 
 ### 被混淆的AOT程序集的裁剪问题

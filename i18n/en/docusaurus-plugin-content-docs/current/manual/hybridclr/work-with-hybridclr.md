@@ -6,7 +6,7 @@ HybridCLR workflow does not consider code obfuscation scenarios, so using it dir
 
 ### Plugin Conflicts Between Obfuz and HybridCLR dnlib Plugins
 
-Both Obfuz and HybridCLR plugins include the dnlib plugin. For Unity 2021 and earlier versions, errors occur when two packages contain plugins with the same name.
+Both Obfuz and HybridCLR plugins include the dnlib plugin. For Unity, errors occur when two packages contain plugins with the same name.
 The solution is to download HybridCLR locally, remove the included dnlib.dll, and then place it in the Packages directory.
 
 ### Trimming Issues for Obfuscated AOT Assemblies
