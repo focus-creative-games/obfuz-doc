@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">快速上手 | Obfuz</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://www.obfuz.com/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://www.obfuz.com/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://www.obfuz.com/docs/beginner/quick-start"><meta data-rh="true" property="og:locale" content="zh"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh"><meta data-rh="true" name="docsearch:language" content="zh"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="快速上手 | Obfuz"><meta data-rh="true" name="description" content="Obfuz支持Unity 2019+版本，同时也支持团结引擎1.0.0+，能在所有Unity和团结引擎支持的平台下正确工作。"><meta data-rh="true" property="og:description" content="Obfuz支持Unity 2019+版本，同时也支持团结引擎1.0.0+，能在所有Unity和团结引擎支持的平台下正确工作。"><link data-rh="true" rel="icon" href="/img/favicon.png"><link data-rh="true" rel="canonical" href="https://www.obfuz.com/docs/beginner/quick-start"><link data-rh="true" rel="alternate" href="https://www.obfuz.com/docs/beginner/quick-start" hreflang="zh"><link data-rh="true" rel="alternate" href="https://www.obfuz.com/en/docs/beginner/quick-start" hreflang="en"><link data-rh="true" rel="alternate" href="https://www.obfuz.com/docs/beginner/quick-start" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.ff9dae79.css">
-<script src="/assets/js/runtime~main.81e9c2f3.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.bd39a380.js" defer="defer"></script>
 <script src="/assets/js/main.73aed02f.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -28,6 +28,8 @@
 <li>运行菜单<code>Obfuz/GenerateEncryptionVM</code>生成加密虚拟机代码，默认生成的代码文件为<code>Assets/Obfuz/GeneratedEncryptionVirtualMachine.cs</code>。</li>
 <li>运行菜单<code>Obfuz/GenerateSecretKeyFile</code>生成两个密钥文件。默认输出文件为<code>Assets/Resources/Obfuz/defaultStaticSecretKey.bytes</code>和<code>Assets/Resources/Obfuz/defaultDynamicSecretKey.bytes</code></li>
 </ul>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>注意</div><div class="admonitionContent_BuS1"><p>请妥善处理defaultStaticSecretKey.bytes和defaultDynamicSecretKey.bytes文件。建议更换名字，并且对它们都作加密处理。
+另外defaultDynamicSecretKey.bytes请尽量不要放到包体内，而是和热更新代码一起下载。</p></div></div>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="添加代码">添加代码<a href="#添加代码" class="hash-link" aria-label="添加代码的直接链接" title="添加代码的直接链接">​</a></h2>
 <ul>
 <li>在<code>Assets</code>目录下创建<code>Bootstrap.cs</code>代码文件，文件内容如下：</li>
