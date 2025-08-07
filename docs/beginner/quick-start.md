@@ -30,6 +30,11 @@ Obfuz的Unity Package Manager URL安装地址：
 - 运行菜单`Obfuz/GenerateEncryptionVM`生成加密虚拟机代码，默认生成的代码文件为`Assets/Obfuz/GeneratedEncryptionVirtualMachine.cs`。
 - 运行菜单`Obfuz/GenerateSecretKeyFile`生成两个密钥文件。默认输出文件为`Assets/Resources/Obfuz/defaultStaticSecretKey.bytes`和`Assets/Resources/Obfuz/defaultDynamicSecretKey.bytes`
 
+:::warning
+请妥善处理defaultStaticSecretKey.bytes和defaultDynamicSecretKey.bytes文件。建议更换名字，并且对它们都作加密处理。
+另外defaultDynamicSecretKey.bytes请尽量不要放到包体内，而是和热更新代码一起下载。
+:::
+
 ## 添加代码
 
 - 在`Assets`目录下创建`Bootstrap.cs`代码文件，文件内容如下：

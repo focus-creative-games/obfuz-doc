@@ -267,12 +267,16 @@ Obfuz通过EncryptionScope来实现这个功能。
 
 菜单`Obfuz/GenerateSecretKey`会为这两个密钥生成defaultStaticSecretKey.bytes和defaultDynamicSecretKey.bytes文件。可在`SecretSettings.SecretKeyOutputPath`可以配置密钥文件的输出目录。
 
-
 如果混淆了某些AOT程序集，由于AOT程序集中的代码在很早期就可能被执行到，如此不能在执行这些程序集中的混淆或者加密代码前就为它们所属的`EncryptionService<{EncryptionScope}>`设置Encryptor，
 会产生运行异常。建议是尽可能早执行`EncryptionService<{EncryptionScope}>.Encrypor`的初始化代码。一个比较合理的方式是使用`[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]`
 在CLR（il2cpp或mono）运行时加载完所有程序集后就运行EncryptionService的初始化代码。
 
 显然，不应该混淆`SetUpStaticSecret`的代码，因为此时EncryptionService还未初始化，这会陷入无限递归。而`SetUpDynamicSecret`则可以被混淆，因此它一般在满足某些条件后（比如热更新完成后）才被调用。
+
+:::warning
+请妥善处理defaultStaticSecretKey.bytes和defaultDynamicSecretKey.bytes文件。建议更换名字，并且对它们都作加密处理。
+另外defaultDynamicSecretKey.bytes请尽量不要放到包体内，而是和热更新代码一起下载。
+:::
 
 ## salt
 
