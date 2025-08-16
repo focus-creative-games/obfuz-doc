@@ -14,14 +14,30 @@ Currently supports encryption of class static variables and member variables, bu
 
 ## Implementation Principle
 
-- Fields are encrypted using `EncryptionService<Scope>::Encrypt` before writing
-- Fields are decrypted using `EncryptionService<Scope>::Decrypt` before reading
+- Before writing to a field, the value is encrypted using `EncryptionService<Scope>::Encrypt`
+- Before reading from a field, the value is decrypted using `EncryptionService<Scope>::Decrypt`
 
-Obfuz will modify all read and write operations for encrypted fields in all assemblies. This encryption process is completely transparent to the assemblies. Obfuz's field encryption algorithm ensures that 0 values map to 0 values.
+Obfuz modifies all read and write operations to the encrypted field in the assembly, and this encryption process is completely transparent to the assembly. Obfuz's field encryption algorithm ensures that a value of 0 maps to 0, so no additional initialization is required for zero values.
 
-Note that Obfuz only guarantees that encryption and decryption operations are performed when reading and writing encrypted fields in code. If accessed through reflection, the encrypted variables are directly operated on, which will cause errors.
-MonoBehaviour, ScriptableObject, and serialization libraries like NewtonsoftJson rely heavily on reflection to read and assign field values, making them incompatible with field encryption.
-Therefore, **do not configure these fields as encrypted**.
+:::warning
+Note that Obfuz only guarantees that encryption and decryption operations are performed when reading from or writing to encrypted fields in the code. If reflection is used, the encrypted values are accessed directly.
+:::
+
+## Compatibility with Serialization Libraries
+
+For serialization libraries, the following scenarios exist:
+
+- If code generation is used to serialize fields, both read and write operations will go through decryption and encryption, just like manually written code, so there will be no issues.
+- If reflection is used to read Property-type fields, since the Property functions also perform decryption and encryption on the underlying data, there will be no issues.
+- If reflection is used to save encrypted field data and then read the encrypted field data back via reflection, there will also be no issues.
+- If reflection is used to save the original field values and then the fields are accessed directly in the code, the fields will not be encrypted, and the decryption operation during reading will result in incorrect data.
+
+Taking Newtonsoft.Json as an example:
+
+- If Newtonsoft.Json is first used to save object data to a JSON file and then deserialize the JSON file back into the object, there will be no issues.
+- If a JSON file is manually written with unencrypted field values and then deserialized into an object, these unencrypted fields will be incorrectly decrypted, resulting in errors.
+
+The same applies to MonoBehaviour and similar cases. If you set a field value in the inspector, since Unity uses reflection to obtain the field value, it saves and loads the original value. When you access the field in code, you will incorrectly get the decrypted value.
 
 ## Settings
 
