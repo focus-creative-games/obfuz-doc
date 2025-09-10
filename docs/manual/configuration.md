@@ -27,6 +27,15 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 |Link Xml Process Callback Order|LinkXmlProcess的callbackOrder。默认值为10000|
 |Obfuscation Process Callback Order|ObfuscationProcess的callbackOrder。默认值为10000|
 
+### Compatibility Settings
+
+运行时兼容性相关设置。mono运行时对类成员的访问权限有更严格的要求，例如不允许类型A访问类型B的private函数或者字段。这导致`Call Obfus`之类的
+混淆pass会生成无法在mono下运行的代码。
+
+|选项|描述|
+|-|-|
+|targetRuntime|目标运行时。 IL2CPP表示生成与IL2CPP运行时兼容的混淆代码，Mono同理。ActivatedScriptingBackend表示由Player Settings中当前scripting backend决定。|
+
 ### Assembly Settings
 
 设置混淆相关程序集。补充文档可见[程序集](./assembly)。

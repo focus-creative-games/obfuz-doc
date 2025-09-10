@@ -27,6 +27,14 @@ Set build pipeline related parameters.
 |Link Xml Process Callback Order|CallbackOrder of LinkXmlProcess. Default value is 10000|
 |Obfuscation Process Callback Order|CallbackOrder of ObfuscationProcess. Default value is 10000|
 
+### Compatibility Settings
+
+Runtime compatibility-related settings. The Mono runtime enforces stricter rules on class member accessibility, for example, it does not allow type A to access private methods or fields of type B. This can cause obfuscation passes like `Call Obfus` to generate code that cannot run under Mono.
+
+| Option | Description |
+|-|-|
+| targetRuntime | Target runtime. **IL2CPP** means generating obfuscated code compatible with the IL2CPP runtime, **Mono** likewise. **ActivatedScriptingBackend** means it is determined by the currently selected scripting backend in Player Settings. |
+
 ### Assembly Settings
 
 Set obfuscation related assemblies. Additional documentation can be found in [Assembly](./assembly).
