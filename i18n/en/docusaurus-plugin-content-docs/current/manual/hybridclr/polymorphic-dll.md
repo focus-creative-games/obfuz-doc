@@ -37,11 +37,9 @@ Whether to prohibit loading standard structure dlls. After enabling this option,
 
 Enabling this option can effectively counter malicious crackers injecting third-party dlls at runtime, because it's very difficult for them to construct dlls that conform to polymorphic dll structures, dramatically increasing injection costs.
 
-## Making HybridCLR Support Polymorphic DLLs
+## Enable Polymorphic DLL Support for HybridCLR
 
-The call to generate polymorphic dll code has been inserted into the `HybridCLR/ObfuzExtension/GenerateAll` command. As long as `PolymorphicDllSettings.enable` is true, related code will be automatically generated during `GenerateAll`.
-
-If you want to actively call generation, you can call the `ObfuscateUtil::GeneratePolymorphicCodes(string libil2cppDir)` function.
+After enabling `the PolymorphicDllSettings.enable` option, executing the HybridCLR/ObfuzExtension/GenerateAllcommand will automatically inject and modify the C++ code of HybridCLR to support loading polymorphic DLLs.
 
 ## Generate Polymorphic DLLs
 
