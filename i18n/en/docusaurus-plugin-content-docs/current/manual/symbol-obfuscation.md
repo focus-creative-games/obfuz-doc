@@ -199,7 +199,58 @@ Rule file example:
 
 The top-level tag must be obfuz, and the second-level tag must be assembly.
 
-All targets (assembly, type, field, method, property, event) **allow defining multiple rules matching them**, with the value of the last rule with non-empty obName taking precedence.
+For assemblies appearing in the `AssemblySettings.AssemblyToObfuscate` configuration item, by default, metadata (including types, fields, functions, etc.) will be obfuscated as much as possible, except under special rules (such as Unity script names not being obfuscated).
+
+To determine whether metadata should be obfuscated, if the metadata itself doesn't have a directly configured `obName` value, and its parent's `applyToMembers` scope includes it, then the parent's `obName` value is used. If the parent also doesn't have a configured `obName` value, then the value of the `obName` value of the assembly it belongs to is used.If the assembly doesn't define a `obName` value, it defaults to 1, meaning it will be obfuscated.
+
+In the following example, the `A.x` field will not be obfuscated; the `A.y` field will be obfuscated; `B.x` inherits `B`'s `obName`, so `B.x` will not be obfuscated; `B.y` has explicitly specified `obName="1"`, so `B.y` will be obfuscated.
+
+```xml
+<obfuz>
+    <assembly name="Test">
+        <type name="A">
+            <field name="x" obName="0"/>
+            <field name="y"/>
+        </type>
+        <type name="B" obName="0" applyToMembers="*">
+            <field name="x"/>
+            <field name="y" obName="1"/>
+        </type>
+    </assembly>
+</obfuz>
+
+```
+
+All targets (assembly, type, field, method, property, event) **allow multiple rules to be defined to match them**, and the value of the last rule whose obName is not empty will be used.
+
+Sometimes you might want to obfuscate only certain classes in an assembly. You can use the following two methods:
+
+- Method 1: Configure `obName="0"` for the assembly and `obName="1"` for the classes you don't want to obfuscate.
+
+```xml
+<obfuz>
+    <assembly name="Test" obName="0">
+        <type name="A" obName="1">
+            <field name="x" obName="0"/>
+            <field name="y"/>
+        </type>
+    </assembly>
+</obfuz>
+```
+
+- Method 2: First configure `<type name="*" obName="0" applyToMembers="*"/>`, then configure `obName="1"` for the classes you don't want to obfuscate.
+
+```xml
+<obfuz>
+    <assembly name="Test" obName="0">
+        <type name="*" obName="0" applyToMembers="*"/>
+        <type name="A" obName="1">
+            <field name="x" obName="0"/> 
+            <field name="y"/> 
+        </type> 
+    </assembly>
+</obfuz>
+```
 
 ### Nullable Bool Type
 

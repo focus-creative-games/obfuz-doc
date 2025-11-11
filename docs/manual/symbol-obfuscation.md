@@ -205,7 +205,58 @@ public class MyRenamePolicy : ObfuscationPolicyBase
 
 顶层tag必须是obfuz，次级tag必须是assembly。
 
+对于出现在`AssemblySettings.AssemblyToObfuscate`配置项中的程序集，默认为除了特殊规则外（如Unity脚本名不能混淆）的元数据（包含类型、字段、函数等）都会被尽可能地混淆。
+
+计算某个元数据是否要混淆，如果没有直接配置元数据本身obName值，同时它的父级的applyToMembers范围包含了它，则取它的父级的obName值，如果父级也没有配置obName的值，则取所在assembly的obName的值为止。
+如果assembly未定义obName的值，则默认为1，即会被混淆。
+
+如下示例中， A.x字段不会被混淆；A.y字段会被混淆；B.x继承了B的obName，因此B.x不会被混淆；B.y已经显式指定了`obName="1"`,因此B.y会被混淆。
+
+```xml
+<obfuz>
+    <assembly name="Test">
+        <type name="A">
+            <field name="x" obName="0"/>
+            <field name="y"/>
+        </type>
+        <type name="B" obName="0" applyToMembers="*">
+            <field name="x"/>
+            <field name="y" obName="1"/>
+        </type>
+    </assembly>
+</obfuz>
+```
+
 所有目标(assembly、type、field、method、property、event)都**允许定义多条与它匹配的规则**，以最后一个obName不为空的规则的值为准。
+
+有时候想仅混淆程序集中的某几个类，则可以使用使用以下两种办法：
+
+- 方法1： 配置程序集的obName="0"，配置不需要混淆的类的obName="1"
+
+```xml
+<obfuz>
+    <assembly name="Test" obName="0">
+        <type name="A" obName="1">
+            <field name="x" obName="0"/>
+            <field name="y"/>
+        </type>
+    </assembly>
+</obfuz>
+```
+
+- 方法2： 先配置 `<type name="*" obName="0" applyToMembers="*"/>`, 再配置不需要混淆的类的`obName="1"`
+
+```xml
+<obfuz>
+    <assembly name="Test" obName="0">
+        <type name="*" obName="0" applyToMembers="*"/>
+        <type name="A" obName="1">
+            <field name="x" obName="0"/>
+            <field name="y"/>
+        </type>
+    </assembly>
+</obfuz>
+```
 
 ### nullable bool类型
 
