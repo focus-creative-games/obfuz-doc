@@ -1,0 +1,95 @@
+{
+  "tutorialSidebar": [
+    {
+      "type": "doc",
+      "id": "intro"
+    },
+    {
+      "type": "category",
+      "label": "入门",
+      "link": {
+        "type": "generated-index",
+        "slug": "/getting-started"
+      },
+      "items": [
+        "beginner/quick-start",
+        "beginner/multi-assemblies-to-obfuscate",
+        "beginner/configuration",
+        "beginner/dynamic-secret-key",
+        "beginner/work-with-hybridclr",
+        "beginner/work-with-xlua"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "手册",
+      "link": {
+        "type": "generated-index",
+        "slug": "/manual"
+      },
+      "items": [
+        "manual/installation",
+        "manual/configuration",
+        "manual/menu",
+        "manual/assembly",
+        "manual/encryption",
+        "manual/method-body-obfuscation",
+        "manual/obfuscation-pass",
+        "manual/customattributes",
+        "manual/obfuscation-instincts",
+        "manual/symbol-obfuscation",
+        "manual/const-encryption",
+        "manual/remove-const-field",
+        "manual/field-encryption",
+        "manual/eval-stack-obfuscation",
+        "manual/expr-obfuscation",
+        "manual/call-obfuscation",
+        "manual/control-flow-obfuscation",
+        "manual/watermark",
+        "manual/garbage-code-generation",
+        "manual/build-pipeline",
+        "manual/run-obfuscation-standalonely",
+        "manual/incremental-obfuscation-and-hotupdate",
+        "manual/serialization",
+        "manual/reflection",
+        "manual/impact-dll-size",
+        {
+          "type": "category",
+          "label": "HybridCLR",
+          "link": {
+            "type": "generated-index",
+            "slug": "/manual/hybridclr"
+          },
+          "items": [
+            "manual/hybridclr/work-with-hybridclr",
+            "manual/hybridclr/polymorphic-dll"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "xLua",
+          "link": {
+            "type": "generated-index",
+            "slug": "/manual/xlua"
+          },
+          "items": [
+            "manual/xlua/work-with-xlua"
+          ]
+        },
+        "manual/deobfuscate-stacktrace"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "帮助",
+      "link": {
+        "type": "generated-index",
+        "slug": "/help"
+      },
+      "items": [
+        "help/faq"
+      ]
+    },
+    "help/releaselog"
+  ]
+}

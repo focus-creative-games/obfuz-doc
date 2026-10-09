@@ -1,0 +1,26 @@
+{
+  "version.label": {
+    "message": "latest",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.入门": {
+    "message": "Getting Started",
+    "description": "The label for category Getting Started in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.手册": {
+    "message": "Manual",
+    "description": "The label for category Manual in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.HybridCLR": {
+    "message": "HybridCLR",
+    "description": "The label for category HybridCLR in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.xLua": {
+    "message": "xLua",
+    "description": "The label for category xLua in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.帮助": {
+    "message": "Help",
+    "description": "The label for category Help in sidebar tutorialSidebar"
+  }
+}

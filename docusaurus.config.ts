@@ -47,7 +47,11 @@ const config: Config = {
           lastVersion: 'current',
           versions: {
             current: {
-              label: 'latest',
+              label: 'v4.0.0',
+            },
+            '3.x': {
+              label: 'v3.x',
+              path: '3.x',
             },
           },
           // Please change this to your repo.
@@ -98,6 +102,10 @@ const config: Config = {
           sidebarId: 'tutorialSidebar',
           position: 'left',
           label: 'Documentation',
+        },
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
         },
         {
           type: 'localeDropdown',
