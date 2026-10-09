@@ -27,6 +27,12 @@ URL installation addresses for Unity Package:
 - `https://github.com/focus-creative-games/obfuz4hybridclr.git`
 - `https://gitee.com/focus-creative-games/obfuz4hybridclr.git`
 
+:::warning
+
+Starting from `v4.0.0`, obfuz4hybridclr only supports HybridCLR `v9.0.0` and above. If your project uses an older version of HybridCLR, please use obfuz4hybridclr `v3.x`, or upgrade HybridCLR to `v9.0.0+`.
+
+:::
+
 ## Replace `HybridCLR/Generate/All`
 
 obfuz4hybridclr provides a GenerateAll command suitable for obfuscation workflows. Please replace the `HybridCLR/Generate/All` command with `HybridCLR/ObfuzExtension/GenerateAll` in the build process.
@@ -38,7 +44,3 @@ If calling `HybridCLR.Editor.Commands.PrebuildCommand::GenerateAll()` in code, r
 obfuz4hybridclr provides commands that simultaneously complete compilation and obfuscation of hot update code. Please replace `HybridCLR/Generate/ActiveBuildTarget` with `HybridCLR/Obfuz/Extension/CompileAndObfuscateDll`.
 
 If calling `HybridCLR.Editor.Commands.CompileDllCommand.CompileDll` in code, replace it with `Obfuz4HybridCLR.PrebuildCommandExt.CompileAndObfuscateDll`.
-
-## Using Polymorphic DLLs
-
-Polymorphic dlls are a brand new custom file structure that supports randomization and can effectively counter malicious cracking and tampering. For detailed documentation, see [Polymorphic DLL Files](./polymorphic-dll).

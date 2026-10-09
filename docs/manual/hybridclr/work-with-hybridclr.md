@@ -27,6 +27,12 @@ HybridCLR默认的`HybridCLR/Generate/All`命令基于未混淆的程序集生�
 - `https://github.com/focus-creative-games/obfuz4hybridclr.git`
 - `https://gitee.com/focus-creative-games/obfuz4hybridclr.git`
 
+:::warning
+
+obfuz4hybridclr自`v4.0.0`版本起，仅支持HybridCLR `v9.0.0`及以上版本。如果你的工程使用的是更低版本的HybridCLR，请使用obfuz4hybridclr `v3.x`版本，或者将HybridCLR升级到`v9.0.0+`。
+
+:::
+
 ## 替换`HybridCLR/Generate/All`
 
 obfuz4hybridclr提供了适合混淆工作流的GenerateAll命令，请在构建过程替换`HybridCLR/Generate/All`命令为`HybridCLR/ObfuzExtension/GenerateAll`。
@@ -38,7 +44,3 @@ obfuz4hybridclr提供了适合混淆工作流的GenerateAll命令，请在构建
 obfuz4hybridclr提供了同时完成编译和混淆热更新代码的命令，请替换`HybridCLR/Generate/ActiveBuildTarget`为`HybridCLR/Obfuz/Extension/CompileAndObfuscateDll`。
 
 如果是代码中调用`HybridCLR.Editor.Commands.CompileDllCommand.CompileDll`，则替换为`Obfuz4HybridCLR.PrebuildCommandExt.CompileAndObfuscateDll`。
-
-## 使用多态dll
-
-多态dll是一种全新的支持随机化的自定义文件结构，可以有效对抗恶意破解和篡改。详细文档见[多态dll文件](./polymorphic-dll)。

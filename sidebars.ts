@@ -82,7 +82,6 @@ const sidebars: SidebarsConfig = {
           },
           items: [
             'manual/hybridclr/work-with-hybridclr',
-            'manual/hybridclr/polymorphic-dll',
           ]
         },
         {

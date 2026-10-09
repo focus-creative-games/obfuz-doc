@@ -1,5 +1,12 @@
 # Code Watermark
 
+:::warning
+
+Starting from `v4.0.0`, the code watermark pass is disabled. Enabling `WaterMark` in `ObfuscationPasses` has no effect.
+The reason is that inserting instructions at certain special positions (for example, between `ldtoken` and a `RuntimeHelpers.InitializeArray` call) causes `il2cpp.exe` to fail.
+
+:::
+
 Obfuz injects special metadata and specific instruction sequences into obfuscated assembly metadata to form identifiable watermark features.
 
 ## Goals of Code Watermarking

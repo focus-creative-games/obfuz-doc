@@ -1,5 +1,12 @@
 # 代码水印
 
+:::warning
+
+自`v4.0.0`版本起，代码水印pass已被禁用，即使在`ObfuscationPasses`中开启`WaterMark`也不会生效。
+原因是在某些特殊指令位置插入指令（例如在`ldtoken`与`RuntimeHelpers.InitializeArray`调用之间插入指令）会导致`il2cpp.exe`执行失败。
+
+:::
+
 Obfuz往混淆后的程序集元数据中注入特殊的元数据及特定指令序列，形成可标识的水印特征。
 
 ## 代码水印的目标

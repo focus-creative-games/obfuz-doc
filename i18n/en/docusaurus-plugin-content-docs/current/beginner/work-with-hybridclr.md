@@ -16,6 +16,12 @@ obufz4hybridclr is an Obfuz extension package for supporting HybridCLR hot updat
 
 :::warning
 
+Starting from `v4.0.0`, obfuz4hybridclr only supports HybridCLR `v9.0.0` and above.
+
+:::
+
+:::warning
+
 Both Obfuz and HybridCLR plugins include the dnlib plugin. For Unity, errors occur when two packages contain plugins with the same name.
 The solution is to download HybridCLR locally, remove the included dnlib.dll, and then place it in the Packages directory.
 

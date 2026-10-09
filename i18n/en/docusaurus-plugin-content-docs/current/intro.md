@@ -20,11 +20,10 @@ Obfuz is an open-source, powerful, user-friendly, and reliable Unity code obfusc
 
 ## Features
 
-- **Polymorphic DLL Files**: Custom structurally randomized DLL file format with different structures on each release, effectively resisting cracking and tampering.
 - **Symbol Obfuscation**: Supports rich configuration rules and incremental obfuscation for flexible and efficient code protection.
 - **Constant Obfuscation**: Obfuscates constants like `int`, `long`, `float`, `double`, `string`, and arrays to prevent reverse engineering.
 - **Variable Memory Encryption**: Encrypts variables in memory to enhance runtime security.
-- **Evaluation Stack Obfuscation**: Obfuscates variables in the execution stack to increase reverse engineering difficulty.
+- **Evaluation Stack Obfuscation**: Obfuscates variables in the execution stack to increase reverse engineering difficulty. (Disabled in v4.0.0)
 - **Expression Obfuscation**: Obfuscates most common operations like add and sub.
 - **Call Obfuscation**:打乱 function call structures to increase cracking difficulty.
 - **Control Flow Obfuscation**: Control flow flattening to disrupt code execution flow, significantly increasing reverse engineering difficulty.
@@ -32,7 +31,7 @@ Obfuz is an open-source, powerful, user-friendly, and reliable Unity code obfusc
 - **Static and Dynamic Decryption**: Combines static and dynamic decryption to prevent offline static analysis.
 - **Obfuscation Polymorphism**: Generates different obfuscated code by configuring different generation keys and random seeds.
 - **Garbage Code Generation**: Supports multiple garbage code generation methods to improve App Store and Google Play review pass rates.
-- **Code Watermarking**: Embeds traceable watermarks.
+- **Code Watermarking**: Embeds traceable watermarks. (Disabled in v4.0.0)
 - **Deep Unity Integration**: Seamlessly integrates with Unity workflows, ready to use with simple configuration.
 - **Hot Update Support**: Fully compatible with hot update frameworks like HybridCLR and xLua, ensuring smooth dynamic code updates.
 - **DOTS Compatibility**: Compatible with all versions of DOTS without configuration.

@@ -23,14 +23,14 @@ Currently supported Obfuscation Passes include:
 - Symbol Obfuscation
 - Const Encryption
 - Remove Const Field
-- Eval Stack Obfuscation (local and temporary variable obfuscation)
+- Eval Stack Obfuscation (local and temporary variable obfuscation). **Disabled since v4.0.0; enabling it has no effect.**
 - Expr Obfuscation (expression obfuscation)
 - Field Encryption
 - Call Obfuscation (function call obfuscation)
 - Control Flow Obfuscation
 - CleanUp Pass. No obfuscation operations, only cleanup operations (such as optimizing redundant code, etc.).
 - RemoveObfuzAttributesPass. The last Pass, removes unused `[ObfuzIgnore]` attributes from the final code.
-- Watermark Pass (add watermark)
+- Watermark Pass (add watermark). **Disabled since v4.0.0; enabling it has no effect.**
 
 Obfuscation Passes that will be supported in the future include:
 

@@ -16,6 +16,12 @@ obufz4hybridclr是一个Obfuz扩展包，用于支持HybridCLR热更新工作流
 
 :::warning
 
+obfuz4hybridclr自`v4.0.0`版本起，仅支持HybridCLR `v9.0.0`及以上版本。
+
+:::
+
+:::warning
+
 Obfuz和HybridCLR插件都包含了dnlib插件。在Unity Editor中当两个package中包含同名插件时会产生错误。
 解决办法为将HybridCLR下载到本地，移除其中包含的dnlib.dll，再放到Packages目录下。
 

@@ -142,6 +142,8 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 
 执行栈的混淆设置。支持通过规则文件非常精细地控制范围和加密效果。补充文档见[执行栈混淆](./eval-stack-obfuscation)。
 
+**自v4.0.0起该pass已被禁用，以下设置不会生效。**
+
 |选项|描述|
 |-|-|
 |Rule Files| 加密规则文件列表。可以为0到多个。如果为空会对所有常量进行混淆。详细配置规则见[执行栈混淆](./eval-stack-obfuscation)。|
@@ -188,17 +190,9 @@ Obfuz提供了极其丰富的配置选项和灵活的混淆规则配置文件，
 
 代码水印相关设置。补充文档见[代码水印](./watermark)。
 
+**自v4.0.0起该pass已被禁用，以下设置不会生效。**
+
 |选项|描述|
 |-|-|
 |Text|代码中嵌入的水印文本|
 |Signature Length|嵌入的水印文本的Hash签名长度|
-
-### PolyMorphic Dll Settings
-
-多态dll相关设置。 补充文档见[多态dll文件](./hybridclr/polymorphic-dll)。
-
-|选项|描述|
-|-|-|
-|enable|是否开启多态dll支持。开启后会在`HybridCLR/ObfuzExtentions/GenerateAll`生成支持多态dll的代码。|
-|codeGenerationSecretKey| 生成多态dll代码时使用的随机化密钥|
-|**disableLoadStandardDll**|**是否禁止加载标准结构的dll**。开启此项后`Assembly.Load`或者`RuntimeApi.LoadMetadataForAOTAssembly`必须传入多态dll，如果传入标准dll，会返回错误。|

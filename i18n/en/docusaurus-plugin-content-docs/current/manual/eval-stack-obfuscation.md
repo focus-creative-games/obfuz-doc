@@ -1,5 +1,12 @@
 # Eval Stack Obfuscation
 
+:::warning
+
+Starting from `v4.0.0`, the eval stack obfuscation pass is disabled. Enabling `EvalStackObfus` in `ObfuscationPasses` has no effect.
+The reason is that this pass has a poor cost-performance ratio. If it cannot be optimized in the future, the feature may be removed.
+
+:::
+
 Randomly obfuscate the execution stack during virtual machine runtime to increase reverse engineering difficulty.
 
 ## Implementation Principle

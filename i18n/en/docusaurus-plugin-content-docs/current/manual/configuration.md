@@ -141,6 +141,8 @@ Remove const constant field related settings. Supports fine control of which con
 
 Execution stack obfuscation settings. Supports very fine control of scope and encryption effects through rule files. Additional documentation can be found in [Eval Stack Obfuscation](./eval-stack-obfuscation).
 
+**This pass is disabled since v4.0.0; the settings below have no effect.**
+
 |Option|Description|
 |-|-|
 |Rule Files| List of encryption rule files. Can be 0 to multiple. If empty, all constants will be obfuscated. Detailed configuration rules can be found in [Eval Stack Obfuscation](./eval-stack-obfuscation).|
@@ -187,17 +189,9 @@ Control flow obfuscation related settings. Supports very fine control of encrypt
 
 Code watermark related settings. Additional documentation can be found in [Code Watermark](./watermark).
 
+**This pass is disabled since v4.0.0; the settings below have no effect.**
+
 |Option|Description|
 |-|-|
 |Text|Watermark text embedded in code|
 |Signature Length|Hash signature length of embedded watermark text|
-
-### PolyMorphic Dll Settings
-
-Polymorphic dll related settings. Additional documentation can be found in [Polymorphic dll Files](./hybridclr/polymorphic-dll).
-
-|Option|Description|
-|-|-|
-|enable|Whether to enable polymorphic dll support. When enabled, code supporting polymorphic dll will be generated in `HybridCLR/ObfuzExtentions/GenerateAll`.|
-|codeGenerationSecretKey| Randomization key used when generating polymorphic dll code|
-|**disableLoadStandardDll**|**Whether to disable loading standard structure dlls**. When this option is enabled, `Assembly.Load` or `RuntimeApi.LoadMetadataForAOTAssembly` must pass polymorphic dlls. If standard dlls are passed, an error will be returned.|
