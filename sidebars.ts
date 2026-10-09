@@ -107,6 +107,7 @@ const sidebars: SidebarsConfig = {
       },
       items: [
         'help/faq',
+        'help/upgrade-notes',
       ],
     },
     'help/releaselog',
