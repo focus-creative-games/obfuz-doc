@@ -9,7 +9,6 @@
 |改动|影响|
 |-|-|
 |移除了多态dll的支持|使用了多态dll的工程需要移除相关配置与构建流程|
-|禁用了执行栈混淆（`EvalStackObfus`）|开启该pass不会生效|
 |禁用了代码水印（`WaterMark`）|开启该pass不会生效|
 |obfuz4hybridclr要求HybridCLR `v9.0.0+`|低版本HybridCLR的工程需要升级，或继续使用obfuz4hybridclr `v3.x`|
 
@@ -29,18 +28,6 @@
 - 如果你仍然依赖多态dll功能，请继续使用obfuz `v3.x`版本。
 
 多态dll的文档参见`v3.x`版本文档中的[多态dll](https://www.obfuz.com/docs/3.x/manual/hybridclr/polymorphic-dll)。
-
-## 禁用了执行栈混淆
-
-[执行栈混淆](../manual/eval-stack-obfuscation)pass已被禁用，即使在`ObfuscationPasses`中开启`EvalStackObfus`也不会生效。
-
-原因是该pass的性价比过低：它会显著增大混淆后的程序集体积，但带来的逆向难度提升有限。如果后续无法优化，该功能可能会被彻底移除。
-
-`EvalStackObfusSettings`中的设置依然保留，但不会产生任何效果。
-
-### 如何升级
-
-无需修改配置。如果你之前依赖该pass提高混淆强度，建议改用[表达式混淆](../manual/expr-obfuscation)与[控制流混淆](../manual/control-flow-obfuscation)。
 
 ## 禁用了代码水印
 
@@ -74,6 +61,16 @@ HybridCLR `v9.0.0`调整了构建流程相关的接口，obfuz4hybridclr `v4.0.0
 注意obfuz与obfuz4hybridclr的大版本号需要保持一致，即obfuz4hybridclr `v4.x`需要配合obfuz `v4.x`使用。
 
 详细文档见[与HybridCLR协同工作](../manual/hybridclr/work-with-hybridclr)。
+
+## 补充说明：执行栈混淆早已被禁用
+
+这不是`v4.x`的改动，但`v3.x`的文档中未作说明，因此在这里补充。
+
+[执行栈混淆](../manual/eval-stack-obfuscation)pass自`v3.0.0`版本起就已被禁用，即使在`ObfuscationPasses`中开启`EvalStackObfus`也不会生效。
+
+原因是该pass的性价比过低：它会显著增大混淆后的程序集体积，但带来的逆向难度提升有限。如果后续无法优化，该功能可能会被彻底移除。
+
+`EvalStackObfusSettings`中的设置依然保留，但不会产生任何效果。无需修改配置。如果你希望进一步提高混淆强度，建议改用[表达式混淆](../manual/expr-obfuscation)与[控制流混淆](../manual/control-flow-obfuscation)。
 
 ## 相关文档
 

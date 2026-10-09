@@ -23,7 +23,7 @@ Obfuz的混淆（或加密）流程的执行方式为先判定对目标是否启
 - Symbol Obfuscation（符号混淆）
 - Const Encryption（常量加密）
 - Remove Const Field （移除const常量字段）
-- Eval Stack Obfusaction （局部与临时变量混淆）
+- Eval Stack Obfusaction （局部与临时变量混淆）。**自v3.0.0起已禁用，开启后不会生效。**
 - Expr Obfusaction （表达式混淆）
 - Field Encryption（字段加密）
 - Call Obfusaction（函数调用混淆）

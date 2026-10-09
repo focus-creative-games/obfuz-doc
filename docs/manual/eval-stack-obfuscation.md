@@ -2,7 +2,7 @@
 
 :::warning
 
-自`v4.0.0`版本起，执行栈混淆pass已被禁用，即使在`ObfuscationPasses`中开启`EvalStackObfus`也不会生效。
+自`v3.0.0`版本起，执行栈混淆pass已被禁用，即使在`ObfuscationPasses`中开启`EvalStackObfus`也不会生效。
 原因是该pass的性价比过低。如果后续无法优化，该功能可能会被移除。
 
 :::

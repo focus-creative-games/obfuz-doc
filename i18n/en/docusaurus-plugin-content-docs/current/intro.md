@@ -23,7 +23,7 @@ Obfuz is an open-source, powerful, user-friendly, and reliable Unity code obfusc
 - **Symbol Obfuscation**: Supports rich configuration rules and incremental obfuscation for flexible and efficient code protection.
 - **Constant Obfuscation**: Obfuscates constants like `int`, `long`, `float`, `double`, `string`, and arrays to prevent reverse engineering.
 - **Variable Memory Encryption**: Encrypts variables in memory to enhance runtime security.
-- **Evaluation Stack Obfuscation**: Obfuscates variables in the execution stack to increase reverse engineering difficulty. (Disabled in v4.0.0)
+- **Evaluation Stack Obfuscation**: Obfuscates variables in the execution stack to increase reverse engineering difficulty. (Disabled in v3.0.0)
 - **Expression Obfuscation**: Obfuscates most common operations like add and sub.
 - **Call Obfuscation**:打乱 function call structures to increase cracking difficulty.
 - **Control Flow Obfuscation**: Control flow flattening to disrupt code execution flow, significantly increasing reverse engineering difficulty.

@@ -2,7 +2,7 @@
 
 :::warning
 
-Starting from `v4.0.0`, the eval stack obfuscation pass is disabled. Enabling `EvalStackObfus` in `ObfuscationPasses` has no effect.
+Starting from `v3.0.0`, the eval stack obfuscation pass is disabled. Enabling `EvalStackObfus` in `ObfuscationPasses` has no effect.
 The reason is that this pass has a poor cost-performance ratio. If it cannot be optimized in the future, the feature may be removed.
 
 :::

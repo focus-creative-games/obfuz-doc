@@ -141,7 +141,7 @@ Remove const constant field related settings. Supports fine control of which con
 
 Execution stack obfuscation settings. Supports very fine control of scope and encryption effects through rule files. Additional documentation can be found in [Eval Stack Obfuscation](./eval-stack-obfuscation).
 
-**This pass is disabled since v4.0.0; the settings below have no effect.**
+**This pass is disabled since v3.0.0; the settings below have no effect.**
 
 |Option|Description|
 |-|-|

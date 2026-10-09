@@ -5,7 +5,6 @@
 For the upgrade guide and details, see [Upgrade Notes](./upgrade-notes).
 
 - Removed support for polymorphic dll
-- Disabled the [eval stack obfuscation](../manual/eval-stack-obfuscation) pass; enabling it has no effect
 - Disabled the [code watermark](../manual/watermark) pass; enabling it has no effect
 - Starting from obfuz4hybridclr v4.0.0, only HybridCLR v9.0.0+ is supported
 

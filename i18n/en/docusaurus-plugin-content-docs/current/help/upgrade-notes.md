@@ -9,7 +9,6 @@ The documentation for the older version is still available: switch to `v3.x` usi
 |Change|Impact|
 |-|-|
 |Removed support for polymorphic dll|Projects using polymorphic dll must remove the related settings and build steps|
-|Disabled eval stack obfuscation (`EvalStackObfus`)|Enabling this pass has no effect|
 |Disabled code watermark (`WaterMark`)|Enabling this pass has no effect|
 |obfuz4hybridclr requires HybridCLR `v9.0.0+`|Projects on an older HybridCLR must upgrade, or keep using obfuz4hybridclr `v3.x`|
 
@@ -29,18 +28,6 @@ Specifically:
 - If you still depend on the polymorphic dll feature, keep using obfuz `v3.x`.
 
 The polymorphic dll documentation is available in the `v3.x` docs: [Polymorphic Dll](https://www.obfuz.com/en/docs/3.x/manual/hybridclr/polymorphic-dll).
-
-## Disabled eval stack obfuscation
-
-The [eval stack obfuscation](../manual/eval-stack-obfuscation) pass is disabled. Enabling `EvalStackObfus` in `ObfuscationPasses` has no effect.
-
-The reason is that this pass has a poor cost-benefit ratio: it significantly increases the size of the obfuscated assemblies while providing only a limited increase in reverse engineering difficulty. If it cannot be optimized in the future, the feature may be removed entirely.
-
-The settings in `EvalStackObfusSettings` are still present, but they have no effect.
-
-### How to upgrade
-
-No configuration change is required. If you relied on this pass for stronger obfuscation, consider using [expression obfuscation](../manual/expr-obfuscation) and [control flow obfuscation](../manual/control-flow-obfuscation) instead.
 
 ## Disabled code watermark
 
@@ -74,6 +61,16 @@ Pick one of the following:
 Note that the major versions of obfuz and obfuz4hybridclr must match, i.e. obfuz4hybridclr `v4.x` must be used together with obfuz `v4.x`.
 
 For details, see [Work with HybridCLR](../manual/hybridclr/work-with-hybridclr).
+
+## Note: eval stack obfuscation was disabled long ago
+
+This is not a `v4.x` change, but it was never mentioned in the `v3.x` documentation, so it is clarified here.
+
+The [eval stack obfuscation](../manual/eval-stack-obfuscation) pass has been disabled since `v3.0.0`. Enabling `EvalStackObfus` in `ObfuscationPasses` has no effect.
+
+The reason is that this pass has a poor cost-benefit ratio: it significantly increases the size of the obfuscated assemblies while providing only a limited increase in reverse engineering difficulty. If it cannot be optimized in the future, the feature may be removed entirely.
+
+The settings in `EvalStackObfusSettings` are still present, but they have no effect. No configuration change is required. If you want stronger obfuscation, consider using [expression obfuscation](../manual/expr-obfuscation) and [control flow obfuscation](../manual/control-flow-obfuscation) instead.
 
 ## Related documentation
 

@@ -23,7 +23,7 @@ Currently supported Obfuscation Passes include:
 - Symbol Obfuscation
 - Const Encryption
 - Remove Const Field
-- Eval Stack Obfuscation (local and temporary variable obfuscation)
+- Eval Stack Obfuscation (local and temporary variable obfuscation). **Disabled since v3.0.0; enabling it has no effect.**
 - Expr Obfuscation (expression obfuscation)
 - Field Encryption
 - Call Obfuscation (function call obfuscation)

@@ -5,7 +5,6 @@
 升级指南及详细说明见[版本升级说明](./upgrade-notes)。
 
 - 移除了多态dll的支持
-- 禁用了[执行栈混淆](../manual/eval-stack-obfuscation)pass，开启后不会生效
 - 禁用了[代码水印](../manual/watermark)pass，开启后不会生效
 - obfuz4hybridclr v4.0.0起，仅支持HybridCLR v9.0.0+版本
 
