@@ -1,6 +1,6 @@
 {
   "version.label": {
-    "message": "latest",
+    "message": "v4.x",
     "description": "The label for version current"
   },
   "sidebar.tutorialSidebar.category.入门": {
